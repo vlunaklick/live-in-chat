@@ -24,3 +24,6 @@ class UserController {
 		}
 	}
 }
+
+const controller = new UserController()
+export { controller as UserController }
