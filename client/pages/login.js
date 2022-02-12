@@ -85,7 +85,8 @@ const LoginWrapper = styled.main`
 			transition: background-color 0.5s ease-in-out;
 		}
 
-		button:hover {
+		button:hover,
+		button:active {
 			background-color: #1e40af;
 		}
 
