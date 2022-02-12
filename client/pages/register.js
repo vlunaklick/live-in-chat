@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import styled from 'styled-components'
 import Link from 'next/link'
+import useErrorForms from '../hooks/useErrorForms'
 
-export default function Login() {
+export default function Register() {
+	const { userError, passwordError, mailError, loginSubmit, registerSubmit } =
+		useErrorForms()
+
 	return (
 		<div>
 			<Head>
@@ -14,18 +18,21 @@ export default function Login() {
 			<RegisterWrapper>
 				<section>
 					<h2>Register</h2>
-					<form action='' method='post' onSubmit={e => e.preventDefault()}>
+					<form action='' method='post' onSubmit={registerSubmit}>
 						<label>
 							Username:
-							<input type='text' minlength='6' required />
+							<input type='text' required />
+							{userError[0] ? <p>{userError[1]}</p> : ''}
 						</label>
 						<label>
 							Mail:
-							<input type='text' />
+							<input type='mail' required />
+							{mailError[0] ? <p>{mailError[1]}</p> : ''}
 						</label>
 						<label>
 							Password:
-							<input type='password' minlength='6' required />
+							<input type='password' required />
+							{passwordError[0] ? <p>{passwordError[1]}</p> : ''}
 						</label>
 						<Link href='/login'>
 							<a>Alredy have an account? Log in here.</a>
@@ -117,6 +124,11 @@ const RegisterWrapper = styled.main`
 
 			input:focus {
 				border: 1px solid #737373;
+			}
+
+			p {
+				font-size: 0.6rem;
+				color: #ef4444;
 			}
 		}
 	}
