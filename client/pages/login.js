@@ -4,8 +4,9 @@ import Link from 'next/link'
 import useErrorForms from '../hooks/useErrorForms'
 
 export default function Login() {
-	const { userError, passwordError, loginSubmit, registerSubmit } =
-		useErrorForms()
+	const { mailError, passwordError, redirect, loginSubmit } = useErrorForms()
+
+	useEffect(() => {}, [redirect])
 
 	return (
 		<div>
@@ -20,9 +21,9 @@ export default function Login() {
 					<h2>Login</h2>
 					<form action='' method='get' onSubmit={loginSubmit}>
 						<label>
-							Username:
+							Email:
 							<input type='text' required />
-							{userError[0] ? <p>{userError[1]}</p> : ''}
+							{mailError[0] ? <p>{mailError[1]}</p> : ''}
 						</label>
 
 						<label>

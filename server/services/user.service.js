@@ -23,9 +23,9 @@ export async function createUser(name, email, password) {
 				password: hashedPass,
 			},
 		})
-		return true
+		return [true, 'Account created.']
 	}
-	return false
+	return [false, 'That email already exists.']
 }
 
 export async function checkAccount(email, password) {
@@ -35,7 +35,13 @@ export async function checkAccount(email, password) {
 		},
 	})
 
+	if (passDb === null) {
+		return [false, 'The email does not exist.', 'email']
+	}
+
 	const isValid = unhashFunction(password, passDb.password)
 
-	return isValid ? true : false
+	return isValid
+		? [true, 'Loged']
+		: [false, 'The password is invalid.', 'password']
 }
