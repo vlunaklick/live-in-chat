@@ -29,19 +29,29 @@ export async function createUser(name, email, password) {
 }
 
 export async function checkAccount(email, password) {
-	const passDb = await prisma.user.findUnique({
+	const user = await prisma.user.findUnique({
 		where: {
 			email: email,
 		},
 	})
 
-	if (passDb === null) {
+	if (user === null) {
 		return [false, 'The email does not exist.', 'email']
 	}
 
-	const isValid = compareHash(password, passDb.password)
+	const isValid = compareHash(password, user.password)
 
 	return isValid
 		? [true, 'Loged']
 		: [false, 'The password is invalid.', 'password']
+}
+
+export async function accountId(email) {
+	const user = await prisma.user.findUnique({
+		where: {
+			email: email,
+		},
+	})
+
+	return user.id
 }

@@ -2,9 +2,19 @@ import Head from 'next/head'
 import styled from 'styled-components'
 import Link from 'next/link'
 import useErrorForms from '../hooks/useErrorForms'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
 export default function Login() {
-	const { mailError, passwordError, loginSubmit } = useErrorForms()
+	const { mailError, passwordError, loginSubmit, loged } = useErrorForms()
+	const router = useRouter()
+
+	useEffect(() => {
+		if (loged) {
+			router.push('/')
+		}
+	}, [loged])
 
 	return (
 		<div>
@@ -39,6 +49,23 @@ export default function Login() {
 			</LoginWrapper>
 		</div>
 	)
+}
+
+export async function getServerSideProps(context) {
+	const { params, query, res } = context
+	/* const apiResponse = await axios('http://localhost:3005/users/me', {
+		withCredentials: true,
+		method: 'GET',
+		credentials: 'include',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+	})
+
+	console.log(apiResponse) */
+
+	return { props: query }
 }
 
 const LoginWrapper = styled.main`

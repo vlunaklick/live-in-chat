@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken'
 
 export function isAuth(req, res, next) {
 	try {
+		console.log(req.cookies)
+
 		const { token } = req.cookies
 
 		if (!token) {
