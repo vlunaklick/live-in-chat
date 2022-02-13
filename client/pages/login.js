@@ -53,17 +53,6 @@ export default function Login() {
 
 export async function getServerSideProps(context) {
 	const { params, query, res } = context
-	/* const apiResponse = await axios('http://localhost:3005/users/me', {
-		withCredentials: true,
-		method: 'GET',
-		credentials: 'include',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-	})
-
-	console.log(apiResponse) */
 
 	return { props: query }
 }

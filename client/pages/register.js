@@ -4,8 +4,26 @@ import Link from 'next/link'
 import useErrorForms from '../hooks/useErrorForms'
 
 export default function Register() {
-	const { userError, passwordError, mailError, loginSubmit, registerSubmit } =
-		useErrorForms()
+	const {
+		userError,
+		passwordError,
+		mailError,
+		registerSubmit,
+		loged,
+		register,
+	} = useErrorForms()
+
+	useEffect(() => {
+		if (loged) {
+			router.push('/')
+		}
+	}, [loged])
+
+	useEffect(() => {
+		if (register) {
+			router.push('/login')
+		}
+	}, [register])
 
 	return (
 		<div>

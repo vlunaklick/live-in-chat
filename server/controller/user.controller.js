@@ -29,13 +29,14 @@ class UserController {
 			})
 
 			res
-				.cookie('token', token)
 				.status(200)
+				.header({
+					Authorization: `Bearer ${token}`,
+				})
 				.json({
 					success: true,
 					message: resolution[1],
 					source: 'none',
-					token: `Bearer ${token}`,
 				})
 		} else {
 			res
