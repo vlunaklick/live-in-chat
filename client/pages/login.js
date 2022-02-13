@@ -5,8 +5,9 @@ import useErrorForms from '../hooks/useErrorForms'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { getCookie } from 'cookies-next'
 
-export default function Login() {
+export default function Login(props) {
 	const { mailError, passwordError, loginSubmit, loged } = useErrorForms()
 	const router = useRouter()
 
@@ -15,6 +16,12 @@ export default function Login() {
 			router.push('/')
 		}
 	}, [loged])
+
+	useEffect(() => {
+		if (props.success) {
+			router.push('/')
+		}
+	}, [])
 
 	return (
 		<div>
@@ -25,36 +32,52 @@ export default function Login() {
 			</Head>
 
 			<LoginWrapper>
-				<section>
-					<h2>Login</h2>
-					<form action='' method='get' onSubmit={loginSubmit}>
-						<label>
-							Email:
-							<input type='text' required />
-							{mailError[0] ? <p>{mailError[1]}</p> : ''}
-						</label>
+				{props.success ? (
+					''
+				) : (
+					<section>
+						<h2>Login</h2>
+						<form action='' method='get' onSubmit={loginSubmit}>
+							<label>
+								Email:
+								<input type='text' required />
+								{mailError[0] ? <p>{mailError[1]}</p> : ''}
+							</label>
 
-						<label>
-							Password:
-							<input type='password' required />
-							{passwordError[0] ? <p>{passwordError[1]}</p> : ''}
-						</label>
+							<label>
+								Password:
+								<input type='password' required />
+								{passwordError[0] ? <p>{passwordError[1]}</p> : ''}
+							</label>
 
-						<Link href='/register'>
-							<a>Are you new? Create a new account here.</a>
-						</Link>
-						<button type='submit'>Login</button>
-					</form>
-				</section>
+							<Link href='/register'>
+								<a>Are you new? Create a new account here.</a>
+							</Link>
+							<button type='submit'>Login</button>
+						</form>
+					</section>
+				)}
 			</LoginWrapper>
 		</div>
 	)
 }
 
 export async function getServerSideProps(context) {
-	const { params, query, res } = context
+	const { params, query, res, req } = context
 
-	return { props: query }
+	const token = getCookie('session', { req, res })
+
+	const apiResponse = await axios.get('http://localhost:3005/users/me', {
+		headers: { Authorization: `Bearer ${token}` },
+		withCredentials: true,
+	})
+
+	if (apiResponse.status === 200) {
+		const props = { success: apiResponse.data.success }
+		return { props: props }
+	}
+
+	return { props: { success: false } }
 }
 
 const LoginWrapper = styled.main`

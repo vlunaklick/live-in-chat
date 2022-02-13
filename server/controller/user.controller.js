@@ -44,6 +44,12 @@ class UserController {
 				.json({ success: false, message: resolution[1], source: resolution[2] })
 		}
 	}
+
+	user = async (req, res) => {
+		const { user } = req
+
+		res.status(200).json({ success: true, user: user })
+	}
 }
 
 const controller = new UserController()

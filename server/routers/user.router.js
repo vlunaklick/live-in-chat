@@ -6,6 +6,6 @@ const router = express.Router()
 
 router.post('/create', UserController.create)
 router.post('/login', UserController.login)
-router.get('/me', isAuth)
+router.get('/me', isAuth, UserController.user)
 
 export { router as userRouter }

@@ -2,8 +2,12 @@ import Head from 'next/head'
 import styled from 'styled-components'
 import Link from 'next/link'
 import useErrorForms from '../hooks/useErrorForms'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { getCookie } from 'cookies-next'
+import { useRouter } from 'next/router'
 
-export default function Register() {
+export default function Register(props) {
 	const {
 		userError,
 		passwordError,
@@ -11,7 +15,10 @@ export default function Register() {
 		registerSubmit,
 		loged,
 		register,
+		setLoged,
 	} = useErrorForms()
+
+	const router = useRouter()
 
 	useEffect(() => {
 		if (loged) {
@@ -25,6 +32,12 @@ export default function Register() {
 		}
 	}, [register])
 
+	useEffect(() => {
+		if (props.success) {
+			router.push('/')
+		}
+	}, [])
+
 	return (
 		<div>
 			<Head>
@@ -34,33 +47,55 @@ export default function Register() {
 			</Head>
 
 			<RegisterWrapper>
-				<section>
-					<h2>Register</h2>
-					<form action='' method='post' onSubmit={registerSubmit}>
-						<label>
-							Username:
-							<input type='text' required />
-							{userError[0] ? <p>{userError[1]}</p> : ''}
-						</label>
-						<label>
-							Mail:
-							<input type='mail' required />
-							{mailError[0] ? <p>{mailError[1]}</p> : ''}
-						</label>
-						<label>
-							Password:
-							<input type='password' required />
-							{passwordError[0] ? <p>{passwordError[1]}</p> : ''}
-						</label>
-						<Link href='/login'>
-							<a>Alredy have an account? Log in here.</a>
-						</Link>
-						<button type='submit'>Register</button>
-					</form>
-				</section>
+				{props.success ? (
+					''
+				) : (
+					<section>
+						<h2>Register</h2>
+						<form action='' method='post' onSubmit={registerSubmit}>
+							<label>
+								Username:
+								<input type='text' required />
+								{userError[0] ? <p>{userError[1]}</p> : ''}
+							</label>
+							<label>
+								Mail:
+								<input type='mail' required />
+								{mailError[0] ? <p>{mailError[1]}</p> : ''}
+							</label>
+							<label>
+								Password:
+								<input type='password' required />
+								{passwordError[0] ? <p>{passwordError[1]}</p> : ''}
+							</label>
+							<Link href='/login'>
+								<a>Alredy have an account? Log in here.</a>
+							</Link>
+							<button type='submit'>Register</button>
+						</form>
+					</section>
+				)}
 			</RegisterWrapper>
 		</div>
 	)
+}
+
+export async function getServerSideProps(context) {
+	const { params, query, res, req } = context
+
+	const token = getCookie('session', { req, res })
+
+	const apiResponse = await axios.get('http://localhost:3005/users/me', {
+		headers: { Authorization: `Bearer ${token}` },
+		withCredentials: true,
+	})
+
+	if (apiResponse.status === 200) {
+		const props = { success: apiResponse.data.success }
+		return { props: props }
+	}
+
+	return { props: { success: false } }
 }
 
 const RegisterWrapper = styled.main`

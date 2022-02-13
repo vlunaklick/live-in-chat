@@ -1,25 +1,34 @@
 import jwt from 'jsonwebtoken'
+import { getUser } from '../services/user.service.js'
 
-export function isAuth(req, res, next) {
+export async function isAuth(req, res, next) {
 	try {
-		console.log(req.cookies.authorization)
+		let { authorization } = req.headers
 
-		const { token } = req.cookies
+		try {
+			authorization = authorization.split(' ')[1]
+		} catch (error) {
+			console.log(error)
+		}
 
-		if (!token) {
+		if (!authorization) {
 			return res.status(401).json({ success: false, message: 'Not logged in' })
 		}
 
-		const tokenValid = jwt.verify(token, process.env.JWT_SECRET)
+		const authorizationValid = jwt.verify(authorization, process.env.JWT_SECRET)
 
-		if (!tokenValid) {
+		const user = await getUser(authorizationValid.email)
+
+		req.user = user
+
+		if (!authorizationValid) {
 			return res
-				.status()
+				.status(403)
 				.json({ success: false, message: 'Session has expired' })
 		}
 
 		next()
 	} catch (err) {
-		res.status(500).json({ succes: false, message: err.message })
+		res.status(500).json({ success: false, message: err.message })
 	}
 }

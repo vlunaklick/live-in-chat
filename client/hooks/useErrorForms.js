@@ -119,5 +119,6 @@ export default function useErrorForms() {
 		registerSubmit,
 		loged,
 		register,
+		setLoged,
 	}
 }

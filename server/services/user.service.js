@@ -8,6 +8,8 @@ export async function getUser(email) {
 		},
 	})
 
+	delete user.password
+
 	return user
 }
 
