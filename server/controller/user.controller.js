@@ -9,7 +9,7 @@ class UserController {
 		if (resolution[0]) {
 			res.status(200).json({ success: true, message: resolution[1] })
 		} else {
-			res.status(200).json({ success: false, message: resolution[1] })
+			res.status(401).json({ success: false, message: resolution[1] })
 		}
 	}
 
@@ -24,7 +24,7 @@ class UserController {
 				.json({ success: true, message: resolution[1], source: 'none' })
 		} else {
 			res
-				.status(200)
+				.status(401)
 				.json({ success: false, message: resolution[1], source: resolution[2] })
 		}
 	}
