@@ -1,5 +1,5 @@
 import prisma from '../utils/prisma.js'
-import { hashFunction, unhashFunction } from '../utils/bcrypt.js'
+import { hashFunction, compareHash } from '../utils/bcrypt.js'
 
 export async function getUser(email) {
 	const user = await prisma.user.findUnique({
@@ -39,7 +39,7 @@ export async function checkAccount(email, password) {
 		return [false, 'The email does not exist.', 'email']
 	}
 
-	const isValid = unhashFunction(password, passDb.password)
+	const isValid = compareHash(password, passDb.password)
 
 	return isValid
 		? [true, 'Loged']
