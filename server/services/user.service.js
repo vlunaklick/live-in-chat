@@ -7,8 +7,9 @@ export async function getUser(email) {
 			email,
 		},
 	})
-
-	delete user.password
+	if (user) {
+		delete user.password
+	}
 
 	return user
 }

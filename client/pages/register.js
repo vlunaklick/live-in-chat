@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
+import Spinner from '../components/Spinner'
 
 export default function Register(props) {
 	const {
@@ -48,7 +49,7 @@ export default function Register(props) {
 
 			<RegisterWrapper>
 				{props.success ? (
-					''
+					<Spinner />
 				) : (
 					<section>
 						<h2>Register</h2>
@@ -84,6 +85,10 @@ export async function getServerSideProps(context) {
 	const { params, query, res, req } = context
 
 	const token = getCookie('session', { req, res })
+
+	if (!token) {
+		return { props: { success: false } }
+	}
 
 	const apiResponse = await axios.get('http://localhost:3005/users/me', {
 		headers: { Authorization: `Bearer ${token}` },
