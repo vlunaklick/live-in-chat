@@ -75,9 +75,11 @@ const MainWrapper = styled.main`
 const ChatWrapper = styled.section`
 	width: 100%;
 	height: 100vh;
+	transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
 
-	@media screen and (min-width: 1200px) {
-		width: 1200px;
+	@media screen and (min-width: 1386px) {
+		width: 1386px;
+		height: calc(100vh - 20px);
 		box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
 			0px 1px 2px 0px rgba(0, 0, 0, 0.06);
 	}

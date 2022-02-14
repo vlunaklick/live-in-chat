@@ -20,7 +20,7 @@ export default function Header({ user }) {
 
 const HeaderWrapper = styled.header`
 	background-color: #262626;
-	padding: 0.5rem;
+	padding: 0.6rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -49,5 +49,9 @@ const HeaderWrapper = styled.header`
 				color: #a3a3a3;
 			}
 		}
+	}
+
+	@media screen and (min-width: 768px) {
+		width: 320px;
 	}
 `
