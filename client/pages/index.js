@@ -28,7 +28,7 @@ export default function Home(props) {
 			</Head>
 			<MainWrapper>
 				<ChatWrapper>
-					<Header />
+					<Header user={user} />
 				</ChatWrapper>
 			</MainWrapper>
 		</div>
