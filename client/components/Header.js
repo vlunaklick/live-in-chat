@@ -3,7 +3,6 @@ import UserIcon from './UserIcon'
 import Logoutbutton from './LogoutButton'
 
 export default function Header({ user }) {
-	console.log(user)
 	return (
 		<HeaderWrapper>
 			<div className='data-container'>

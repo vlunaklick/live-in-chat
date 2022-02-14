@@ -5,6 +5,7 @@ import axios from 'axios'
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
 import Header from '../components/Header'
+import Spinner from '../components/Spinner'
 
 export default function Home(props) {
 	const [user, setUser] = useState({})
@@ -27,9 +28,13 @@ export default function Home(props) {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<MainWrapper>
-				<ChatWrapper>
-					<Header user={user} />
-				</ChatWrapper>
+				{props.success ? (
+					<ChatWrapper>
+						<Header user={user} />
+					</ChatWrapper>
+				) : (
+					<Spinner />
+				)}
 			</MainWrapper>
 		</div>
 	)
