@@ -6,7 +6,7 @@ export default function Chat({ user, chatSelected, setChatSelected }) {
 	return (
 		<ChatWrapper>
 			{chatSelected !== false ? (
-				<>
+				<SubChatWrapper>
 					<ChatHeader
 						user={user}
 						profilePicture='/no-user.jpg'
@@ -14,7 +14,7 @@ export default function Chat({ user, chatSelected, setChatSelected }) {
 					/>
 					<ChatContent />
 					<MessageSender />
-				</>
+				</SubChatWrapper>
 			) : (
 				''
 			)}
@@ -27,10 +27,35 @@ const ChatWrapper = styled.section`
 	background-color: #262626;
 	display: flex;
 	flex-direction: column;
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	@media screen and (min-width: 768px) {
+		position: relative;
+		height: 100%;
+	}
+`
+
+const SubChatWrapper = styled.section`
+	width: 100%;
+	background-color: #262626;
+	display: flex;
+	flex-direction: column;
+
+	@media screen and (min-width: 768px) {
+		position: relative;
+		height: 100%;
+	}
 `
 
 const ChatContent = styled.section`
 	background-color: #737373;
-	height: 100%;
+	background-image: url();
+	height: calc(100vh - 59.19px - 59.19px);
 	width: 100%;
+
+	@media screen and (min-width: 1386px) {
+		height: calc(100vh - 59.19px - 59.19px - 20px);
+	}
 `

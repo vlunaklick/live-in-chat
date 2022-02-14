@@ -33,7 +33,7 @@ export default function Home(props) {
 			<MainWrapper>
 				{props.success ? (
 					<ChatWrapper>
-						<div>
+						<div className='sidebar-selection'>
 							<Header user={user} />
 							<Sidebar
 								setChatSelected={setChatSelected}
@@ -91,6 +91,16 @@ const ChatWrapper = styled.section`
 	height: 100vh;
 	display: flex;
 	transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+
+	.sidebar-selection {
+		width: 100%;
+	}
+
+	@media screen and (min-width: 768px) {
+		.sidebar-selection {
+			width: 320px;
+		}
+	}
 
 	@media screen and (min-width: 1386px) {
 		width: 1386px;
