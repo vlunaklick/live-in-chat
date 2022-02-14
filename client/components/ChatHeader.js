@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
-import Logoutbutton from './LogoutButton'
 
 export default function ChatHeader({ user, profilePicture }) {
 	return (
