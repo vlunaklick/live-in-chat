@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 
-const UserIcon = () => {
+const UserIcon = ({ profilePicture }) => {
 	return (
 		<ImageContainer>
 			<Image
-				src={'/no-user.jpg'}
+				src={profilePicture}
 				layout='fill'
 				alt='Profile picture'
 				objectFit='contain'
@@ -21,9 +21,8 @@ const ImageContainer = styled.div`
 	width: 40px;
 	height: 40px;
 	position: relative;
-	border-radius: 100%;
 
 	img {
-		border-radius: 100%;
+		border-radius: 50%;
 	}
 `

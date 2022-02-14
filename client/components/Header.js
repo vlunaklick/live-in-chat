@@ -6,7 +6,7 @@ export default function Header({ user }) {
 	return (
 		<HeaderWrapper>
 			<div className='data-container'>
-				<UserIcon />
+				<UserIcon profilePicture='/no-user.jpg' />
 				<div className='container-data-user'>
 					<p className='user-name-header'>{user.name}</p>
 					<p className='user-email-header'>{user.email}</p>
@@ -24,6 +24,7 @@ const HeaderWrapper = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	transition: border-rigth 0.5s ease-in-out;
 
 	.data-container {
 		display: flex;
@@ -53,5 +54,6 @@ const HeaderWrapper = styled.header`
 
 	@media screen and (min-width: 768px) {
 		width: 320px;
+		border-right: 1px solid #737373;
 	}
 `

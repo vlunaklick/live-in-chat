@@ -6,6 +6,7 @@ import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import Spinner from '../components/Spinner'
+import Sidebar from '../components/Sidebar'
 
 export default function Home(props) {
 	const [user, setUser] = useState({})
@@ -31,6 +32,7 @@ export default function Home(props) {
 				{props.success ? (
 					<ChatWrapper>
 						<Header user={user} />
+						<Sidebar />
 					</ChatWrapper>
 				) : (
 					<Spinner />
