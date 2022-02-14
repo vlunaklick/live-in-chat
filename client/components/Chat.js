@@ -54,6 +54,8 @@ const ChatContent = styled.section`
 	background-image: url();
 	height: calc(100vh - 59.19px - 59.19px);
 	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
 
 	@media screen and (min-width: 1386px) {
 		height: calc(100vh - 59.19px - 59.19px - 20px);

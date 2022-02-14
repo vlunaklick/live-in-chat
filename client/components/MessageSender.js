@@ -16,6 +16,9 @@ const MessageSenderWrapper = styled.section`
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 
 	input {
 		padding: 0.5rem;
@@ -35,5 +38,9 @@ const MessageSenderWrapper = styled.section`
 		height: 30px;
 		width: 40px;
 		color: #979797;
+	}
+
+	@media screen and (min-width: 768px) {
+		position: relative;
 	}
 `
