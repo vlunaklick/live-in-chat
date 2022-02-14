@@ -7,7 +7,7 @@ export default function Header({ user }) {
 		<HeaderWrapper>
 			<div className='data-container'>
 				<UserIcon />
-				<div>
+				<div className='container-data-user'>
 					<p className='user-name-header'>{user.name}</p>
 					<p className='user-email-header'>{user.email}</p>
 				</div>
@@ -34,14 +34,20 @@ const HeaderWrapper = styled.header`
 			line-height: 1;
 		}
 
-		.user-name-header {
-			font-weight: 600;
-			color: #fafafa;
-		}
+		.container-data-user {
+			display: flex;
+			flex-direction: column;
+			gap: 0.2rem;
 
-		.user-email-header {
-			font-size: 0.8rem;
-			color: #a3a3a3;
+			.user-name-header {
+				font-weight: 600;
+				color: #fafafa;
+			}
+
+			.user-email-header {
+				font-size: 0.8rem;
+				color: #a3a3a3;
+			}
 		}
 	}
 `
