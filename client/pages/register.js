@@ -22,12 +22,6 @@ export default function Register(props) {
 	const router = useRouter()
 
 	useEffect(() => {
-		if (loged) {
-			router.push('/')
-		}
-	}, [loged])
-
-	useEffect(() => {
 		if (register) {
 			router.push('/login')
 		}
@@ -82,7 +76,7 @@ export default function Register(props) {
 }
 
 export async function getServerSideProps(context) {
-	const { params, query, res, req } = context
+	const { res, req } = context
 
 	const token = getCookie('session', { req, res })
 

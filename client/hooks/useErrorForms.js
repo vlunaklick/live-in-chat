@@ -32,7 +32,7 @@ export default function useErrorForms() {
 			setPasswordError([false, ''])
 		}
 
-		if (mailError[0] === false || passwordError[0] === false) {
+		if (mailError[0] === false && passwordError[0] === false) {
 			axios
 				.post(
 					`http://localhost:3005/users/login`,
@@ -64,22 +64,22 @@ export default function useErrorForms() {
 		}
 	}
 
-	const registerSubmit = e => {
+	const registerSubmit = async e => {
 		e.preventDefault()
 		const user = e.target[0].value
 		const email = e.target[1].value
 		const password = e.target[2].value
 
-		if (user.length < 6) {
-			setUserError([true, 'The user should be at least 6 characters long.'])
-		} else {
-			setUserError([false, ''])
-		}
-
 		if (email.match(regexMail) === null) {
 			setMailError([true, 'The email isn\u0027t valid.'])
 		} else {
 			setMailError([false, ''])
+		}
+
+		if (user.length < 6) {
+			setUserError([true, 'The user should be at least 6 characters long.'])
+		} else {
+			setUserError([false, ''])
 		}
 
 		if (password.length < 6) {
@@ -92,9 +92,9 @@ export default function useErrorForms() {
 		}
 
 		if (
-			mailError[0] === false ||
-			passwordError[0] === false ||
-			user[0] === false
+			email.match(regexMail) !== null &&
+			password.length >= 6 &&
+			user.length >= 6
 		) {
 			axios
 				.post(`http://localhost:3005/users/create`, {
@@ -103,7 +103,9 @@ export default function useErrorForms() {
 					password: password,
 				})
 				.then(({ data }) => {
-					setRegister(true)
+					if (data.success) {
+						setRegister(true)
+					}
 				})
 				.catch(({ response }) => {
 					setMailError([true, response.data.message])
@@ -115,10 +117,10 @@ export default function useErrorForms() {
 		userError,
 		passwordError,
 		mailError,
-		loginSubmit,
-		registerSubmit,
 		loged,
 		register,
+		loginSubmit,
+		registerSubmit,
 		setLoged,
 	}
 }

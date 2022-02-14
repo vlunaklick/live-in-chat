@@ -25,15 +25,13 @@ export default function Home(props) {
 				<meta name='description' content='Chatting app' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<ChatWrapper>
-				<p>{user.email}</p>
-			</ChatWrapper>
+			<ChatWrapper></ChatWrapper>
 		</div>
 	)
 }
 
 export async function getServerSideProps(context) {
-	const { params, query, res, req } = context
+	const { res, req } = context
 
 	const token = getCookie('session', { req, res })
 
