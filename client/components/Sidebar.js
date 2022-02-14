@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 import Sidebarchat from './SidebarChat'
 import { useState } from 'react'
+import SearchSide from './SearchSide'
 
 const Sidebar = () => {
 	const [chatSelected, setChatSelected] = useState(false)
 
 	return (
 		<SidebarWrapper>
+			<SearchSide />
 			<Sidebarchat
 				name='Valen'
 				lastMessage='Re loco'
@@ -45,7 +47,9 @@ const SidebarWrapper = styled.section`
 
 	@media screen and (min-width: 768px) {
 		width: 320px;
-		height: calc(100vh - 59.19px - 20px);
 		border-right: 1px solid #737373;
+	}
+	@media screen and (min-width: 1386px) {
+		height: calc(100vh - 59.19px - 20px);
 	}
 `

@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import Spinner from '../components/Spinner'
 import Sidebar from '../components/Sidebar'
+import Chat from '../components/Chat'
 
 export default function Home(props) {
 	const [user, setUser] = useState({})
@@ -31,8 +32,11 @@ export default function Home(props) {
 			<MainWrapper>
 				{props.success ? (
 					<ChatWrapper>
-						<Header user={user} />
-						<Sidebar />
+						<div>
+							<Header user={user} />
+							<Sidebar />
+						</div>
+						<Chat />
 					</ChatWrapper>
 				) : (
 					<Spinner />
@@ -77,6 +81,7 @@ const MainWrapper = styled.main`
 const ChatWrapper = styled.section`
 	width: 100%;
 	height: 100vh;
+	display: flex;
 	transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
 
 	@media screen and (min-width: 1386px) {

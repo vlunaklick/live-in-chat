@@ -9,14 +9,14 @@ import { getCookie } from 'cookies-next'
 import Spinner from '../components/Spinner'
 
 export default function Login(props) {
-	const { mailError, passwordError, loginSubmit, loged } = useErrorForms()
+	const { mailError, passwordError, loginSubmit, logged } = useErrorForms()
 	const router = useRouter()
 
 	useEffect(() => {
-		if (loged) {
+		if (logged) {
 			router.push('/')
 		}
-	}, [loged])
+	}, [logged])
 
 	useEffect(() => {
 		if (props.success) {

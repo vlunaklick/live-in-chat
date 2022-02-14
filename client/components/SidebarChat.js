@@ -31,6 +31,7 @@ const SidebarChatWrapper = styled.div`
 	padding: 0.6rem;
 	gap: 0.5rem;
 	align-items: center;
+	border-bottom: 1px solid #737373;
 	cursor: pointer;
 	background-color: ${({ selected, id }) => (selected === id ? '#737373' : '')};
 
@@ -40,7 +41,6 @@ const SidebarChatWrapper = styled.div`
 		gap: 0.3rem;
 		width: 80%;
 		padding: 0.3rem 0.2rem;
-		border-bottom: 1px solid #737373;
 
 		p {
 			line-height: 1;

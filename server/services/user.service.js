@@ -45,7 +45,7 @@ export async function checkAccount(email, password) {
 	const isValid = compareHash(password, user.password)
 
 	return isValid
-		? [true, 'Loged']
+		? [true, 'logged']
 		: [false, 'The password is invalid.', 'password']
 }
 

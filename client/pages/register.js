@@ -14,9 +14,9 @@ export default function Register(props) {
 		passwordError,
 		mailError,
 		registerSubmit,
-		loged,
+		logged,
 		register,
-		setLoged,
+		setlogged,
 	} = useErrorForms()
 
 	const router = useRouter()

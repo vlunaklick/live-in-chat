@@ -6,7 +6,7 @@ export default function useErrorForms() {
 	const [userError, setUserError] = useState([false, ''])
 	const [mailError, setMailError] = useState([false, ''])
 	const [passwordError, setPasswordError] = useState([false, ''])
-	const [loged, setLoged] = useState(false)
+	const [logged, setlogged] = useState(false)
 	const [register, setRegister] = useState(false)
 
 	const regexMail =
@@ -47,7 +47,7 @@ export default function useErrorForms() {
 						let token = data.headers['authorization'].split(' ')[1]
 						removeCookies('session')
 						setCookies('session', token, { HttpOnly: true })
-						setLoged(true)
+						setlogged(true)
 					} catch (error) {
 						console.log(error)
 					}
@@ -117,10 +117,10 @@ export default function useErrorForms() {
 		userError,
 		passwordError,
 		mailError,
-		loged,
+		logged,
 		register,
 		loginSubmit,
 		registerSubmit,
-		setLoged,
+		setlogged,
 	}
 }
