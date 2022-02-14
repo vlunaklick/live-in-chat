@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
+import Logoutbutton from './LogoutButton'
 
 export default function Header({ user }) {
 	console.log(user)
@@ -12,6 +13,8 @@ export default function Header({ user }) {
 					<p className='user-email-header'>{user.email}</p>
 				</div>
 			</div>
+
+			<Logoutbutton />
 		</HeaderWrapper>
 	)
 }
@@ -19,6 +22,9 @@ export default function Header({ user }) {
 const HeaderWrapper = styled.header`
 	background-color: #262626;
 	padding: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
 	.data-container {
 		display: flex;
