@@ -36,7 +36,7 @@ export default function Home(props) {
 							<Header user={user} />
 							<Sidebar />
 						</div>
-						<Chat />
+						<Chat user={user} />
 					</ChatWrapper>
 				) : (
 					<Spinner />
