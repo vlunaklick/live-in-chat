@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import Sidebarchat from './SidebarChat'
-import { useState } from 'react'
 import SearchSide from './SearchSide'
+import CreateNewChat from './CreateNewChat'
 
 const Sidebar = ({ chatSelected, setChatSelected }) => {
 	return (
 		<SidebarWrapper>
 			<SearchSide />
+			<CreateNewChat />
 			<Sidebarchat
 				name='Valen'
 				lastMessage='Re loco'
