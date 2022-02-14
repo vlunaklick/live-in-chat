@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
+import Header from '../components/Header'
 
 export default function Home(props) {
 	const [user, setUser] = useState({})
@@ -25,7 +26,11 @@ export default function Home(props) {
 				<meta name='description' content='Chatting app' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<ChatWrapper></ChatWrapper>
+			<MainWrapper>
+				<ChatWrapper>
+					<Header />
+				</ChatWrapper>
+			</MainWrapper>
 		</div>
 	)
 }
@@ -53,11 +58,22 @@ export async function getServerSideProps(context) {
 	}
 }
 
-const ChatWrapper = styled.main`
+const MainWrapper = styled.main`
 	background-color: #171717;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+`
+
+const ChatWrapper = styled.section`
+	width: 100%;
+	height: 100vh;
+
+	@media screen and (min-width: 1200px) {
+		width: 1200px;
+		box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+			0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+	}
 `
