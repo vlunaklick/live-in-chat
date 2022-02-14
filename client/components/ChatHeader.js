@@ -1,14 +1,21 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
+import { BiArrowBack } from 'react-icons/bi'
 
-export default function ChatHeader({ user, profilePicture }) {
+export default function ChatHeader({ user, profilePicture, setChatSelected }) {
 	return (
 		<ChatHeaderWrapper>
 			<div className='data-container'>
-				<UserIcon profilePicture={profilePicture} />
-				<div className='container-data-user'>
-					<p className='user-name-header'>{user.name}</p>
+				<div className='left-header-chat'>
+					<UserIcon profilePicture={profilePicture} />
+					<div className='container-data-user'>
+						<p className='user-name-header'>{user.name}</p>
+					</div>
 				</div>
+				<BiArrowBack
+					className='back-header-chat'
+					onClick={() => setChatSelected(false)}
+				/>
 			</div>
 		</ChatHeaderWrapper>
 	)
@@ -18,13 +25,27 @@ const ChatHeaderWrapper = styled.header`
 	background-color: #262626;
 	padding: 0.6rem;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 
 	.data-container {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
+		justify-content: space-between;
+		width: 100%;
+
+		.left-header-chat {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.back-header-chat {
+			margin-right: 0.5rem;
+			color: #fafafa;
+			cursor: pointer;
+			width: 20px;
+			height: 20px;
+		}
 
 		p {
 			line-height: 1;

@@ -2,12 +2,22 @@ import styled from 'styled-components'
 import ChatHeader from './ChatHeader'
 import MessageSender from './MessageSender'
 
-export default function Chat({ user }) {
+export default function Chat({ user, chatSelected, setChatSelected }) {
 	return (
 		<ChatWrapper>
-			<ChatHeader user={user} profilePicture='/no-user.jpg' />
-			<ChatContent />
-			<MessageSender />
+			{chatSelected !== false ? (
+				<>
+					<ChatHeader
+						user={user}
+						profilePicture='/no-user.jpg'
+						setChatSelected={setChatSelected}
+					/>
+					<ChatContent />
+					<MessageSender />
+				</>
+			) : (
+				''
+			)}
 		</ChatWrapper>
 	)
 }

@@ -3,9 +3,7 @@ import Sidebarchat from './SidebarChat'
 import { useState } from 'react'
 import SearchSide from './SearchSide'
 
-const Sidebar = () => {
-	const [chatSelected, setChatSelected] = useState(false)
-
+const Sidebar = ({ chatSelected, setChatSelected }) => {
 	return (
 		<SidebarWrapper>
 			<SearchSide />

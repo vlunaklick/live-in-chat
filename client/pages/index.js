@@ -11,6 +11,7 @@ import Chat from '../components/Chat'
 
 export default function Home(props) {
 	const [user, setUser] = useState({})
+	const [chatSelected, setChatSelected] = useState(false)
 
 	const router = useRouter()
 
@@ -34,9 +35,16 @@ export default function Home(props) {
 					<ChatWrapper>
 						<div>
 							<Header user={user} />
-							<Sidebar />
+							<Sidebar
+								setChatSelected={setChatSelected}
+								chatSelected={chatSelected}
+							/>
 						</div>
-						<Chat user={user} />
+						<Chat
+							user={user}
+							chatSelected={chatSelected}
+							setChatSelected={setChatSelected}
+						/>
 					</ChatWrapper>
 				) : (
 					<Spinner />
