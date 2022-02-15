@@ -13,35 +13,21 @@ model Message {
   createdAt DateTime @default(now())
   chatId    String
   creatorId String
-  creator   User     @relation(fields: [creatorId], references: [id])
   chat      Chat     @relation(fields: [chatId], references: [id])
 }
 
 model Chat {
-  id           String     @id @default(uuid())
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  messages     Message[]  @relation()
-  users        ChatUser[]
-  codecreators String     @unique @db.VarChar(255)
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[] @relation()
+  members   String[]
 }
 
 model User {
-  id        String     @id @default(uuid())
-  name      String     @db.VarChar(255)
-  email     String     @unique
-  password  String     @db.VarChar(255)
-  createdAt DateTime   @default(now())
-  chats     ChatUser[]
-  messages  Message[]  @relation()
-}
-
-model ChatUser {
-  id      Int    @default(autoincrement())
-  chat    Chat   @relation(fields: [chatId], references: [id])
-  user    User   @relation(fields: [emailId], references: [email])
-  chatId  String
-  emailId String @db.VarChar(255)
-
-  @@id([emailId, chatId])
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(255)
+  email     String   @unique
+  password  String   @db.VarChar(255)
+  createdAt DateTime @default(now())
 }

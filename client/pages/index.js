@@ -8,10 +8,13 @@ import Header from '../components/Header'
 import Spinner from '../components/Spinner'
 import Sidebar from '../components/Sidebar'
 import Chat from '../components/Chat'
+import { newConnection } from '../socket/socket'
 
 export default function Home(props) {
 	const [user, setUser] = useState({})
 	const [chatSelected, setChatSelected] = useState(false)
+
+	newConnection()
 
 	const router = useRouter()
 

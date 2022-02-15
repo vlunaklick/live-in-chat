@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { removeCookies } from 'cookies-next'
 import { useRouter } from 'next/router'
+import { newDisconnection } from '../socket/socket.js'
 
 const Logoutbutton = () => {
 	const router = useRouter()
@@ -8,6 +9,7 @@ const Logoutbutton = () => {
 	const logOut = e => {
 		e.preventDefault()
 		removeCookies('session')
+		newDisconnection()
 		router.reload('/')
 	}
 

@@ -41,7 +41,6 @@ export async function isAuth(req, res, next) {
 
 		next()
 	} catch (err) {
-		console.log(err.message)
 		res.status(500).json({ success: false, message: err.message })
 	}
 }
