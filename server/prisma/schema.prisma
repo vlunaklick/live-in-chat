@@ -7,15 +7,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Message {
   id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
+  message   String   @db.VarChar(1000)
   createdAt DateTime @default(now())
+  chatId    Int
+  chat      Chat     @relation(fields: [chatId], references: [id])
 }
 
+model Chat {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  messages  Message[]  @relation()
+  users     ChatUser[]
+}
 
-model Chat{
-  id String @unique
+model User {
+  id        String     @id @default(uuid())
+  name      String     @db.VarChar(255)
+  email     String     @unique
+  password  String     @db.VarChar(255)
+  createdAt DateTime   @default(now())
+  chats     ChatUser[]
+}
+
+model ChatUser {
+  id      Int    @default(autoincrement())
+  chat    Chat   @relation(fields: [chatId], references: [id])
+  user    User   @relation(fields: [emailId], references: [email])
+  chatId  Int
+  emailId String @db.VarChar(255)
+
+  @@id([emailId, chatId])
 }
