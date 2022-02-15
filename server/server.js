@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { userRouter } from './routers/user.router.js'
+import { chatRouter } from './routers/chat.router.js'
 import cookieParser from 'cookie-parser'
 
 const app = express()
@@ -20,6 +21,7 @@ app.use(cookieParser())
 app.set('port', 3005 || process.env.PORT)
 
 app.use('/users', userRouter)
+app.use('/chats', chatRouter)
 
 app.listen(app.get('port'), () => {
 	console.log(`Listening on port ${app.get('port')}`)

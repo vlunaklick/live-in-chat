@@ -16,22 +16,6 @@ const Sidebar = ({ chatSelected, setChatSelected }) => {
 				id='1'
 				chatSelected={chatSelected}
 			/>
-			<Sidebarchat
-				name='Valtol'
-				lastMessage='ahre'
-				profilePicture='/no-user.jpg'
-				setChatSelected={setChatSelected}
-				id='3'
-				chatSelected={chatSelected}
-			/>
-			<Sidebarchat
-				name='Angi'
-				lastMessage='SAPEEE'
-				profilePicture='/no-user.jpg'
-				setChatSelected={setChatSelected}
-				id='2'
-				chatSelected={chatSelected}
-			/>
 		</SidebarWrapper>
 	)
 }
