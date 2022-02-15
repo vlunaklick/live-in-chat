@@ -38,6 +38,12 @@ const MessageSenderWrapper = styled.section`
 		height: 30px;
 		width: 40px;
 		color: #979797;
+		cursor: pointer;
+		transition: color 0.5s ease-in-out;
+	}
+
+	.message-send-svg:hover {
+		color: #c084fc;
 	}
 
 	@media screen and (min-width: 768px) {

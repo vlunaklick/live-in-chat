@@ -6,8 +6,8 @@ import CreateNewChat from './CreateNewChat'
 const Sidebar = ({ chatSelected, setChatSelected }) => {
 	return (
 		<SidebarWrapper>
-			<SearchSide />
 			<CreateNewChat />
+			<SearchSide />
 			<Sidebarchat
 				name='Valen'
 				lastMessage='Re loco'

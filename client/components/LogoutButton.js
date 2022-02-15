@@ -17,9 +17,8 @@ const Logoutbutton = () => {
 export default Logoutbutton
 
 const LogOutWrapper = styled.button`
-	height: 2rem;
-	background-color: #991b1b;
-	padding: 0.335rem 1rem;
+	background-color: #dc2626;
+	padding: 0.6rem 1rem;
 	outline: none;
 	border: none;
 	cursor: pointer;
@@ -31,6 +30,6 @@ const LogOutWrapper = styled.button`
 
 	:hover,
 	:active {
-		background-color: #7f1d1d;
+		background-color: #b91c1c;
 	}
 `
