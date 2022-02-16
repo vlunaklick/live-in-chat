@@ -6,10 +6,10 @@ const router = express.Router()
 
 /* Create a message */
 
-router.post('/create', MessageController.create)
+router.post('/create', isAuth, MessageController.create)
 
 /* See user message */
 
-router.get('/:chatId', MessageController.getConversation)
+router.get('/:chatId', isAuth, MessageController.getConversation)
 
 export { router as messageRouter }

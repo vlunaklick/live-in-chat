@@ -1,4 +1,5 @@
 import prisma from '../utils/prisma.js'
+import { lastMessage } from './message.service.js'
 
 export async function createChat(sender, receiver) {
 	const chatExistence = await prisma.chat.findMany({
@@ -46,4 +47,15 @@ export async function chatExist(id) {
 	}
 
 	return false
+}
+
+export async function lastMessageChats(user) {
+	const conversations = await userChats(user)
+	let array = []
+
+	for (let i = 0; i < conversations.length; i++) {
+		array.push(await lastMessage(conversations[i].id))
+	}
+
+	return array
 }

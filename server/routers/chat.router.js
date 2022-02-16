@@ -8,8 +8,8 @@ const router = express.Router()
 
 router.post('/create', isAuth, ChatController.create)
 
-/* See user chats */
+/* See user last chats */
 
-router.get('/:userId', isAuth, ChatController.userChats)
+router.get('/:userId', ChatController.userLastChats)
 
 export { router as chatRouter }

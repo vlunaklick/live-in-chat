@@ -1,4 +1,4 @@
-import { createChat, userChats } from '../services/chat.service.js'
+import { createChat, lastMessageChats } from '../services/chat.service.js'
 
 class ChatController {
 	create = async (req, res) => {
@@ -19,11 +19,11 @@ class ChatController {
 		}
 	}
 
-	userChats = async (req, res) => {
+	userLastChats = async (req, res) => {
 		try {
 			const { userId } = req.params
 
-			const chats = await userChats(userId)
+			const chats = await lastMessageChats(userId)
 
 			res.status(200).json({ success: true, chats: chats })
 		} catch (err) {
