@@ -21,3 +21,15 @@ export async function createChat(sender, receiver) {
 
 	return false
 }
+
+export async function userChats(user) {
+	const conversations = await prisma.chat.findMany({
+		where: {
+			members: {
+				has: user,
+			},
+		},
+	})
+
+	return conversations
+}

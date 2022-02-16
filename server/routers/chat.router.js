@@ -8,8 +8,8 @@ const router = express.Router()
 
 router.post('/create', ChatController.create)
 
-/* Login */
+/* See user chats */
 
-/* See if is auth */
+router.get('/:userId', ChatController.userChats)
 
 export { router as chatRouter }
