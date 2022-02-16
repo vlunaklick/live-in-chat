@@ -1,10 +1,19 @@
 import express from 'express'
 import cors from 'cors'
-import { userRouter } from './routers/user.router.js'
 import cookieParser from 'cookie-parser'
+
+/* Socket io imports */
+
 import { Server } from 'socket.io'
 import { createServer } from 'http'
+
+/* Import routers */
+
+import { userRouter } from './routers/user.router.js'
 import { chatRouter } from './routers/chat.router.js'
+import { messageRouter } from './routers/message.router.js'
+
+/* Create express app */
 
 const app = express()
 
@@ -26,6 +35,7 @@ app.set('port', 3005 || process.env.PORT)
 
 app.use('/users', userRouter)
 app.use('/chats', chatRouter)
+app.use('/messages', messageRouter)
 
 /* Socket */
 
@@ -46,9 +56,11 @@ io.on('disconnect', socket => {
 	console.log('a user has disconnected')
 })
 
+/* Socket listener */
+
 server.listen(3010)
 
-/* Server listener */
+/* Api listener */
 
 app.listen(app.get('port'), () => {
 	console.log(`Listening on port ${app.get('port')}`)

@@ -33,3 +33,17 @@ export async function userChats(user) {
 
 	return conversations
 }
+
+export async function chatExist(id) {
+	const chat = await prisma.chat.findUnique({
+		where: {
+			id,
+		},
+	})
+
+	if (chat) {
+		return true
+	}
+
+	return false
+}

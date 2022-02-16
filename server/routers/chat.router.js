@@ -4,12 +4,12 @@ import { isAuth } from '../middlewares/isAuth.middleware.js'
 
 const router = express.Router()
 
-/* Create a */
+/* Create a chat */
 
-router.post('/create', ChatController.create)
+router.post('/create', isAuth, ChatController.create)
 
 /* See user chats */
 
-router.get('/:userId', ChatController.userChats)
+router.get('/:userId', isAuth, ChatController.userChats)
 
 export { router as chatRouter }
