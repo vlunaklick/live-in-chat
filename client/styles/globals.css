@@ -76,9 +76,9 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #ebebeb;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #6d6d6d;
+    background: #171717;
 }

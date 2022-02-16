@@ -8,6 +8,7 @@ const Sidebar = ({ chatSelected, setChatSelected, lastChats, owner }) => {
 		return (
 			<Sidebarchat
 				owner={owner}
+				date={chat.date}
 				messageMail={chat.email}
 				name={chat.creator}
 				lastMessage={chat.message}
