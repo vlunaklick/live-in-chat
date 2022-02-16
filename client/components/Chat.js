@@ -9,6 +9,7 @@ import ChatContent from './ChatContent'
 
 export default function Chat(props) {
 	const [messages, setMessages] = useState([])
+	const [title, setTitle] = useState('')
 
 	const firstUpdate = useRef(true)
 
@@ -30,6 +31,19 @@ export default function Chat(props) {
 					props.setLoading(false)
 				})
 		}
+
+		let titleName = props.lastChats.map(chat => {
+			return chat.chatId === props.chatSelected ? chat.creator : ''
+		})
+
+		let newArray = new Array()
+		for (var i = 0, j = titleName.length; i < j; i++) {
+			if (titleName[i]) {
+				newArray.push(titleName[i])
+			}
+		}
+
+		setTitle(newArray[0])
 	}, [props.chatSelected])
 
 	return (
@@ -41,11 +55,20 @@ export default function Chat(props) {
 					<SubChatWrapper>
 						<ChatHeader
 							user={props.user}
+							name={title}
 							profilePicture='/no-user.jpg'
 							setChatSelected={props.setChatSelected}
 						/>
 						<ChatContent messages={messages} user={props.user} />
-						<MessageSender />
+						<MessageSender
+							messages={messages}
+							setMessages={setMessages}
+							chatId={props.chatSelected}
+							email={props.user.email}
+							name={title}
+							setLastChats={props.setLastChats}
+							lastChats={props.lastChats}
+						/>
 					</SubChatWrapper>
 				)
 			) : (

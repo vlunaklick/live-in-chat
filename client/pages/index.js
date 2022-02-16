@@ -58,6 +58,8 @@ export default function Home(props) {
 							user={user}
 							chatSelected={chatSelected}
 							setChatSelected={closeChat}
+							setLastChats={setLastChats}
+							lastChats={lastChats}
 						/>
 					</ChatWrapper>
 				) : (

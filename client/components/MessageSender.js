@@ -1,10 +1,64 @@
 import styled from 'styled-components'
 import { IoMdSend } from 'react-icons/io'
+import axios from 'axios'
+import { getCookie } from 'cookies-next'
 
-export default function MessageSender() {
-	const createMessage = e => {
+export default function MessageSender({
+	email,
+	chatId,
+	setMessages,
+	messages,
+	setLastChats,
+	lastChats,
+	name,
+}) {
+	const createMessage = async e => {
 		e.preventDefault()
-		console.log('da')
+		if (e.target[0].value.replace(/\s/g, '').length) {
+			try {
+				const token = getCookie('session')
+				const data = {
+					email: email,
+					chatId: chatId,
+					text: e.target[0].value,
+				}
+
+				const message = await axios.post(
+					'http://localhost:3005/messages/create',
+					data,
+					{
+						headers: { Authorization: `Bearer ${token}` },
+						withCredentials: true,
+					}
+				)
+
+				setMessages([...messages, message.data.message])
+
+				let newLastChats = lastChats.map(chat => {
+					if (chat.creator === name) {
+						return {
+							creator: chat.creator,
+							chatId: chat.chatId,
+							email: email,
+							date: message.data.message.createdAt,
+							message: message.data.message.message,
+						}
+					} else {
+						return chat
+					}
+				})
+
+				newLastChats.sort((a, b) => {
+					return new Date(b.date) - new Date(a.date)
+				})
+
+				setLastChats(newLastChats)
+
+				e.target[0].value = ''
+			} catch (err) {
+				console.log(err)
+			}
+		}
 	}
 
 	return (

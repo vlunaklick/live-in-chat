@@ -2,14 +2,19 @@ import styled from 'styled-components'
 import UserIcon from './UserIcon'
 import { BiArrowBack } from 'react-icons/bi'
 
-export default function ChatHeader({ user, profilePicture, setChatSelected }) {
+export default function ChatHeader({
+	user,
+	profilePicture,
+	setChatSelected,
+	name,
+}) {
 	return (
 		<ChatHeaderWrapper>
 			<div className='data-container'>
 				<div className='left-header-chat'>
 					<UserIcon profilePicture={profilePicture} />
 					<div className='container-data-user'>
-						<p className='user-name-header'>{user.name}</p>
+						<p className='user-name-header'>{name}</p>
 					</div>
 				</div>
 				<BiArrowBack

@@ -28,10 +28,10 @@ const ChatContentWrapper = styled.section`
 	flex-direction: column;
 	padding: 0 0.8rem 4.5rem 0.8rem;
 	gap: 1rem;
-	justify-content: flex-end;
+	overflow-y: auto;
+	align-items: flex-end;
 
 	@media screen and (min-width: 1386px) {
-		overflow-y: scroll;
 		height: calc(100vh - 59.19px);
 		padding: 0 2rem 4.5rem 2.625rem;
 		max-height: calc(100vh - 59.19px);
