@@ -68,7 +68,5 @@ export async function lastMessageChats(user) {
 		return new Date(b.date) - new Date(a.date)
 	})
 
-	console.log(array)
-
 	return array
 }

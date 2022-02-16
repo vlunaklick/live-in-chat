@@ -1,66 +1,58 @@
 import styled from 'styled-components'
 import ChatHeader from './ChatHeader'
 import MessageSender from './MessageSender'
+import { useEffect, useState, useRef } from 'react'
+import axios from 'axios'
+import Spinner from './Spinner'
+import { getCookie } from 'cookies-next'
+import ChatContent from './ChatContent'
 
-export default function Chat({ user, chatSelected, setChatSelected }) {
+export default function Chat(props) {
+	const [messages, setMessages] = useState([])
+
+	const firstUpdate = useRef(true)
+
+	useEffect(async () => {
+		if (firstUpdate.current) {
+			firstUpdate.current = false
+			return
+		}
+
+		const token = getCookie('session')
+		if (props.chatSelected) {
+			await axios
+				.get(`http://localhost:3005/messages/${props.chatSelected}`, {
+					headers: { Authorization: `Bearer ${token}` },
+					withCredentials: true,
+				})
+				.then(data => {
+					setMessages(data.data.messages)
+					props.setLoading(false)
+				})
+		}
+	}, [props.chatSelected])
+
 	return (
 		<ChatWrapper>
-			{chatSelected !== false ? (
-				<SubChatWrapper>
-					<ChatHeader
-						user={user}
-						profilePicture='/no-user.jpg'
-						setChatSelected={setChatSelected}
-					/>
-					<ChatContent />
-					<MessageSender />
-				</SubChatWrapper>
+			{props.chatSelected !== false ? (
+				props.loading ? (
+					<Spinner />
+				) : (
+					<SubChatWrapper>
+						<ChatHeader
+							user={props.user}
+							profilePicture='/no-user.jpg'
+							setChatSelected={props.setChatSelected}
+						/>
+						<ChatContent messages={messages} user={props.user} />
+						<MessageSender />
+					</SubChatWrapper>
+				)
 			) : (
 				''
 			)}
 		</ChatWrapper>
 	)
-}
-
-export async function getServerSideProps(context) {
-	const { res, req } = context
-
-	const token = getCookie('session', { req, res })
-
-	if (!token) {
-		return { props: { success: false, user: {} } }
-	}
-
-	const authResponse = await axios.get('http://localhost:3005/users/me', {
-		headers: { Authorization: `Bearer ${token}` },
-		withCredentials: true,
-	})
-
-	let props
-
-	if (authResponse.status === 200) {
-		props = {
-			success: authResponse.data.success,
-			user: authResponse.data.user,
-		}
-	}
-
-	const lastChats = await axios.get(
-		`http://localhost:3005/chats/${props.user.email}`,
-		{
-			headers: { Authorization: `Bearer ${token}` },
-			withCredentials: true,
-		}
-	)
-
-	if (lastChats.status === 200) {
-		props = {
-			...props,
-			lastChats: lastChats.data.chats,
-		}
-	}
-
-	return { props: props }
 }
 
 const ChatWrapper = styled.section`
@@ -87,18 +79,5 @@ const SubChatWrapper = styled.section`
 	@media screen and (min-width: 768px) {
 		position: relative;
 		height: 100%;
-	}
-`
-
-const ChatContent = styled.section`
-	background-color: #737373;
-	background-image: url();
-	height: calc(100vh - 59.19px - 59.19px);
-	width: 100%;
-	overflow-y: auto;
-	overflow-x: hidden;
-
-	@media screen and (min-width: 1386px) {
-		height: calc(100vh - 59.19px - 59.19px - 20px);
 	}
 `

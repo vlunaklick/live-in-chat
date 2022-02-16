@@ -10,14 +10,20 @@ import Sidebar from '../components/Sidebar'
 import Chat from '../components/Chat'
 import { newConnection } from '../socket/socket'
 
+newConnection()
+
 export default function Home(props) {
+	const [loading, setLoading] = useState(true)
 	const [user, setUser] = useState({})
 	const [chatSelected, setChatSelected] = useState(false)
 	const [lastChats, setLastChats] = useState(props.lastChats)
 
-	newConnection()
-
 	const router = useRouter()
+
+	const closeChat = () => {
+		setChatSelected(false)
+		setLoading(true)
+	}
 
 	useEffect(() => {
 		if (!props.success) {
@@ -47,9 +53,11 @@ export default function Home(props) {
 							/>
 						</div>
 						<Chat
+							loading={loading}
+							setLoading={setLoading}
 							user={user}
 							chatSelected={chatSelected}
-							setChatSelected={setChatSelected}
+							setChatSelected={closeChat}
 						/>
 					</ChatWrapper>
 				) : (
