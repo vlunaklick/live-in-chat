@@ -10,6 +10,6 @@ router.post('/create', isAuth, ChatController.create)
 
 /* See user last chats */
 
-router.get('/:userId', ChatController.userLastChats)
+router.get('/:userId', isAuth, ChatController.userLastChats)
 
 export { router as chatRouter }

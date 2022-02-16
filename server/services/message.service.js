@@ -39,9 +39,15 @@ export async function getAllMessages(chatId) {
 export async function lastMessage(chatId) {
 	const messages = await getAllMessages(chatId)
 
-	const creator = await accountUsername(messages.pop().creatorId)
+	const lastMessage = messages.pop()
 
-	return { creator: creator, message: messages.pop().message }
+	const creator = await accountUsername(lastMessage.creatorId)
+
+	return {
+		creator: creator,
+		message: lastMessage.message,
+		chatId: lastMessage.chatId,
+	}
 }
 
 export async function checkExistanceMessage(chatId) {

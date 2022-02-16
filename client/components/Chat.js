@@ -22,6 +22,47 @@ export default function Chat({ user, chatSelected, setChatSelected }) {
 	)
 }
 
+export async function getServerSideProps(context) {
+	const { res, req } = context
+
+	const token = getCookie('session', { req, res })
+
+	if (!token) {
+		return { props: { success: false, user: {} } }
+	}
+
+	const authResponse = await axios.get('http://localhost:3005/users/me', {
+		headers: { Authorization: `Bearer ${token}` },
+		withCredentials: true,
+	})
+
+	let props
+
+	if (authResponse.status === 200) {
+		props = {
+			success: authResponse.data.success,
+			user: authResponse.data.user,
+		}
+	}
+
+	const lastChats = await axios.get(
+		`http://localhost:3005/chats/${props.user.email}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+			withCredentials: true,
+		}
+	)
+
+	if (lastChats.status === 200) {
+		props = {
+			...props,
+			lastChats: lastChats.data.chats,
+		}
+	}
+
+	return { props: props }
+}
+
 const ChatWrapper = styled.section`
 	width: 100%;
 	background-color: #262626;

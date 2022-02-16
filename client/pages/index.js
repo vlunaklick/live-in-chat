@@ -13,6 +13,7 @@ import { newConnection } from '../socket/socket'
 export default function Home(props) {
 	const [user, setUser] = useState({})
 	const [chatSelected, setChatSelected] = useState(false)
+	const [lastChats, setLastChats] = useState(props.lastChats)
 
 	newConnection()
 
@@ -41,6 +42,7 @@ export default function Home(props) {
 							<Sidebar
 								setChatSelected={setChatSelected}
 								chatSelected={chatSelected}
+								lastChats={lastChats}
 							/>
 						</div>
 						<Chat
@@ -66,18 +68,36 @@ export async function getServerSideProps(context) {
 		return { props: { success: false, user: {} } }
 	}
 
-	const apiResponse = await axios.get('http://localhost:3005/users/me', {
+	const authResponse = await axios.get('http://localhost:3005/users/me', {
 		headers: { Authorization: `Bearer ${token}` },
 		withCredentials: true,
 	})
 
-	if (apiResponse.status === 200) {
-		const props = {
-			success: apiResponse.data.success,
-			user: apiResponse.data.user,
+	let props
+
+	if (authResponse.status === 200) {
+		props = {
+			success: authResponse.data.success,
+			user: authResponse.data.user,
 		}
-		return { props: props }
 	}
+
+	const lastChats = await axios.get(
+		`http://localhost:3005/chats/${props.user.email}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+			withCredentials: true,
+		}
+	)
+
+	if (lastChats.status === 200) {
+		props = {
+			...props,
+			lastChats: lastChats.data.chats,
+		}
+	}
+
+	return { props: props }
 }
 
 const MainWrapper = styled.main`
