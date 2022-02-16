@@ -75,9 +75,9 @@ const SubChatWrapper = styled.section`
 	background-color: #262626;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 
 	@media screen and (min-width: 768px) {
-		position: relative;
 		height: 100%;
 	}
 `

@@ -26,6 +26,7 @@ const ChatHeaderWrapper = styled.header`
 	padding: 0.6rem;
 	display: flex;
 	align-items: center;
+	z-index: 10;
 
 	.data-container {
 		display: flex;

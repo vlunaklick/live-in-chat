@@ -21,17 +21,19 @@ export default function ChatContent({ messages, user }) {
 const ChatContentWrapper = styled.section`
 	background-color: #737373;
 	background-image: url();
-	height: calc(100vh - 59.19px - 59.19px);
+	height: calc(100vh - 59.19px);
 	width: 100%;
 	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
-	padding: 0 2rem 1rem 2rem;
+	padding: 0 0.8rem 4.5rem 0.8rem;
 	gap: 1rem;
 	justify-content: flex-end;
-	overflow-y: scroll;
 
 	@media screen and (min-width: 1386px) {
-		height: 200px;
+		overflow-y: scroll;
+		height: calc(100vh - 59.19px);
+		padding: 0 2rem 4.5rem 2.625rem;
+		max-height: calc(100vh - 59.19px);
 	}
 `
