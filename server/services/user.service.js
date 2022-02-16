@@ -58,3 +58,17 @@ export async function accountId(email) {
 
 	return user.id
 }
+
+export async function accountUsername(email) {
+	const user = await prisma.user.findUnique({
+		where: {
+			email: email,
+		},
+	})
+
+	if (!user) {
+		return email
+	}
+
+	return user.name
+}

@@ -1,8 +1,13 @@
 import prisma from '../utils/prisma.js'
 import { chatExist } from './chat.service.js'
+import { accountUsername } from './user.service.js'
 
 export async function createMessage(email, chatId, text) {
 	const isThere = await checkExistanceMessage(chatId)
+
+	if (!isThere) {
+		return false
+	}
 
 	const newMessage = await prisma.message.create({
 		data: {
@@ -18,6 +23,10 @@ export async function createMessage(email, chatId, text) {
 export async function getAllMessages(chatId) {
 	const isThere = await checkExistanceMessage(chatId)
 
+	if (!isThere) {
+		return false
+	}
+
 	const messages = await prisma.message.findMany({
 		where: {
 			chatId: chatId,
@@ -30,7 +39,9 @@ export async function getAllMessages(chatId) {
 export async function lastMessage(chatId) {
 	const messages = await getAllMessages(chatId)
 
-	return { creator: messages.pop().creatorId, message: messages.pop().message }
+	const creator = await accountUsername(messages.pop().creatorId)
+
+	return { creator: creator, message: messages.pop().message }
 }
 
 export async function checkExistanceMessage(chatId) {
