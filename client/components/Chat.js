@@ -13,6 +13,8 @@ export default function Chat(props) {
 
 	const firstUpdate = useRef(true)
 
+	const scrollRef = useRef()
+
 	useEffect(async () => {
 		if (firstUpdate.current) {
 			firstUpdate.current = false
@@ -46,6 +48,10 @@ export default function Chat(props) {
 		setTitle(newArray[0])
 	}, [props.chatSelected])
 
+	useEffect(() => {
+		scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
+	}, [messages])
+
 	return (
 		<ChatWrapper>
 			{props.chatSelected !== false ? (
@@ -59,7 +65,11 @@ export default function Chat(props) {
 							profilePicture='/no-user.jpg'
 							setChatSelected={props.setChatSelected}
 						/>
-						<ChatContent messages={messages} user={props.user} />
+						<ChatContent
+							messages={messages}
+							user={props.user}
+							scrollRef={scrollRef}
+						/>
 						<MessageSender
 							messages={messages}
 							setMessages={setMessages}
