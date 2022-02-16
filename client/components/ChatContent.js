@@ -9,9 +9,7 @@ export default function ChatContent({ messages, user, scrollRef }) {
 				<MessageSenderPeople text={message} hours={createdAt} key={createdAt} />
 			</div>
 		) : (
-			<div className='width-ref' ref={scrollRef}>
-				<MessageReciever text={message} hours={createdAt} key={createdAt} />
-			</div>
+			<MessageReciever text={message} hours={createdAt} key={createdAt} />
 		)
 	})
 

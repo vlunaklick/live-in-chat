@@ -50,6 +50,7 @@ export default function Home(props) {
 								setChatSelected={setChatSelected}
 								chatSelected={chatSelected}
 								lastChats={lastChats}
+								setLastChats={setLastChats}
 							/>
 						</div>
 						<Chat

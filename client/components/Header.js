@@ -25,6 +25,7 @@ const HeaderWrapper = styled.header`
 	justify-content: space-between;
 	align-items: center;
 	transition: border-rigth 0.5s ease-in-out;
+	position: relative;
 
 	.data-container {
 		display: flex;
@@ -55,5 +56,6 @@ const HeaderWrapper = styled.header`
 	@media screen and (min-width: 768px) {
 		width: 320px;
 		border-right: 1px solid #737373;
+		z-index: 5;
 	}
 `

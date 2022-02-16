@@ -48,10 +48,6 @@ export default function MessageSender({
 					}
 				})
 
-				newLastChats.sort((a, b) => {
-					return new Date(b.date) - new Date(a.date)
-				})
-
 				setLastChats(newLastChats)
 
 				e.target[0].value = ''

@@ -3,8 +3,18 @@ import Sidebarchat from './SidebarChat'
 import SearchSide from './SearchSide'
 import CreateNewChat from './CreateNewChat'
 
-const Sidebar = ({ chatSelected, setChatSelected, lastChats, owner }) => {
-	const lastChatsShow = lastChats.map(chat => {
+const Sidebar = ({
+	chatSelected,
+	setChatSelected,
+	lastChats,
+	owner,
+	setLastChats,
+}) => {
+	let fixedArray = lastChats.sort((a, b) => {
+		return new Date(b.date) - new Date(a.date)
+	})
+
+	const lastChatsShow = fixedArray.map(chat => {
 		return (
 			<Sidebarchat
 				owner={owner}
@@ -23,9 +33,13 @@ const Sidebar = ({ chatSelected, setChatSelected, lastChats, owner }) => {
 
 	return (
 		<SidebarWrapper>
-			<CreateNewChat />
+			<CreateNewChat
+				sender={owner}
+				lastChats={lastChats}
+				setLastChats={setLastChats}
+			/>
 			<SearchSide />
-			{lastChatsShow}
+			<div className='container-chats-side'>{lastChatsShow}</div>
 		</SidebarWrapper>
 	)
 }
@@ -37,6 +51,17 @@ const SidebarWrapper = styled.section`
 	width: 100%;
 	height: calc(100vh - 59.19px);
 	transition: border-rigth 0.5s ease-in-out;
+	position: relative;
+
+	.container-chats-side {
+		position: absolute;
+		max-height: 100%;
+		width: 100%;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+		height: calc(100vh - 59.19px - 44.19px - 53.78px);
+	}
 
 	@media screen and (min-width: 768px) {
 		width: 320px;
@@ -44,6 +69,9 @@ const SidebarWrapper = styled.section`
 	}
 
 	@media screen and (min-width: 1386px) {
+		.container-chats-side {
+			height: calc(100vh - 59.19px - 44.19px - 53.78px - 20px);
+		}
 		height: calc(100vh - 59.19px - 20px);
 	}
 `
