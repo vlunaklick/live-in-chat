@@ -21,6 +21,8 @@ export default function Chat(props) {
 			return
 		}
 
+		props.setLoading(true)
+
 		const token = getCookie('session')
 		if (props.chatSelected) {
 			await axios
@@ -46,6 +48,8 @@ export default function Chat(props) {
 		}
 
 		setTitle(newArray[0])
+
+		scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
 	}, [props.chatSelected])
 
 	useEffect(() => {
