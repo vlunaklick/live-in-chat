@@ -40,6 +40,7 @@ export default function Home(props) {
 						<div className='sidebar-selection'>
 							<Header user={user} />
 							<Sidebar
+								owner={user.email}
 								setChatSelected={setChatSelected}
 								chatSelected={chatSelected}
 								lastChats={lastChats}

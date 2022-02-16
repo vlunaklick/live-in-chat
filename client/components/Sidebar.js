@@ -3,16 +3,19 @@ import Sidebarchat from './SidebarChat'
 import SearchSide from './SearchSide'
 import CreateNewChat from './CreateNewChat'
 
-const Sidebar = ({ chatSelected, setChatSelected, lastChats }) => {
+const Sidebar = ({ chatSelected, setChatSelected, lastChats, owner }) => {
 	const lastChatsShow = lastChats.map(chat => {
 		return (
 			<Sidebarchat
+				owner={owner}
+				messageMail={chat.email}
 				name={chat.creator}
 				lastMessage={chat.message}
 				profilePicture='/no-user.jpg'
 				setChatSelected={setChatSelected}
 				id={chat.chatId}
 				chatSelected={chatSelected}
+				key={chat.chatId}
 			/>
 		)
 	})

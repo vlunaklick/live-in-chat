@@ -17,6 +17,15 @@ export async function createMessage(email, chatId, text) {
 		},
 	})
 
+	await prisma.chat.update({
+		where: {
+			id: chatId,
+		},
+		data: {
+			updatedAt: new Date(),
+		},
+	})
+
 	return newMessage
 }
 
@@ -36,17 +45,31 @@ export async function getAllMessages(chatId) {
 	return messages
 }
 
-export async function lastMessage(chatId) {
+export async function lastMessage(chatId, user, chatSender, date) {
 	const messages = await getAllMessages(chatId)
+
+	let value = chatSender.indexOf(user) === 0 ? chatSender[1] : chatSender[0]
+
+	const creator = await accountUsername(value)
+
+	if (messages.length === 0) {
+		return {
+			creator: creator,
+			email: value,
+			date: date,
+			message: '',
+			chatId: chatId,
+		}
+	}
 
 	const lastMessage = messages.pop()
 
-	const creator = await accountUsername(lastMessage.creatorId)
-
 	return {
 		creator: creator,
+		email: lastMessage.creatorId,
+		date: date,
 		message: lastMessage.message,
-		chatId: lastMessage.chatId,
+		chatId: chatId,
 	}
 }
 

@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
-import { useState } from 'react'
 
 const SidebarChat = ({
 	name,
@@ -9,6 +8,8 @@ const SidebarChat = ({
 	id,
 	setChatSelected,
 	chatSelected,
+	owner,
+	messageMail,
 }) => {
 	return (
 		<SidebarChatWrapper
@@ -18,7 +19,9 @@ const SidebarChat = ({
 			<UserIcon profilePicture={profilePicture} />
 			<div className='sidebar-chat-data'>
 				<p className='sidebar-chat-name'>{name}</p>
-				<p className='sidebar-chat-last'>{lastMessage}</p>
+				<p className='sidebar-chat-last'>
+					{owner === messageMail ? `You: ${lastMessage}` : lastMessage}
+				</p>
 			</div>
 		</SidebarChatWrapper>
 	)
@@ -38,9 +41,10 @@ const SidebarChatWrapper = styled.div`
 	.sidebar-chat-data {
 		display: flex;
 		flex-direction: column;
-		gap: 0.3rem;
+		gap: 0.5rem;
 		width: 80%;
 		padding: 0.3rem 0.2rem;
+		height: 46.39px;
 
 		p {
 			line-height: 1;
@@ -54,6 +58,10 @@ const SidebarChatWrapper = styled.div`
 		.sidebar-chat-last {
 			font-size: 0.8rem;
 			color: #d4d4d4;
+			text-overflow: ellipsis;
+			max-width: 239.84px;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 	}
 `

@@ -54,8 +54,21 @@ export async function lastMessageChats(user) {
 	let array = []
 
 	for (let i = 0; i < conversations.length; i++) {
-		array.push(await lastMessage(conversations[i].id))
+		array.push(
+			await lastMessage(
+				conversations[i].id,
+				user,
+				conversations[i].members,
+				conversations[i].updatedAt
+			)
+		)
 	}
+
+	array.sort((a, b) => {
+		return new Date(b.date) - new Date(a.date)
+	})
+
+	console.log(array)
 
 	return array
 }
