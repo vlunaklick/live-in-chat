@@ -64,9 +64,31 @@ export async function lastMessageChats(user) {
 		)
 	}
 
-	array.sort((a, b) => {
-		return new Date(b.date) - new Date(a.date)
-	})
-
 	return array
+}
+
+export async function deleteChat(chatId) {
+	const existance = await chatExist(chatId)
+
+	if (!existance) {
+		return false
+	}
+	try {
+		await prisma.message.deleteMany({
+			where: {
+				chatId: chatId,
+			},
+		})
+
+		await prisma.chat.delete({
+			where: {
+				id: chatId,
+			},
+		})
+	} catch (err) {
+		console.log(err)
+		return false
+	}
+
+	return true
 }
