@@ -68,6 +68,9 @@ export default function Chat(props) {
 							name={title}
 							profilePicture='/no-user.jpg'
 							setChatSelected={props.setChatSelected}
+							chatId={props.chatSelected}
+							setLastChats={props.setLastChats}
+							lastChats={props.lastChats}
 						/>
 						<ChatContent
 							messages={messages}

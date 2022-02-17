@@ -6,10 +6,18 @@ export default function ChatContent({ messages, user, scrollRef }) {
 	const messagesDisplay = messages.map(({ creatorId, message, createdAt }) => {
 		return creatorId === user.email ? (
 			<div className='width-ref' ref={scrollRef}>
-				<MessageSenderPeople text={message} hours={createdAt} key={createdAt} />
+				<MessageSenderPeople
+					text={message}
+					hours={createdAt}
+					key={createdAt + creatorId}
+				/>
 			</div>
 		) : (
-			<MessageReciever text={message} hours={createdAt} key={createdAt} />
+			<MessageReciever
+				text={message}
+				hours={createdAt}
+				key={createdAt + creatorId}
+			/>
 		)
 	})
 

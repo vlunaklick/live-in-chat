@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
-import { BiArrowBack } from 'react-icons/bi'
+import DropdownChatHeader from './DropdownChatHeader'
 
 export default function ChatHeader({
 	user,
 	profilePicture,
 	setChatSelected,
 	name,
+	chatId,
+	setLastChats,
+	lastChats,
 }) {
 	return (
 		<ChatHeaderWrapper>
@@ -17,9 +20,11 @@ export default function ChatHeader({
 						<p className='user-name-header'>{name}</p>
 					</div>
 				</div>
-				<BiArrowBack
-					className='back-header-chat'
-					onClick={() => setChatSelected(false)}
+				<DropdownChatHeader
+					setChatSelected={setChatSelected}
+					chatId={chatId}
+					setLastChats={setLastChats}
+					lastChats={lastChats}
 				/>
 			</div>
 		</ChatHeaderWrapper>
