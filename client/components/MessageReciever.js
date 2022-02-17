@@ -45,6 +45,7 @@ const MessageRecieverWrapper = styled.div`
 	.text-left {
 		color: #fafafa;
 		min-width: 111px;
+		max-width: 622px;
 		margin-bottom: 0.5rem;
 	}
 

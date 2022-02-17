@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { BsChevronUp } from 'react-icons/bs'
 
-const MessageSenderPeople = ({ text, hours }) => {
+const MessageSenderPeople = ({ text, hours, scrollRef }) => {
 	const dateH = new Date(hours)
 
 	const hoursGood = dateH.toLocaleTimeString('en-US', {
@@ -9,7 +10,7 @@ const MessageSenderPeople = ({ text, hours }) => {
 	})
 
 	return (
-		<MessageSenderPeopleWrapper>
+		<MessageSenderPeopleWrapper ref={scrollRef}>
 			<div className='wrapper-right-text'>
 				<p className='text-rigth'>{text}</p>
 			</div>
@@ -35,7 +36,6 @@ const MessageSenderPeopleWrapper = styled.div`
 	position: relative;
 	box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0px 2px 4px -1px rgba(0, 0, 0, 0.06);
-	width: fit-content;
 
 	.wrapper-right-text {
 		position: relative;
@@ -49,6 +49,7 @@ const MessageSenderPeopleWrapper = styled.div`
 		font-size: 0.8rem;
 		color: #fafafa;
 		min-width: 111px;
+		max-width: 622px;
 		margin-bottom: 0.5rem;
 	}
 

@@ -75,18 +75,18 @@ const MessageSenderWrapper = styled.section`
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	position: fixed;
 	bottom: 0;
 	width: 100%;
 	min-height: 59.19px;
 	flex: 1;
+	z-index: 5;
 
 	form {
 		display: flex;
 		width: 100%;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 0 0.5rem;
+		justify-content: space-between;
 	}
 
 	button {
@@ -133,6 +133,5 @@ const MessageSenderWrapper = styled.section`
 	@media screen and (min-width: 768px) {
 		position: absolute;
 		bottom: 0;
-		z-index: 5;
 	}
 `

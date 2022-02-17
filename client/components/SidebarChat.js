@@ -66,7 +66,7 @@ const SidebarChatWrapper = styled.div`
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		width: 80%;
+		width: 100%;
 		padding: 0.3rem 0.2rem;
 		height: 46.39px;
 		justify-content: center;

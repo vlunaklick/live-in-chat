@@ -5,13 +5,12 @@ import MessageReciever from './MessageReciever'
 export default function ChatContent({ messages, user, scrollRef }) {
 	const messagesDisplay = messages.map(({ creatorId, message, createdAt }) => {
 		return creatorId === user.email ? (
-			<div className='width-ref' ref={scrollRef}>
-				<MessageSenderPeople
-					text={message}
-					hours={createdAt}
-					key={createdAt + creatorId}
-				/>
-			</div>
+			<MessageSenderPeople
+				text={message}
+				hours={createdAt}
+				key={createdAt + creatorId}
+				scrollRef={scrollRef}
+			/>
 		) : (
 			<MessageReciever
 				text={message}
@@ -26,24 +25,18 @@ export default function ChatContent({ messages, user, scrollRef }) {
 
 const ChatContentWrapper = styled.section`
 	background-color: #737373;
-	background-image: url();
-	height: calc(100vh - 59.19px);
-	width: 100%;
+	height: calc(100vh - 59.19px - 59.19px);
 	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
-	padding: 0.5rem 0.8rem 4.5rem 0.8rem;
+	padding: 0.5rem 0.8rem 0.5rem 0.8rem;
 	gap: 1rem;
 	overflow-y: auto;
-	align-items: flex-end;
-
-	.width-ref {
-		width: 100%;
-	}
+	width: 100%;
 
 	@media screen and (min-width: 1386px) {
-		height: calc(100vh - 59.19px);
-		padding: 0.5rem 2rem 4.5rem 2.625rem;
-		max-height: calc(100vh - 59.19px);
+		height: calc(100vh - 59.19px - 61.69px - 20px);
+		padding: 0.5rem 2rem 0.5rem 2.625rem;
+		max-height: calc(100vh - 59.19px - 61.69px - 20px);
 	}
 `

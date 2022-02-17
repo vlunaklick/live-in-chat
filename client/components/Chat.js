@@ -58,38 +58,34 @@ export default function Chat(props) {
 
 	return (
 		<ChatWrapper>
-			{props.chatSelected !== false ? (
-				props.loading ? (
-					<Spinner />
-				) : (
-					<SubChatWrapper>
-						<ChatHeader
-							user={props.user}
-							name={title}
-							profilePicture='/no-user.jpg'
-							setChatSelected={props.setChatSelected}
-							chatId={props.chatSelected}
-							setLastChats={props.setLastChats}
-							lastChats={props.lastChats}
-						/>
-						<ChatContent
-							messages={messages}
-							user={props.user}
-							scrollRef={scrollRef}
-						/>
-						<MessageSender
-							messages={messages}
-							setMessages={setMessages}
-							chatId={props.chatSelected}
-							email={props.user.email}
-							name={title}
-							setLastChats={props.setLastChats}
-							lastChats={props.lastChats}
-						/>
-					</SubChatWrapper>
-				)
-			) : (
+			{props.chatSelected === false ? (
 				''
+			) : (
+				<>
+					<ChatHeader
+						user={props.user}
+						name={title}
+						profilePicture='/no-user.jpg'
+						setChatSelected={props.setChatSelected}
+						chatId={props.chatSelected}
+						setLastChats={props.setLastChats}
+						lastChats={props.lastChats}
+					/>
+					<ChatContent
+						messages={messages}
+						user={props.user}
+						scrollRef={scrollRef}
+					/>
+					<MessageSender
+						messages={messages}
+						setMessages={setMessages}
+						chatId={props.chatSelected}
+						email={props.user.email}
+						name={title}
+						setLastChats={props.setLastChats}
+						lastChats={props.lastChats}
+					/>
+				</>
 			)}
 		</ChatWrapper>
 	)
@@ -101,23 +97,10 @@ const ChatWrapper = styled.section`
 	display: flex;
 	flex-direction: column;
 	position: fixed;
-	top: 0;
-	left: 0;
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: 786px) {
 		position: relative;
-		height: 100%;
 	}
 `
 
-const SubChatWrapper = styled.section`
-	width: 100%;
-	background-color: #262626;
-	display: flex;
-	flex-direction: column;
-	position: relative;
-
-	@media screen and (min-width: 768px) {
-		height: 100%;
-	}
-`
+const SubChatWrapper = styled.section``

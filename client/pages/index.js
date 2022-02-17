@@ -126,6 +126,7 @@ const ChatWrapper = styled.section`
 	height: 100vh;
 	display: flex;
 	transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+	position: relative;
 
 	.sidebar-selection {
 		width: 100%;
