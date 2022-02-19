@@ -8,7 +8,7 @@ const UserIcon = ({ profilePicture }) => {
 				src={profilePicture}
 				layout='fill'
 				alt='Profile picture'
-				objectFit='contain'
+				objectFit='cover'
 				priority
 			/>
 		</ImageContainer>
@@ -21,6 +21,7 @@ const ImageContainer = styled.div`
 	width: 40px;
 	height: 40px;
 	position: relative;
+	border-radius: 50%;
 
 	img {
 		border-radius: 50%;

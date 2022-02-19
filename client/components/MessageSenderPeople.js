@@ -1,7 +1,11 @@
 import styled from 'styled-components'
-import { BsChevronUp } from 'react-icons/bs'
+import { useState } from 'react'
+import DropdownMessageSender from './DropdownMessageSender'
 
 const MessageSenderPeople = ({ text, hours, scrollRef }) => {
+	const [options, setOptions] = useState(false)
+	const [open, setOpen] = useState(false)
+
 	const dateH = new Date(hours)
 
 	const hoursGood = dateH.toLocaleTimeString('en-US', {
@@ -10,11 +14,25 @@ const MessageSenderPeople = ({ text, hours, scrollRef }) => {
 	})
 
 	return (
-		<MessageSenderPeopleWrapper ref={scrollRef}>
+		<MessageSenderPeopleWrapper
+			ref={scrollRef}
+			optionsThing={options}
+			onMouseEnter={() => setOptions(true)}
+			onMouseLeave={() => {
+				if (!open) {
+					setOptions(false)
+				}
+			}}>
 			<div className='wrapper-right-text'>
 				<p className='text-rigth'>{text}</p>
 			</div>
 			<p className='hour-rigth'>{hoursGood}</p>
+			<DropdownMessageSender
+				options={options}
+				open={open}
+				setOpen={setOpen}
+				setOptions={setOptions}
+			/>
 		</MessageSenderPeopleWrapper>
 	)
 }
@@ -36,6 +54,12 @@ const MessageSenderPeopleWrapper = styled.div`
 	position: relative;
 	box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+	.options-message {
+		display: ${props => (props.optionsThing === true ? 'block' : 'none')};
+		opacity: ${props => (props.optionsThing === true ? '1' : '0')};
+		color: white;
+	}
 
 	.wrapper-right-text {
 		position: relative;
