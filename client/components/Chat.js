@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import ChatHeader from './ChatHeader'
-import MessageSender from './MessageSender'
+import ChatInputMessage from './ChatInputMessage'
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Spinner from './Spinner'
@@ -76,7 +76,7 @@ export default function Chat(props) {
 						user={props.user}
 						scrollRef={scrollRef}
 					/>
-					<MessageSender
+					<ChatInputMessage
 						messages={messages}
 						setMessages={setMessages}
 						chatId={props.chatSelected}

@@ -3,7 +3,7 @@ import { IoMdSend } from 'react-icons/io'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 
-export default function MessageSender({
+export default function ChatInputMessage({
 	email,
 	chatId,
 	setMessages,
@@ -58,18 +58,18 @@ export default function MessageSender({
 	}
 
 	return (
-		<MessageSenderWrapper>
+		<InputWrapper>
 			<form action='' method='post' onSubmit={createMessage}>
 				<input type='text' placeholder='Write your message here.' />
 				<button>
 					<IoMdSend className='message-send-svg' />
 				</button>
 			</form>
-		</MessageSenderWrapper>
+		</InputWrapper>
 	)
 }
 
-const MessageSenderWrapper = styled.section`
+const InputWrapper = styled.section`
 	padding: 0.6rem;
 	background-color: #525252;
 	display: flex;

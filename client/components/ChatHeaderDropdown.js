@@ -1,26 +1,55 @@
 import styled from 'styled-components'
-import { useState, useEffect, useRef } from 'react'
-import { BsChevronUp } from 'react-icons/bs'
+import { useState, useRef, useEffect } from 'react'
+import { BsThreeDotsVertical } from 'react-icons/bs'
 import { getCookie } from 'cookies-next'
 import axios from 'axios'
 
-export default function DropdownMessageSender({
-	options,
-	open,
-	setOpen,
-	setOptions,
+export default function ChatHeaderDropdown({
 	setChatSelected,
 	chatId,
 	setLastChats,
 	lastChats,
 }) {
+	const [open, setOpen] = useState(false)
+
+	const deleteChat = async () => {
+		const token = getCookie('session')
+
+		if (chatId) {
+			await axios
+				.delete(`http://localhost:3005/chats/id/${chatId}`, {
+					headers: { Authorization: `Bearer ${token}` },
+					withCredentials: true,
+				})
+				.then(data => {
+					try {
+						const newArr = lastChats.map(chat => {
+							return chat.chatId !== chatId ? chat : ''
+						})
+
+						let newArray = new Array()
+						for (var i = 0, j = newArr.length; i < j; i++) {
+							if (newArr[i]) {
+								newArray.push(newArr[i])
+							}
+						}
+
+						setLastChats(newArray)
+
+						setChatSelected(false)
+					} catch (err) {
+						console.log(err)
+					}
+				})
+		}
+	}
+
 	let dropdownRef = useRef()
 
 	useEffect(() => {
 		let handler = e => {
-			if (!dropdownRef.current?.contains(e.target) && open) {
+			if (!dropdownRef.current?.contains(e.target)) {
 				setOpen(false)
-				setOptions(false)
 			}
 		}
 		document.addEventListener('mousedown', handler)
@@ -32,47 +61,35 @@ export default function DropdownMessageSender({
 
 	return (
 		<WrapperDropdown
-			options={options}
 			onClick={() => setOpen(prevState => !prevState)}
 			ref={dropdownRef}>
-			<BsChevronUp className='dropdown-menu' />
+			<BsThreeDotsVertical className='dropdown-menu' />
 			<DropdownStyle open={open}>
-				<div>Delete message</div>
+				<div onClick={deleteChat}>Delete chat</div>
+				<div onClick={() => setChatSelected(false)}>Close chat</div>
 			</DropdownStyle>
 		</WrapperDropdown>
 	)
 }
 
 const WrapperDropdown = styled.div`
-	width: 20px;
-	height: 20px;
-	display: ${props => (props.options ? 'flex' : 'none')};
+	width: 30px;
+	height: 30px;
+	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
-	right: 8px;
-	top: 5px;
-	z-index: 2;
-	box-shadow: 0px 24px 38px 3px rgba(76, 29, 149, 0.14),
-		0px 9px 46px 8px rgba(76, 29, 149, 0.12),
-		0px 11px 15px -7px rgba(76, 29, 149, 0.2);
-	background-color: #4c1d95;
-	transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out;
 
 	.dropdown-menu {
 		cursor: pointer;
 		color: #fafafa;
-		font-size: 0.8rem;
-		z-index: 3;
-		position: relative;
-		transform: rotate(180deg);
+		font-size: 1.2rem;
 	}
 `
 
 const DropdownStyle = styled.div`
 	position: absolute;
-	top: 20px;
-	right: 15px;
+	top: 42px;
+	right: 25px;
 	width: 150px;
 	transform: translate(-45%);
 	overflow: hidden;
@@ -81,7 +98,6 @@ const DropdownStyle = styled.div`
 	border-top-right-radius: 0;
 	padding: 0.5rem 0;
 	overflow: hidden;
-	z-index: 4;
 	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 10px 0px rgba(0, 0, 0, 0.12), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
 	transform: ${({ open }) => (open ? 'scale(1,1)' : 'scale(0,0)')};
@@ -91,8 +107,7 @@ const DropdownStyle = styled.div`
 	div {
 		padding: 0.5rem 1rem;
 		color: #fafafa;
-		font-size: 0.6rem;
-		line-height: 1;
+		font-size: 0.9rem;
 		transition: background-color 0.5s ease-in-out;
 		cursor: pointer;
 	}

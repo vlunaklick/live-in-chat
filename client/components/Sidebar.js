@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Sidebarchat from './SidebarChat'
-import SearchSide from './SearchSide'
-import CreateNewChat from './CreateNewChat'
+import SidebarSearch from './SidebarSearch'
+import SidebarCreateChat from './SidebarCreateChat'
 
 const Sidebar = ({
 	chatSelected,
@@ -33,12 +33,12 @@ const Sidebar = ({
 
 	return (
 		<SidebarWrapper>
-			<CreateNewChat
+			<SidebarCreateChat
 				sender={owner}
 				lastChats={lastChats}
 				setLastChats={setLastChats}
 			/>
-			<SearchSide />
+			<SidebarSearch />
 			<div className='container-chats-side'>{lastChatsShow}</div>
 		</SidebarWrapper>
 	)

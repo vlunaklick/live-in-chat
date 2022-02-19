@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import MessageSenderPeople from './MessageSenderPeople'
+import MessageSend from './MessageSend'
 import MessageReciever from './MessageReciever'
 
 export default function ChatContent({ messages, user, scrollRef }) {
 	const messagesDisplay = messages.map(({ creatorId, message, createdAt }) => {
 		return creatorId === user.email ? (
-			<MessageSenderPeople
+			<MessageSend
 				text={message}
 				hours={createdAt}
 				key={createdAt + creatorId}

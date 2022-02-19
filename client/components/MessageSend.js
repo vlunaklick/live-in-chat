@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { useState } from 'react'
-import DropdownMessageSender from './DropdownMessageSender'
+import MessageDropdown from './MessageDropdown'
 
-const MessageSenderPeople = ({ text, hours, scrollRef }) => {
+const MessageSend = ({ text, hours, scrollRef }) => {
 	const [options, setOptions] = useState(false)
 	const [open, setOpen] = useState(false)
 
@@ -14,7 +14,7 @@ const MessageSenderPeople = ({ text, hours, scrollRef }) => {
 	})
 
 	return (
-		<MessageSenderPeopleWrapper
+		<MessageWrapper
 			ref={scrollRef}
 			optionsThing={options}
 			onMouseEnter={() => setOptions(true)}
@@ -27,19 +27,19 @@ const MessageSenderPeople = ({ text, hours, scrollRef }) => {
 				<p className='text-rigth'>{text}</p>
 			</div>
 			<p className='hour-rigth'>{hoursGood}</p>
-			<DropdownMessageSender
+			<MessageDropdown
 				options={options}
 				open={open}
 				setOpen={setOpen}
 				setOptions={setOptions}
 			/>
-		</MessageSenderPeopleWrapper>
+		</MessageWrapper>
 	)
 }
 
-export default MessageSenderPeople
+export default MessageSend
 
-const MessageSenderPeopleWrapper = styled.div`
+const MessageWrapper = styled.div`
 	padding: 6px 7px 8px 9px;
 	margin: 0 0 0 auto;
 	display: flex;

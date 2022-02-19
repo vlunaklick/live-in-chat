@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
-import Header from '../components/Header'
+import SidebarHeader from '../components/SidebarHeader'
 import Spinner from '../components/Spinner'
 import Sidebar from '../components/Sidebar'
 import Chat from '../components/Chat'
@@ -44,7 +44,7 @@ export default function Home(props) {
 				{props.success ? (
 					<ChatWrapper>
 						<div className='sidebar-selection'>
-							<Header user={user} />
+							<SidebarHeader user={user} />
 							<Sidebar
 								owner={user.email}
 								setChatSelected={setChatSelected}

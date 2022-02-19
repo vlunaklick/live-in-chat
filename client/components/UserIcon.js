@@ -18,8 +18,8 @@ const UserIcon = ({ profilePicture }) => {
 export default UserIcon
 
 const ImageContainer = styled.div`
-	width: 40px;
-	height: 40px;
+	min-width: 40px;
+	min-height: 40px;
 	position: relative;
 	border-radius: 50%;
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { BsSearch } from 'react-icons/bs'
 
-export default function SearchSide() {
+export default function SidebarSearch() {
 	return (
 		<SearchWrapper>
 			<div>

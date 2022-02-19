@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
-import DropdownChatHeader from './DropdownChatHeader'
+import ChatHeaderDropdown from './ChatHeaderDropdown'
 
 export default function ChatHeader({
 	user,
@@ -20,7 +20,7 @@ export default function ChatHeader({
 						<p className='user-name-header'>{name}</p>
 					</div>
 				</div>
-				<DropdownChatHeader
+				<ChatHeaderDropdown
 					setChatSelected={setChatSelected}
 					chatId={chatId}
 					setLastChats={setLastChats}

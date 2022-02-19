@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import UserIcon from './UserIcon'
 import Logoutbutton from './LogoutButton'
 
-export default function Header({ user }) {
+export default function SidebarHeader({ user }) {
 	return (
 		<HeaderWrapper>
 			<div className='data-container'>

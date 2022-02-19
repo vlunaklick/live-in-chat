@@ -3,7 +3,7 @@ import { FaUserPlus } from 'react-icons/fa'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 
-export default function CreateNewChat({ sender, lastChats, setLastChats }) {
+export default function SidebarCreateChat({ sender, lastChats, setLastChats }) {
 	const changeName = async () => {
 		let newN = prompt('Enter the email')
 		const regexMail =
