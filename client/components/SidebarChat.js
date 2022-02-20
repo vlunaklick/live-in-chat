@@ -45,9 +45,10 @@ const SidebarChatWrapper = styled.div`
 	padding: 0.6rem;
 	gap: 0.5rem;
 	align-items: center;
-	border-bottom: 1px solid #737373;
+	border-bottom: ${({ theme }) => theme.sidebar.border};
 	cursor: pointer;
-	background-color: ${({ selected, id }) => (selected === id ? '#737373' : '')};
+	background-color: ${({ selected, id, theme }) =>
+		selected === id ? theme.sidebar.chats_hover : ''};
 	position: relative;
 
 	.container-hour-name {

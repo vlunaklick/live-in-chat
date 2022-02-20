@@ -93,7 +93,7 @@ export default function Chat(props) {
 
 const ChatWrapper = styled.section`
 	width: 100%;
-	background-color: #262626;
+	background-color: ${({ theme }) => theme.chat.no_chat};
 	display: flex;
 	flex-direction: column;
 	position: fixed;

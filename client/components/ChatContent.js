@@ -24,8 +24,8 @@ export default function ChatContent({ messages, user, scrollRef }) {
 }
 
 const ChatContentWrapper = styled.section`
-	background-color: #737373;
-	height: calc(100vh - 59.19px - 59.19px);
+	background-color: ${({ theme }) => theme.chat.chat};
+	height: calc(100vh - 61.19px - 63.69px);
 	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
@@ -35,7 +35,7 @@ const ChatContentWrapper = styled.section`
 	width: 100%;
 
 	@media screen and (min-width: 1386px) {
-		height: calc(100vh - 59.19px - 61.69px - 20px);
+		height: calc(100vh - 61.19px - 63.69px - 20px);
 		padding: 0.5rem 2rem 0.5rem 2.625rem;
 		max-height: calc(100vh - 59.19px - 61.69px - 20px);
 	}

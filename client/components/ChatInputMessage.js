@@ -71,7 +71,7 @@ export default function ChatInputMessage({
 
 const InputWrapper = styled.section`
 	padding: 0.6rem;
-	background-color: #525252;
+	background-color: ${({ theme }) => theme.chat.input};
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
@@ -80,6 +80,7 @@ const InputWrapper = styled.section`
 	min-height: 59.19px;
 	flex: 1;
 	z-index: 5;
+	border-top: ${({ theme }) => theme.sidebar.border};
 
 	form {
 		display: flex;
@@ -106,7 +107,7 @@ const InputWrapper = styled.section`
 		width: 100%;
 		border-radius: 0.5rem;
 		color: #fafafa;
-		background-color: #696969;
+		background-color: ${({ theme }) => theme.chat.holder};
 		border: none;
 		outline: none;
 		max-height: 100px;

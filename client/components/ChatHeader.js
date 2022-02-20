@@ -32,11 +32,12 @@ export default function ChatHeader({
 }
 
 const ChatHeaderWrapper = styled.header`
-	background-color: #262626;
+	background-color: ${({ theme }) => theme.chat.header};
 	padding: 0.6rem;
 	display: flex;
 	align-items: center;
 	z-index: 10;
+	border-bottom: ${({ theme }) => theme.sidebar.border};
 
 	.data-container {
 		display: flex;

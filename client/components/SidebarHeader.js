@@ -19,7 +19,7 @@ export default function SidebarHeader({ user }) {
 }
 
 const HeaderWrapper = styled.header`
-	background-color: #262626;
+	background-color: ${({ theme }) => theme.sidebar.header};
 	padding: 0.6rem;
 	display: flex;
 	justify-content: space-between;
@@ -55,7 +55,7 @@ const HeaderWrapper = styled.header`
 
 	@media screen and (min-width: 768px) {
 		width: 320px;
-		border-right: 1px solid #737373;
+		border-right: ${({ theme }) => theme.sidebar.border};
 		z-index: 5;
 	}
 `

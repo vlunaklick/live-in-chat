@@ -53,9 +53,6 @@ const WrapperDropdown = styled.div`
 	right: 8px;
 	top: 5px;
 	z-index: 2;
-	box-shadow: 0px 24px 38px 3px rgba(76, 29, 149, 0.14),
-		0px 9px 46px 8px rgba(76, 29, 149, 0.12),
-		0px 11px 15px -7px rgba(76, 29, 149, 0.2);
 	background-color: #4c1d95;
 	transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out;
 
@@ -81,7 +78,7 @@ const DropdownStyle = styled.div`
 	border-top-right-radius: 0;
 	padding: 0.5rem 0;
 	overflow: hidden;
-	z-index: 4;
+	z-index: 5;
 	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 10px 0px rgba(0, 0, 0, 0.12), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
 	transform: ${({ open }) => (open ? 'scale(1,1)' : 'scale(0,0)')};

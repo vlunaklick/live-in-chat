@@ -47,7 +47,7 @@ const Sidebar = ({
 export default Sidebar
 
 const SidebarWrapper = styled.section`
-	background-color: #404040;
+	background-color: ${({ theme }) => theme.sidebar.chats};
 	width: 100%;
 	height: calc(100vh - 59.19px);
 	transition: border-rigth 0.5s ease-in-out;
@@ -65,7 +65,7 @@ const SidebarWrapper = styled.section`
 
 	@media screen and (min-width: 768px) {
 		width: 320px;
-		border-right: 1px solid #737373;
+		border-right: ${({ theme }) => theme.sidebar.border};
 	}
 
 	@media screen and (min-width: 1386px) {

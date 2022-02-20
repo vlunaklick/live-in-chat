@@ -57,7 +57,7 @@ const CreateWrapper = styled.div`
 	padding: 0.6rem 1.5rem;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 1px solid #737373;
+	border-bottom: ${({ theme }) => theme.sidebar.border};
 	color: #fafafa;
 	cursor: pointer;
 	position: relative;
