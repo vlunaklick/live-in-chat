@@ -2,6 +2,7 @@ import {
 	createMessage,
 	getAllMessages,
 	deleteMessage,
+	dontShowMessage,
 } from '../services/message.service.js'
 
 class MessageController {
@@ -47,6 +48,24 @@ class MessageController {
 			const { messageId, user } = req.body
 
 			const message = await deleteMessage(messageId, user)
+
+			if (!message) {
+				return res
+					.status(401)
+					.json({ success: false, message: 'Message does not exist.' })
+			}
+
+			res.status(200).json({ success: true, messages: message })
+		} catch (err) {
+			res.status(500).json({ success: false, message: err.message })
+		}
+	}
+
+	dontShow = async (req, res) => {
+		try {
+			const { messageId } = req.params
+
+			const message = await dontShowMessage(messageId)
 
 			if (!message) {
 				return res

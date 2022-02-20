@@ -105,7 +105,22 @@ export async function deleteMessage(messageId, user) {
 		},
 	})
 
-	console.log(message)
+	if (!message) {
+		return false
+	}
+
+	return message
+}
+
+export async function dontShowMessage(messageId) {
+	const message = await prisma.message.update({
+		where: {
+			id: parseInt(messageId),
+		},
+		data: {
+			deleted: true,
+		},
+	})
 
 	if (!message) {
 		return false

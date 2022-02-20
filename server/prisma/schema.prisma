@@ -11,7 +11,7 @@ model Message {
   id        Int      @id @default(autoincrement())
   message   String   @db.VarChar(1000)
   createdAt DateTime @default(now())
-  chatId    String   
+  chatId    String
   notSee    String[]
   deleted   Boolean  @default(false)
   creatorId String

@@ -16,4 +16,8 @@ router.post('/:chatId', isAuth, MessageController.getConversation)
 
 router.post('/delete/message', isAuth, MessageController.delete)
 
+/* Don't show user message */
+
+router.put('/delete/:messageId', isAuth, MessageController.dontShow)
+
 export { router as messageRouter }
