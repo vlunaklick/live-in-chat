@@ -68,6 +68,7 @@ export async function lastMessage(chatId, user, chatSender, date) {
 			email: value,
 			date: date,
 			message: '',
+			deleted: false,
 			chatId: chatId,
 		}
 	}
@@ -75,10 +76,12 @@ export async function lastMessage(chatId, user, chatSender, date) {
 	const lastMessage = messages.pop()
 
 	return {
+		messageId: lastMessage.id,
 		creator: creator,
 		email: lastMessage.creatorId,
 		date: date,
 		message: lastMessage.message,
+		deleted: lastMessage.deleted,
 		chatId: chatId,
 	}
 }

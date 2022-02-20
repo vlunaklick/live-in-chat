@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styled from 'styled-components'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
@@ -9,6 +9,7 @@ import Spinner from '../components/Spinner'
 import Sidebar from '../components/Sidebar'
 import Chat from '../components/Chat'
 import { newConnection } from '../socket/socket'
+import ModalDelete from '../components/ModalDelete'
 
 newConnection()
 
@@ -17,6 +18,10 @@ export default function Home(props) {
 	const [user, setUser] = useState({})
 	const [chatSelected, setChatSelected] = useState(false)
 	const [lastChats, setLastChats] = useState(props.lastChats)
+	const [modal, setModal] = useState(false)
+	const [messageSelected, setMessageSelected] = useState([])
+	const [messages, setMessages] = useState([])
+	const [title, setTitle] = useState('')
 
 	const router = useRouter()
 
@@ -32,6 +37,53 @@ export default function Home(props) {
 			setUser(props.user)
 		}
 	}, [])
+
+	const firstUpdate = useRef(true)
+
+	const scrollRef = useRef()
+
+	useEffect(async () => {
+		if (firstUpdate.current) {
+			firstUpdate.current = false
+			return
+		}
+
+		setLoading(true)
+
+		const token = getCookie('session')
+		if (chatSelected) {
+			await axios
+				.post(
+					`http://localhost:3005/messages/${chatSelected}`,
+					{
+						user: user.email,
+					},
+					{
+						headers: { Authorization: `Bearer ${token}` },
+						withCredentials: true,
+					}
+				)
+				.then(data => {
+					setMessages(data.data.messages)
+					setLoading(false)
+				})
+		}
+
+		let titleName = lastChats.map(chat => {
+			return chat.chatId === chatSelected ? chat.creator : ''
+		})
+
+		let newArray = new Array()
+		for (var i = 0, j = titleName.length; i < j; i++) {
+			if (titleName[i]) {
+				newArray.push(titleName[i])
+			}
+		}
+
+		setTitle(newArray[0])
+
+		scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
+	}, [chatSelected])
 
 	return (
 		<div>
@@ -61,10 +113,27 @@ export default function Home(props) {
 							setChatSelected={closeChat}
 							setLastChats={setLastChats}
 							lastChats={lastChats}
+							setModal={setModal}
+							setMessageSelected={setMessageSelected}
+							messages={messages}
+							scrollRef={scrollRef}
+							title={title}
+							setMessages={setMessages}
 						/>
 					</ChatWrapper>
 				) : (
 					<Spinner />
+				)}
+				{modal ? (
+					<ModalDelete
+						mainEmail={user.email}
+						setModal={setModal}
+						messageSelected={messageSelected}
+						lastChats={lastChats}
+						setLastChats={setLastChats}
+					/>
+				) : (
+					''
 				)}
 			</MainWrapper>
 		</div>

@@ -93,7 +93,7 @@ const DropdownStyle = styled.div`
 	width: 150px;
 	transform: translate(-45%);
 	overflow: hidden;
-	background-color: #190627;
+	background-color: ${({ theme }) => theme.dropdown.bg};
 	border-radius: 4px;
 	border-top-right-radius: 0;
 	padding: 0.5rem 0;
@@ -113,6 +113,6 @@ const DropdownStyle = styled.div`
 	}
 
 	div:hover {
-		background-color: #040106;
+		background-color: ${({ theme }) => theme.dropdown.hover};
 	}
 `

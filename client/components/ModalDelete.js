@@ -1,5 +1,165 @@
 import styled from 'styled-components'
+import { getCookie } from 'cookies-next'
+import axios from 'axios'
 
-export default function ModalDelete({ sender }) {
-	return <div></div>
+export default function ModalDelete({
+	mainEmail,
+	setModal,
+	messageSelected,
+	lastChats,
+	setLastChats,
+}) {
+	const deleteForYou = async () => {
+		const token = getCookie('session')
+
+		if (!token) {
+			return { props: { success: false, user: {} } }
+		}
+
+		await axios.post(
+			'http://localhost:3005/messages/delete/message',
+			{
+				messageId: messageSelected[0].id,
+				user: mainEmail,
+			},
+			{
+				headers: { Authorization: `Bearer ${token}` },
+				withCredentials: true,
+			}
+		)
+
+		setModal(false)
+	}
+
+	const deleteForEveryone = async () => {
+		const token = getCookie('session')
+
+		if (!token) {
+			return { props: { success: false, user: {} } }
+		}
+
+		await axios.put(
+			`http://localhost:3005/messages/delete/${messageSelected[0].id}`,
+			{},
+			{
+				headers: { Authorization: `Bearer ${token}` },
+				withCredentials: true,
+			}
+		)
+
+		let newArray = lastChats.map(chat => {
+			if (chat.messageId === messageSelected[0].id) {
+				return { ...chat, deleted: true }
+			} else {
+				return chat
+			}
+		})
+
+		setLastChats(newArray)
+
+		setModal(false)
+	}
+
+	return (
+		<ModalWrapper>
+			<div className='box'>
+				<p className='title'>Do you want to delete the message?</p>
+				<div className='buttons'>
+					<button className='cancel' onClick={() => setModal(false)}>
+						CANCEL
+					</button>
+					<button className='delete_you' onClick={() => deleteForYou()}>
+						DELETE FOR YOU
+					</button>
+					{messageSelected.length !== 0 &&
+					mainEmail === messageSelected[0].creatorId &&
+					messageSelected[0].deleted === false ? (
+						<button className='delete_you' onClick={() => deleteForEveryone()}>
+							DELETE FOR EVERYONE
+						</button>
+					) : (
+						''
+					)}
+				</div>
+			</div>
+		</ModalWrapper>
+	)
 }
+
+const ModalWrapper = styled.div`
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background-color: ${({ theme }) => theme.modal.bg};
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.box {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		background-color: ${({ theme }) => theme.modal.box};
+		padding: 1.2rem;
+		border-radius: 2px;
+		max-width: 315px;
+		box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14),
+			0px 1px 10px 0px rgba(0, 0, 0, 0.12), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
+
+		.title {
+			color: ${({ theme }) => theme.modal.title};
+		}
+
+		.buttons {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+			justify-content: flex-end;
+			font-size: 1rem;
+
+			.cancel {
+				outline: none;
+				letter-spacing: 0.15rem;
+				text-align: center;
+				background-color: transparent;
+				padding: 0.5rem;
+				font-size: 0.8rem;
+				border: ${({ theme }) => theme.modal.cancel_border};
+				color: ${({ theme }) => theme.modal.color_button};
+				transition: background-color 0.3s ease-in-out,
+					box-shadow 0.3s ease-in-out;
+				cursor: pointer;
+				border-radius: 2px;
+			}
+
+			.cancel:hover {
+				background-color: ${({ theme }) => theme.modal.color_cancel_hover};
+				box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+					0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+			}
+
+			.delete_you {
+				outline: none;
+				border: none;
+				letter-spacing: 0.15rem;
+				text-align: center;
+				padding: 0.5rem;
+				font-size: 0.8rem;
+				background-color: ${({ theme }) => theme.modal.color_button};
+				transition: background-color 0.3s ease-in-out,
+					box-shadow 0.3s ease-in-out;
+				cursor: pointer;
+				border-radius: 2px;
+			}
+
+			.delete_you:hover {
+				background-color: ${({ theme }) => theme.modal.color_button_hover};
+				box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+					0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+			}
+		}
+	}
+`

@@ -26,6 +26,7 @@ const Sidebar = ({
 				setChatSelected={setChatSelected}
 				id={chat.chatId}
 				chatSelected={chatSelected}
+				deleted={chat.deleted}
 				key={chat.chatId}
 			/>
 		)

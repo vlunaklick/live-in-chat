@@ -1,8 +1,17 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 import MessageDropdown from './MessageDropdown'
+import { HiOutlineBan } from 'react-icons/hi'
 
-const MessageSend = ({ text, hours, scrollRef }) => {
+const MessageSend = ({
+	text,
+	hours,
+	scrollRef,
+	deleted,
+	setModal,
+	setMessageSelected,
+	messagePlain,
+}) => {
 	const [options, setOptions] = useState(false)
 	const [open, setOpen] = useState(false)
 
@@ -16,6 +25,7 @@ const MessageSend = ({ text, hours, scrollRef }) => {
 	return (
 		<MessageWrapper
 			ref={scrollRef}
+			deleted={deleted}
 			optionsThing={options}
 			onMouseEnter={() => setOptions(true)}
 			onMouseLeave={() => {
@@ -24,7 +34,16 @@ const MessageSend = ({ text, hours, scrollRef }) => {
 				}
 			}}>
 			<div className='wrapper-right-text'>
-				<p className='text-rigth'>{text}</p>
+				<p className='text-rigth'>
+					{deleted ? (
+						<>
+							<HiOutlineBan className='icon-cancel' />
+							Message has been eliminated
+						</>
+					) : (
+						text
+					)}
+				</p>
 			</div>
 			<p className='hour-rigth'>{hoursGood}</p>
 			<MessageDropdown
@@ -32,6 +51,9 @@ const MessageSend = ({ text, hours, scrollRef }) => {
 				open={open}
 				setOpen={setOpen}
 				setOptions={setOptions}
+				setModal={setModal}
+				setMessageSelected={setMessageSelected}
+				message={messagePlain}
 			/>
 		</MessageWrapper>
 	)
@@ -72,9 +94,21 @@ const MessageWrapper = styled.div`
 	.text-rigth {
 		font-size: 0.8rem;
 		color: #fafafa;
-		min-width: 111px;
+		min-width: ${({ deleted }) => (deleted ? '250px' : '111px')};
 		max-width: 622px;
 		margin-bottom: 0.5rem;
+		text-align: left;
+		line-height: ${({ deleted }) => (deleted ? '1' : '')};
+		font-style: ${({ deleted }) => (deleted ? 'italic' : 'normal')};
+		display: ${({ deleted }) => (deleted ? 'flex' : 'block')};
+		align-items: center;
+		gap: 0.2rem;
+		color: ${({ deleted, theme }) =>
+			deleted ? theme.chat.deleted : '#fafafa'};
+	}
+
+	.icon-cancel {
+		font-size: 1rem;
 	}
 
 	.hour-rigth {

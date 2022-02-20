@@ -1,6 +1,18 @@
 import styled from 'styled-components'
+import { TiCancel } from 'react-icons/ti'
+import MessageDropdown from './MessageDropdown'
 
-const MessageReciever = ({ text, hours }) => {
+const MessageReciever = ({
+	text,
+	hours,
+	deleted,
+	setModal,
+	setMessageSelected,
+	message,
+}) => {
+	const [options, setOptions] = useState(false)
+	const [open, setOpen] = useState(false)
+
 	const dateH = new Date(hours)
 
 	const hoursGood = dateH.toLocaleTimeString('en-US', {
@@ -9,11 +21,29 @@ const MessageReciever = ({ text, hours }) => {
 	})
 
 	return (
-		<MessageRecieverWrapper>
+		<MessageRecieverWrapper deleted={deleted}>
 			<div className='wrapper-left-text'>
-				<p className='text-left'>{text}</p>
+				<p className='text-left'>
+					{deleted ? (
+						<>
+							<TiCancel className='icon-cancel' />
+							Message has been eliminated
+						</>
+					) : (
+						text
+					)}
+				</p>
 			</div>
 			<p className='hour-left'>{hoursGood}</p>
+			<MessageDropdown
+				options={options}
+				open={open}
+				setOpen={setOpen}
+				setOptions={setOptions}
+				setModal={setModal}
+				setMessageSelected={setMessageSelected}
+				message={message}
+			/>
 		</MessageRecieverWrapper>
 	)
 }

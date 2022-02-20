@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
+import { HiOutlineBan } from 'react-icons/hi'
 
 const SidebarChat = ({
 	name,
@@ -11,6 +12,7 @@ const SidebarChat = ({
 	owner,
 	messageMail,
 	date,
+	deleted,
 }) => {
 	const dateH = new Date(date)
 
@@ -19,8 +21,17 @@ const SidebarChat = ({
 		minute: '2-digit',
 	})
 
+	let messageShow
+
+	if (owner === messageMail) {
+		messageShow = `You: ${lastMessage}`
+	} else {
+		messageShow = `${lastMessage}`
+	}
+
 	return (
 		<SidebarChatWrapper
+			deleted={deleted}
 			selected={chatSelected}
 			id={id}
 			onClick={() => setChatSelected(id)}>
@@ -31,7 +42,14 @@ const SidebarChat = ({
 					<p className='hour-sidebar-chats'>{hoursGood}</p>
 				</div>
 				<p className='sidebar-chat-last'>
-					{owner === messageMail ? `You: ${lastMessage}` : lastMessage}
+					{deleted ? (
+						<>
+							<HiOutlineBan className='icon-cancel' />
+							Message has been eliminated
+						</>
+					) : (
+						messageShow
+					)}
 				</p>
 			</div>
 		</SidebarChatWrapper>
@@ -89,6 +107,14 @@ const SidebarChatWrapper = styled.div`
 			max-width: 239.84px;
 			white-space: nowrap;
 			overflow: hidden;
+			font-style: ${({ deleted }) => (deleted ? 'italic' : 'normal')};
+			display: ${({ deleted }) => (deleted ? 'flex' : 'block')};
+			gap: 0.2rem;
+			align-items: center;
+		}
+
+		.icon-cancel {
+			font-size: 1rem;
 		}
 	}
 `

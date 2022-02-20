@@ -37,9 +37,11 @@ export default function ChatInputMessage({
 				let newLastChats = lastChats.map(chat => {
 					if (chat.creator === name) {
 						return {
+							messageId: message.data.message.id,
 							creator: chat.creator,
 							chatId: chat.chatId,
 							email: email,
+							deleted: false,
 							date: message.data.message.createdAt,
 							message: message.data.message.message,
 						}

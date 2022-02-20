@@ -2,20 +2,34 @@ import styled from 'styled-components'
 import MessageSend from './MessageSend'
 import MessageReciever from './MessageReciever'
 
-export default function ChatContent({ messages, user, scrollRef }) {
-	const messagesDisplay = messages.map(({ creatorId, message, createdAt }) => {
-		return creatorId === user.email ? (
+export default function ChatContent({
+	messages,
+	user,
+	scrollRef,
+	setModal,
+	setMessageSelected,
+}) {
+	const messagesDisplay = messages.map(message => {
+		return message.creatorId === user.email ? (
 			<MessageSend
-				text={message}
-				hours={createdAt}
-				key={createdAt + creatorId}
+				text={message.message}
+				deleted={message.deleted}
+				hours={message.createdAt}
+				key={message.createdAt + message.creatorId}
 				scrollRef={scrollRef}
+				setModal={setModal}
+				setMessageSelected={setMessageSelected}
+				messagePlain={message}
 			/>
 		) : (
 			<MessageReciever
-				text={message}
-				hours={createdAt}
-				key={createdAt + creatorId}
+				text={message.message}
+				deleted={message.deleted}
+				hours={message.createdAt}
+				key={message.createdAt + message.creatorId}
+				setModal={setModal}
+				setMessageSelected={setMessageSelected}
+				messagePlain={message}
 			/>
 		)
 	})

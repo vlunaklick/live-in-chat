@@ -1,14 +1,15 @@
 import styled from 'styled-components'
 import { useState, useEffect, useRef } from 'react'
 import { BsChevronUp } from 'react-icons/bs'
-import { getCookie } from 'cookies-next'
-import axios from 'axios'
 
 export default function MessageDropdown({
 	options,
 	open,
 	setOpen,
 	setOptions,
+	setModal,
+	setMessageSelected,
+	message,
 	setChatSelected,
 	chatId,
 	setLastChats,
@@ -30,16 +31,23 @@ export default function MessageDropdown({
 		}
 	})
 
+	const openModal = () => {
+		setMessageSelected([message])
+		setModal(true)
+	}
+
 	return (
-		<WrapperDropdown
-			options={options}
-			onClick={() => setOpen(prevState => !prevState)}
-			ref={dropdownRef}>
-			<BsChevronUp className='dropdown-menu' />
-			<DropdownStyle open={open}>
-				<div>Delete message</div>
-			</DropdownStyle>
-		</WrapperDropdown>
+		<>
+			<WrapperDropdown
+				options={options}
+				onClick={() => setOpen(prevState => !prevState)}
+				ref={dropdownRef}>
+				<BsChevronUp className='dropdown-menu' />
+				<DropdownStyle open={open}>
+					<div onClick={() => openModal()}>Delete message</div>
+				</DropdownStyle>
+			</WrapperDropdown>
+		</>
 	)
 }
 
@@ -50,7 +58,7 @@ const WrapperDropdown = styled.div`
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	right: 8px;
+	right: 5px;
 	top: 5px;
 	z-index: 2;
 	background-color: #4c1d95;
@@ -73,7 +81,7 @@ const DropdownStyle = styled.div`
 	width: 150px;
 	transform: translate(-45%);
 	overflow: hidden;
-	background-color: #190627;
+	background-color: ${({ theme }) => theme.dropdown.bg};
 	border-radius: 4px;
 	border-top-right-radius: 0;
 	padding: 0.5rem 0;
@@ -95,6 +103,6 @@ const DropdownStyle = styled.div`
 	}
 
 	div:hover {
-		background-color: #040106;
+		background-color: ${({ theme }) => theme.dropdown.hover};
 	}
 `

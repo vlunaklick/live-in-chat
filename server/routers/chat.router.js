@@ -14,6 +14,6 @@ router.get('/:userId', isAuth, ChatController.userLastChats)
 
 /* Delete user chat */
 
-router.delete('/id/:chatId', ChatController.deleteChats)
+router.delete('/id/:chatId', isAuth, ChatController.deleteChats)
 
 export { router as chatRouter }
