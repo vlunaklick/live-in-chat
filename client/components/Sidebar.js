@@ -14,7 +14,7 @@ const Sidebar = ({
 		return new Date(b.date) - new Date(a.date)
 	})
 
-	const lastChatsShow = fixedArray.map(chat => {
+	let lastChatsShow = fixedArray.map(chat => {
 		return (
 			<Sidebarchat
 				owner={owner}

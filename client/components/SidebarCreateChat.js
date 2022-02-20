@@ -12,7 +12,6 @@ export default function SidebarCreateChat({ sender, lastChats, setLastChats }) {
 			if (newN.match(regexMail) !== null) {
 				try {
 					const token = getCookie('session')
-
 					await axios
 						.post(
 							'http://localhost:3005/chats/create',

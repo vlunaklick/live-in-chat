@@ -94,18 +94,20 @@ export async function getServerSideProps(context) {
 		}
 	}
 
-	const lastChats = await axios.get(
-		`http://localhost:3005/chats/${props.user.email}`,
-		{
-			headers: { Authorization: `Bearer ${token}` },
-			withCredentials: true,
-		}
-	)
+	if (props.user) {
+		const lastChats = await axios.get(
+			`http://localhost:3005/chats/${props.user.email}`,
+			{
+				headers: { Authorization: `Bearer ${token}` },
+				withCredentials: true,
+			}
+		)
 
-	if (lastChats.status === 200) {
-		props = {
-			...props,
-			lastChats: lastChats.data.chats,
+		if (lastChats.status === 200) {
+			props = {
+				...props,
+				lastChats: lastChats.data.chats,
+			}
 		}
 	}
 
