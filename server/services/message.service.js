@@ -14,6 +14,7 @@ export async function createMessage(email, chatId, text) {
 			message: text,
 			chatId: chatId,
 			creatorId: email,
+			notSee: [],
 		},
 	})
 
@@ -29,7 +30,7 @@ export async function createMessage(email, chatId, text) {
 	return newMessage
 }
 
-export async function getAllMessages(chatId) {
+export async function getAllMessages(chatId, user) {
 	const isThere = await checkExistanceMessage(chatId)
 
 	if (!isThere) {
@@ -38,7 +39,16 @@ export async function getAllMessages(chatId) {
 
 	const messages = await prisma.message.findMany({
 		where: {
-			chatId: chatId,
+			AND: [
+				{ chatId: chatId },
+				{
+					NOT: {
+						notSee: {
+							has: user,
+						},
+					},
+				},
+			],
 		},
 	})
 
@@ -46,7 +56,7 @@ export async function getAllMessages(chatId) {
 }
 
 export async function lastMessage(chatId, user, chatSender, date) {
-	const messages = await getAllMessages(chatId)
+	const messages = await getAllMessages(chatId, user)
 
 	let value = chatSender.indexOf(user) === 0 ? chatSender[1] : chatSender[0]
 
@@ -81,4 +91,25 @@ export async function checkExistanceMessage(chatId) {
 	}
 
 	return true
+}
+
+export async function deleteMessage(messageId, user) {
+	const message = await prisma.message.update({
+		where: {
+			id: parseInt(messageId),
+		},
+		data: {
+			notSee: {
+				push: user,
+			},
+		},
+	})
+
+	console.log(message)
+
+	if (!message) {
+		return false
+	}
+
+	return message
 }

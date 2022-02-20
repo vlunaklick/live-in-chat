@@ -1,4 +1,8 @@
-import { createMessage, getAllMessages } from '../services/message.service.js'
+import {
+	createMessage,
+	getAllMessages,
+	deleteMessage,
+} from '../services/message.service.js'
 
 class MessageController {
 	create = async (req, res) => {
@@ -22,8 +26,9 @@ class MessageController {
 	getConversation = async (req, res) => {
 		try {
 			const { chatId } = req.params
+			const { user } = req.body
 
-			const messages = await getAllMessages(chatId)
+			const messages = await getAllMessages(chatId, user)
 
 			if (!messages) {
 				return res
@@ -32,6 +37,24 @@ class MessageController {
 			}
 
 			res.status(200).json({ success: true, messages: messages })
+		} catch (err) {
+			res.status(500).json({ success: false, message: err.message })
+		}
+	}
+
+	delete = async (req, res) => {
+		try {
+			const { messageId, user } = req.body
+
+			const message = await deleteMessage(messageId, user)
+
+			if (!message) {
+				return res
+					.status(401)
+					.json({ success: false, message: 'Message does not exist.' })
+			}
+
+			res.status(200).json({ success: true, messages: message })
 		} catch (err) {
 			res.status(500).json({ success: false, message: err.message })
 		}

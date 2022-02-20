@@ -15,6 +15,8 @@ export default function Chat(props) {
 
 	const scrollRef = useRef()
 
+	console.log()
+
 	useEffect(async () => {
 		if (firstUpdate.current) {
 			firstUpdate.current = false
@@ -26,10 +28,16 @@ export default function Chat(props) {
 		const token = getCookie('session')
 		if (props.chatSelected) {
 			await axios
-				.get(`http://localhost:3005/messages/${props.chatSelected}`, {
-					headers: { Authorization: `Bearer ${token}` },
-					withCredentials: true,
-				})
+				.post(
+					`http://localhost:3005/messages/${props.chatSelected}`,
+					{
+						user: props.user.email,
+					},
+					{
+						headers: { Authorization: `Bearer ${token}` },
+						withCredentials: true,
+					}
+				)
 				.then(data => {
 					setMessages(data.data.messages)
 					props.setLoading(false)

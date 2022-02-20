@@ -10,6 +10,10 @@ router.post('/create', isAuth, MessageController.create)
 
 /* See user message */
 
-router.get('/:chatId', isAuth, MessageController.getConversation)
+router.post('/:chatId', isAuth, MessageController.getConversation)
+
+/* Delete user message */
+
+router.post('/delete/message', isAuth, MessageController.delete)
 
 export { router as messageRouter }
