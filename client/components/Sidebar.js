@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Sidebarchat from './SidebarChat'
 import SidebarSearch from './SidebarSearch'
 import SidebarCreateChat from './SidebarCreateChat'
+import { useState } from 'react'
 
 const Sidebar = ({
 	chatSelected,
@@ -10,7 +11,9 @@ const Sidebar = ({
 	owner,
 	setLastChats,
 }) => {
-	let fixedArray = lastChats.sort((a, b) => {
+	const [showChat, setShowChat] = useState(lastChats)
+
+	let fixedArray = showChat.sort((a, b) => {
 		return new Date(b.date) - new Date(a.date)
 	})
 
@@ -36,10 +39,10 @@ const Sidebar = ({
 		<SidebarWrapper>
 			<SidebarCreateChat
 				sender={owner}
-				lastChats={lastChats}
+				lastChats={showChat}
 				setLastChats={setLastChats}
 			/>
-			<SidebarSearch />
+			<SidebarSearch setShowChat={setShowChat} lastChats={lastChats} />
 			<div className='container-chats-side'>{lastChatsShow}</div>
 		</SidebarWrapper>
 	)

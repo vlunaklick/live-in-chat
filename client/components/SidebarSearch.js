@@ -1,12 +1,34 @@
 import styled from 'styled-components'
 import { BsSearch } from 'react-icons/bs'
 
-export default function SidebarSearch() {
+export default function SidebarSearch({ setShowChat, lastChats }) {
+	const searchInput = e => {
+		if (e.target.value === '') {
+			setShowChat(lastChats)
+		} else {
+			let newChats = lastChats.filter(chat => {
+				if (
+					chat.creator.toLowerCase().includes(e.target.value.toLowerCase()) ||
+					chat.email.toLowerCase().includes(e.target.value.toLowerCase())
+				) {
+					return chat
+				}
+			})
+			setShowChat(newChats)
+		}
+	}
+
 	return (
 		<SearchWrapper>
 			<div>
 				<BsSearch className='svg' />
-				<input type='text' placeholder='Search a chat' />
+				<input
+					type='text'
+					placeholder='Search a chat'
+					onChange={e => {
+						searchInput(e)
+					}}
+				/>
 			</div>
 		</SearchWrapper>
 	)
