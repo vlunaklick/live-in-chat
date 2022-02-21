@@ -22,7 +22,7 @@ export default function ChatHeader({
 	let info
 
 	if (isConnected && isTypingUser.success) {
-		info = 'Is typing...'
+		info = 'User is typing...'
 	} else if (isConnected) {
 		info = 'Online'
 	} else {
