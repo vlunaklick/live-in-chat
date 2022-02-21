@@ -51,11 +51,9 @@ export default function Home(props) {
 			setArrivalDelete(data)
 		})
 		socket.current?.on('getIsTyping', data => {
-			console.log(data)
 			setIsTypingUser(data)
 		})
 		socket.current?.on('getIsTyping', data => {
-			console.log(data)
 			setIsTypingUser(data)
 		})
 	}, [])
