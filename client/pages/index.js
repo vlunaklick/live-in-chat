@@ -48,6 +48,29 @@ export default function Home(props) {
 			return
 		}
 
+		const token = getCookie('session')
+
+		if (!token) {
+			return { props: { success: false, user: {} } }
+		}
+
+		const lastChatFetched = await axios.get(
+			`http://localhost:3005/chats/${user.email}`,
+			{
+				headers: { Authorization: `Bearer ${token}` },
+				withCredentials: true,
+			}
+		)
+
+		setLastChats(lastChatFetched.data.chats)
+	}, [messages])
+
+	useEffect(async () => {
+		if (firstUpdate.current) {
+			firstUpdate.current = false
+			return
+		}
+
 		setLoading(true)
 
 		const token = getCookie('session')
@@ -131,6 +154,8 @@ export default function Home(props) {
 						messageSelected={messageSelected}
 						lastChats={lastChats}
 						setLastChats={setLastChats}
+						messages={messages}
+						setMessages={setMessages}
 					/>
 				) : (
 					''

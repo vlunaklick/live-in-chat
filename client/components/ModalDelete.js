@@ -6,8 +6,8 @@ export default function ModalDelete({
 	mainEmail,
 	setModal,
 	messageSelected,
-	lastChats,
-	setLastChats,
+	messages,
+	setMessages,
 }) {
 	const deleteForYou = async () => {
 		const token = getCookie('session')
@@ -28,6 +28,14 @@ export default function ModalDelete({
 			}
 		)
 
+		let newMessages = messages.filter(chat => {
+			if (!(chat.id === messageSelected[0].id)) {
+				return chat
+			}
+		})
+
+		setMessages(newMessages)
+
 		setModal(false)
 	}
 
@@ -47,15 +55,15 @@ export default function ModalDelete({
 			}
 		)
 
-		let newArray = lastChats.map(chat => {
-			if (chat.messageId === messageSelected[0].id) {
+		let newMessages = messages.map(chat => {
+			if (chat.id === messageSelected[0].id) {
 				return { ...chat, deleted: true }
 			} else {
 				return chat
 			}
 		})
 
-		setLastChats(newArray)
+		setMessages(newMessages)
 
 		setModal(false)
 	}

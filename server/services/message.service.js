@@ -52,7 +52,11 @@ export async function getAllMessages(chatId, user) {
 		},
 	})
 
-	return messages
+	const sortedMessages = messages.sort((a, b) => {
+		return a.id - b.id
+	})
+
+	return sortedMessages
 }
 
 export async function lastMessage(chatId, user, chatSender, date) {
