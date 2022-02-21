@@ -10,10 +10,7 @@ export default function MessageDropdown({
 	setModal,
 	setMessageSelected,
 	message,
-	setChatSelected,
-	chatId,
-	setLastChats,
-	lastChats,
+	sender,
 }) {
 	let dropdownRef = useRef()
 
@@ -43,7 +40,7 @@ export default function MessageDropdown({
 				onClick={() => setOpen(prevState => !prevState)}
 				ref={dropdownRef}>
 				<BsChevronUp className='dropdown-menu' />
-				<DropdownStyle open={open}>
+				<DropdownStyle sender={sender} open={open}>
 					<div onClick={() => openModal()}>Delete message</div>
 				</DropdownStyle>
 			</WrapperDropdown>
@@ -61,7 +58,8 @@ const WrapperDropdown = styled.div`
 	right: 5px;
 	top: 5px;
 	z-index: 2;
-	background-color: #4c1d95;
+	border-radius: 50%;
+	background-color: ${({ theme }) => theme.dropdown.svg};
 	transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out;
 
 	.dropdown-menu {
@@ -76,8 +74,8 @@ const WrapperDropdown = styled.div`
 
 const DropdownStyle = styled.div`
 	position: absolute;
-	top: 20px;
-	right: 15px;
+	top: ${props => (props.sender ? '20px' : '20px')};
+	right: ${props => (props.sender ? '15px' : '-140px')};
 	width: 150px;
 	transform: translate(-45%);
 	overflow: hidden;
@@ -90,7 +88,7 @@ const DropdownStyle = styled.div`
 	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 10px 0px rgba(0, 0, 0, 0.12), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
 	transform: ${({ open }) => (open ? 'scale(1,1)' : 'scale(0,0)')};
-	transform-origin: top right;
+	transform-origin: ${props => (props.sender ? 'top right' : 'top left')};
 	transition: transform 0.2s ease-in;
 
 	div {

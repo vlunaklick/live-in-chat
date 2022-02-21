@@ -54,6 +54,7 @@ const MessageSend = ({
 				setModal={setModal}
 				setMessageSelected={setMessageSelected}
 				message={messagePlain}
+				sender={true}
 			/>
 		</MessageWrapper>
 	)

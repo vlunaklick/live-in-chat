@@ -7,7 +7,7 @@ import ChatContent from './ChatContent'
 export default function Chat(props) {
 	useEffect(() => {
 		props.scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
-	}, [props.messages])
+	}, [props.messages, props.chatSelected])
 
 	return (
 		<ChatWrapper>

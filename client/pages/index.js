@@ -104,8 +104,6 @@ export default function Home(props) {
 		}
 
 		setTitle(newArray[0])
-
-		scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
 	}, [chatSelected])
 
 	return (

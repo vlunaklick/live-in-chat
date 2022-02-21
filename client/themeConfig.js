@@ -14,6 +14,7 @@ export const darkTheme = {
 		deleted: '#737373',
 	},
 	dropdown: {
+		svg: 'rgba(0, 0, 0, 0.1)',
 		bg: '#292234',
 		hover: '#322744',
 	},
@@ -21,7 +22,7 @@ export const darkTheme = {
 		bg: 'rgba(35, 30, 42, 0.8)',
 		box: '#322744',
 		title: '#fafafa',
-		cancel_border: '1px solid #48435D',
+		cancel_border: '1px solid #26202f',
 		color_button: '#10b981',
 		color_button_hover: '#34d399',
 		color_cancel_hover: '#48435D',

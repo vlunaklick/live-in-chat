@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-import { TiCancel } from 'react-icons/ti'
+import { HiOutlineBan } from 'react-icons/hi'
 import MessageDropdown from './MessageDropdown'
+import { useState } from 'react'
 
 const MessageReciever = ({
 	text,
@@ -21,12 +22,20 @@ const MessageReciever = ({
 	})
 
 	return (
-		<MessageRecieverWrapper deleted={deleted}>
+		<MessageRecieverWrapper
+			deleted={deleted}
+			optionsThing={options}
+			onMouseEnter={() => setOptions(true)}
+			onMouseLeave={() => {
+				if (!open) {
+					setOptions(false)
+				}
+			}}>
 			<div className='wrapper-left-text'>
 				<p className='text-left'>
 					{deleted ? (
 						<>
-							<TiCancel className='icon-cancel' />
+							<HiOutlineBan className='icon-cancel' />
 							Message has been eliminated
 						</>
 					) : (
@@ -43,6 +52,7 @@ const MessageReciever = ({
 				setModal={setModal}
 				setMessageSelected={setMessageSelected}
 				message={message}
+				sender={false}
 			/>
 		</MessageRecieverWrapper>
 	)
@@ -73,10 +83,18 @@ const MessageRecieverWrapper = styled.div`
 	}
 
 	.text-left {
+		font-size: 0.8rem;
 		color: #fafafa;
-		min-width: 111px;
+		min-width: ${({ deleted }) => (deleted ? '250px' : '111px')};
 		max-width: 622px;
 		margin-bottom: 0.5rem;
+		line-height: ${({ deleted }) => (deleted ? '1' : '')};
+		font-style: ${({ deleted }) => (deleted ? 'italic' : 'normal')};
+		display: ${({ deleted }) => (deleted ? 'flex' : 'block')};
+		align-items: center;
+		gap: 0.2rem;
+		color: ${({ deleted, theme }) =>
+			deleted ? theme.chat.deleted : '#fafafa'};
 	}
 
 	.hour-left {
