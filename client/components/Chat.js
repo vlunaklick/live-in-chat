@@ -23,6 +23,7 @@ export default function Chat(props) {
 						chatId={props.chatSelected}
 						setLastChats={props.setLastChats}
 						lastChats={props.lastChats}
+						setMessages={props.setMessages}
 					/>
 					<ChatContent
 						messages={props.messages}

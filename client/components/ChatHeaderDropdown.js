@@ -7,8 +7,7 @@ import axios from 'axios'
 export default function ChatHeaderDropdown({
 	setChatSelected,
 	chatId,
-	setLastChats,
-	lastChats,
+	setMessages,
 }) {
 	const [open, setOpen] = useState(false)
 
@@ -23,20 +22,7 @@ export default function ChatHeaderDropdown({
 				})
 				.then(data => {
 					try {
-						const newArr = lastChats.map(chat => {
-							return chat.chatId !== chatId ? chat : ''
-						})
-
-						let newArray = new Array()
-						for (var i = 0, j = newArr.length; i < j; i++) {
-							if (newArr[i]) {
-								newArray.push(newArr[i])
-							}
-						}
-
-						setLastChats(newArray)
-
-						setChatSelected(false)
+						setMessages([])
 					} catch (err) {
 						console.log(err)
 					}

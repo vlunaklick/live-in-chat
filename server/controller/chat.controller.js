@@ -39,7 +39,7 @@ class ChatController {
 		try {
 			const { chatId } = req.params
 
-			const deleted = await deleteChat(chatId)
+			const deleted = await deleteChat(chatId, req.user.email)
 
 			res.status(200).json({ success: deleted })
 		} catch (err) {

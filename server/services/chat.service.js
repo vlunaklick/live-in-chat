@@ -67,16 +67,22 @@ export async function lastMessageChats(user) {
 	return array
 }
 
-export async function deleteChat(chatId) {
+export async function deleteChat(chatId, user) {
 	const existance = await chatExist(chatId)
 
 	if (!existance) {
 		return false
 	}
+
 	try {
-		await prisma.message.deleteMany({
+		await prisma.message.updateMany({
 			where: {
 				chatId: chatId,
+			},
+			data: {
+				notSee: {
+					push: user,
+				},
 			},
 		})
 

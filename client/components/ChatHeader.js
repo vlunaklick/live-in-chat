@@ -10,6 +10,7 @@ export default function ChatHeader({
 	chatId,
 	setLastChats,
 	lastChats,
+	setMessages,
 }) {
 	return (
 		<ChatHeaderWrapper>
@@ -25,6 +26,7 @@ export default function ChatHeader({
 					chatId={chatId}
 					setLastChats={setLastChats}
 					lastChats={lastChats}
+					setMessages={setMessages}
 				/>
 			</div>
 		</ChatHeaderWrapper>
