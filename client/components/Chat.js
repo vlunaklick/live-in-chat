@@ -24,6 +24,10 @@ export default function Chat(props) {
 						setLastChats={props.setLastChats}
 						lastChats={props.lastChats}
 						setMessages={props.setMessages}
+						socket={props.socket}
+						userConnecteds={props.userConnecteds}
+						receiver={props.receiver}
+						isTypingUser={props.isTypingUser}
 					/>
 					<ChatContent
 						messages={props.messages}

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { IoMdSend } from 'react-icons/io'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
+import { useState } from 'react'
 
 export default function ChatInputMessage({
 	email,
@@ -14,6 +15,8 @@ export default function ChatInputMessage({
 	otherEmail,
 	socket,
 }) {
+	const [typing, setTyping] = useState(false)
+
 	const createMessage = async e => {
 		e.preventDefault()
 		if (e.target[0].value.replace(/\s/g, '').length) {
@@ -66,10 +69,36 @@ export default function ChatInputMessage({
 		}
 	}
 
+	const notTyping = () => {
+		setTyping(false)
+		socket.current?.emit('stopTyping', {
+			receiverId: otherEmail,
+			chatId: chatId,
+		})
+	}
+
+	const isTyping = () => {
+		if (!typing) {
+			setTyping(true)
+			socket.current?.emit('isTyping', {
+				receiverId: otherEmail,
+				chatId: chatId,
+			})
+			let time = setTimeout(notTyping, 2000)
+		} else {
+			clearTimeout(time)
+			let time = setTimeout(notTyping, 2000)
+		}
+	}
+
 	return (
 		<InputWrapper>
 			<form action='' method='post' onSubmit={createMessage}>
-				<input type='text' placeholder='Write your message here.' />
+				<input
+					type='text'
+					placeholder='Write your message here.'
+					onKeyDown={() => isTyping()}
+				/>
 				<button>
 					<IoMdSend className='message-send-svg' />
 				</button>

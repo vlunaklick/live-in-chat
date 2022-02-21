@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
 import ChatHeaderDropdown from './ChatHeaderDropdown'
+import { useEffect } from 'react'
 
 export default function ChatHeader({
 	user,
@@ -11,14 +12,31 @@ export default function ChatHeader({
 	setLastChats,
 	lastChats,
 	setMessages,
+	socket,
+	userConnecteds,
+	receiver,
+	isTypingUser,
 }) {
+	let isConnected = userConnecteds.some(user => user.userEmail === receiver)
+
+	let info
+
+	if (isConnected && isTypingUser.success) {
+		info = 'Is typing...'
+	} else if (isConnected) {
+		info = 'Online'
+	} else {
+		info = 'User is disconnected'
+	}
+
 	return (
-		<ChatHeaderWrapper>
+		<ChatHeaderWrapper isConnected={isConnected}>
 			<div className='data-container'>
 				<div className='left-header-chat'>
 					<UserIcon profilePicture={profilePicture} />
 					<div className='container-data-user'>
 						<p className='user-name-header'>{name}</p>
+						<p className='user-name-online'>{info}</p>
 					</div>
 				</div>
 				<ChatHeaderDropdown
@@ -68,7 +86,7 @@ const ChatHeaderWrapper = styled.header`
 		.container-data-user {
 			display: flex;
 			flex-direction: column;
-			gap: 0.2rem;
+			gap: 0.5rem;
 
 			.user-name-header {
 				font-weight: 600;
@@ -80,5 +98,13 @@ const ChatHeaderWrapper = styled.header`
 				color: #a3a3a3;
 			}
 		}
+	}
+
+	.user-name-online {
+		opacity: 1;
+		font-size: 0.8rem;
+		font-style: italic;
+		color: ${({ theme }) => theme.chat.online};
+		transition: opacity 0.5s ease-in-out;
 	}
 `

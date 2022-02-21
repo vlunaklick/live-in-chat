@@ -40,29 +40,58 @@ io.on('connection', socket => {
 	socket.on('userConnection', userEmail => {
 		if (userEmail !== null) {
 			addUser(userEmail, socket.id)
+			io.emit('getUsers', users)
 		}
 	})
 
 	//when an user send message
 	socket.on('sendMessage', ({ receiverId, message }) => {
 		const receiver = findUser(receiverId)
-		io.to(receiver.socketId).emit('getMessage', message)
+		if (receiver) {
+			io.to(receiver.socketId).emit('getMessage', message)
+		}
 	})
 
 	// delete an user message
 	socket.on('deleteMessage', ({ receiverId, messageId }) => {
 		const receiver = findUser(receiverId)
-		io.to(receiver.socketId).emit('getDeleteMessage', messageId)
+		if (receiver) {
+			io.to(receiver.socketId).emit('getDeleteMessage', messageId)
+		}
+	})
+
+	// when user is typing
+	socket.on('isTyping', ({ receiverId, chatId }) => {
+		const receiver = findUser(receiverId)
+		if (receiver) {
+			io.to(receiver.socketId).emit('getIsTyping', {
+				success: true,
+				chatId: chatId,
+			})
+		}
+	})
+
+	// when user stop typing
+	socket.on('stopTyping', ({ receiverId, chatId }) => {
+		const receiver = findUser(receiverId)
+		if (receiver) {
+			io.to(receiver.socketId).emit('getIsTyping', {
+				success: false,
+				chatId: chatId,
+			})
+		}
 	})
 
 	// when an user logouts
 	socket.on('userDisconnects', () => {
 		removeUser(socket.id)
+		io.emit('getUsers', users)
 	})
 
 	//when a user disconnects
 	socket.on('disconnect', () => {
 		removeUser(socket.id)
+		io.emit('getUsers', users)
 	})
 })
 

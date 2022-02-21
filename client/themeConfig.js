@@ -12,6 +12,7 @@ export const darkTheme = {
 		input: '#221b33',
 		holder: '#2a1d51',
 		deleted: '#737373',
+		online: '#a3a3a3',
 	},
 	dropdown: {
 		svg: 'rgba(0, 0, 0, 0.1)',

@@ -23,11 +23,16 @@ export default function Home(props) {
 	const [receiver, setReceiver] = useState('')
 	const [arrivalMsg, setArrivalMsg] = useState(null)
 	const [arrivalDelete, setArrivalDelete] = useState(null)
+	const [userConnecteds, setUserConnecteds] = useState([])
+	const [isTypingUser, setIsTypingUser] = useState({
+		success: false,
+		chatId: 0,
+	})
 
 	const socket = useRef()
 
 	useEffect(() => {
-		if (!props.success) {
+		if (!props.success && props.user) {
 			router.push('/login')
 		} else {
 			setUser(props.user)
@@ -36,11 +41,22 @@ export default function Home(props) {
 
 	useEffect(() => {
 		socket.current = io('http://localhost:3010')
+		socket.current?.on('getUsers', data => {
+			setUserConnecteds(data)
+		})
 		socket.current?.on('getMessage', data => {
 			setArrivalMsg(data)
 		})
 		socket.current?.on('getDeleteMessage', data => {
 			setArrivalDelete(data)
+		})
+		socket.current?.on('getIsTyping', data => {
+			console.log(data)
+			setIsTypingUser(data)
+		})
+		socket.current?.on('getIsTyping', data => {
+			console.log(data)
+			setIsTypingUser(data)
 		})
 	}, [])
 
@@ -180,6 +196,8 @@ export default function Home(props) {
 							setMessages={setMessages}
 							receiver={receiver}
 							socket={socket}
+							userConnecteds={userConnecteds}
+							isTypingUser={isTypingUser}
 						/>
 					</ChatWrapper>
 				) : (
