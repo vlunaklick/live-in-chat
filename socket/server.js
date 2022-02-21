@@ -49,6 +49,12 @@ io.on('connection', socket => {
 		io.to(receiver.socketId).emit('getMessage', message)
 	})
 
+	// delete an user message
+	socket.on('deleteMessage', ({ receiverId, messageId }) => {
+		const receiver = findUser(receiverId)
+		io.to(receiver.socketId).emit('getDeleteMessage', messageId)
+	})
+
 	// when an user logouts
 	socket.on('userDisconnects', () => {
 		removeUser(socket.id)

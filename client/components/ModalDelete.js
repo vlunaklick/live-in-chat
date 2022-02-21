@@ -8,6 +8,8 @@ export default function ModalDelete({
 	messageSelected,
 	messages,
 	setMessages,
+	socket,
+	receiver,
 }) {
 	const deleteForYou = async () => {
 		const token = getCookie('session')
@@ -54,6 +56,11 @@ export default function ModalDelete({
 				withCredentials: true,
 			}
 		)
+
+		socket.current?.emit('deleteMessage', {
+			receiverId: receiver,
+			messageId: messageSelected[0].id,
+		})
 
 		let newMessages = messages.map(chat => {
 			if (chat.id === messageSelected[0].id) {

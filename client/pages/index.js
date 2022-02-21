@@ -22,15 +22,38 @@ export default function Home(props) {
 	const [title, setTitle] = useState('')
 	const [receiver, setReceiver] = useState('')
 	const [arrivalMsg, setArrivalMsg] = useState(null)
+	const [arrivalDelete, setArrivalDelete] = useState(null)
 
 	const socket = useRef()
+
+	useEffect(() => {
+		if (!props.success) {
+			router.push('/login')
+		} else {
+			setUser(props.user)
+		}
+	}, [])
 
 	useEffect(() => {
 		socket.current = io('http://localhost:3010')
 		socket.current?.on('getMessage', data => {
 			setArrivalMsg(data)
 		})
+		socket.current?.on('getDeleteMessage', data => {
+			setArrivalDelete(data)
+		})
 	}, [])
+
+	useEffect(() => {
+		const mapedItem = messages.map(message => {
+			if (message.id === arrivalDelete) {
+				return { ...message, deleted: true }
+			} else {
+				return message
+			}
+		})
+		setMessages(mapedItem)
+	}, [arrivalDelete])
 
 	useEffect(() => {
 		if (arrivalMsg !== null && arrivalMsg.chatId === chatSelected) {
@@ -48,14 +71,6 @@ export default function Home(props) {
 	useEffect(() => {
 		socket.current?.emit('userConnection', user.email)
 	}, [user])
-
-	useEffect(() => {
-		if (!props.success) {
-			router.push('/login')
-		} else {
-			setUser(props.user)
-		}
-	}, [])
 
 	useEffect(() => {
 		setReceiver(lastChats[0].otherEmail)
@@ -86,7 +101,7 @@ export default function Home(props) {
 		)
 
 		setLastChats(lastChatFetched.data.chats)
-	}, [messages])
+	}, [messages, arrivalMsg, arrivalDelete])
 
 	useEffect(async () => {
 		if (firstUpdate.current) {
@@ -179,6 +194,8 @@ export default function Home(props) {
 						setLastChats={setLastChats}
 						messages={messages}
 						setMessages={setMessages}
+						socket={socket}
+						receiver={receiver}
 					/>
 				) : (
 					''
@@ -211,7 +228,13 @@ export async function getServerSideProps(context) {
 		}
 	}
 
-	if (props.user) {
+	if (props.success !== true) {
+		res.statusCode = 302
+		res.setHeader('Location', `/login`)
+		return { props: {} }
+	}
+
+	if (props.success) {
 		const lastChats = await axios.get(
 			`http://localhost:3005/chats/${props.user.email}`,
 			{

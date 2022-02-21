@@ -15,7 +15,7 @@ export default function ChatContent({
 				text={message.message}
 				deleted={message.deleted}
 				hours={message.createdAt}
-				key={message.createdAt + message.creatorId}
+				key={message.createdAt + message.id}
 				scrollRef={scrollRef}
 				setModal={setModal}
 				setMessageSelected={setMessageSelected}

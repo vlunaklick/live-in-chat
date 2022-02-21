@@ -31,6 +31,7 @@ export default function Chat(props) {
 						scrollRef={props.scrollRef}
 						setModal={props.setModal}
 						setMessageSelected={props.setMessageSelected}
+						socket={props.socket}
 					/>
 					<ChatInputMessage
 						messages={props.messages}
