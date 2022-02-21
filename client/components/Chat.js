@@ -40,6 +40,8 @@ export default function Chat(props) {
 						name={props.title}
 						setLastChats={props.setLastChats}
 						lastChats={props.lastChats}
+						otherEmail={props.receiver}
+						socket={props.socket}
 					/>
 				</>
 			)}

@@ -11,6 +11,8 @@ export default function ChatInputMessage({
 	setLastChats,
 	lastChats,
 	name,
+	otherEmail,
+	socket,
 }) {
 	const createMessage = async e => {
 		e.preventDefault()
@@ -31,6 +33,11 @@ export default function ChatInputMessage({
 						withCredentials: true,
 					}
 				)
+
+				socket.current?.emit('sendMessage', {
+					receiverId: otherEmail,
+					message: message.data.message,
+				})
 
 				setMessages([...messages, message.data.message])
 

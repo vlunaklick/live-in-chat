@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import UserIcon from './UserIcon'
 import Logoutbutton from './LogoutButton'
 
-export default function SidebarHeader({ user }) {
+export default function SidebarHeader({ user, socket }) {
 	return (
 		<HeaderWrapper>
 			<div className='data-container'>
@@ -13,7 +13,7 @@ export default function SidebarHeader({ user }) {
 				</div>
 			</div>
 
-			<Logoutbutton />
+			<Logoutbutton socket={socket} />
 		</HeaderWrapper>
 	)
 }

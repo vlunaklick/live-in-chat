@@ -69,6 +69,7 @@ export async function lastMessage(chatId, user, chatSender, date) {
 	if (messages.length === 0) {
 		return {
 			creator: creator,
+			otherEmail: value,
 			email: value,
 			date: date,
 			message: '',
@@ -82,6 +83,7 @@ export async function lastMessage(chatId, user, chatSender, date) {
 	return {
 		messageId: lastMessage.id,
 		creator: creator,
+		otherEmail: value,
 		email: lastMessage.creatorId,
 		date: date,
 		message: lastMessage.message,

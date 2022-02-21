@@ -8,10 +8,8 @@ import SidebarHeader from '../components/SidebarHeader'
 import Spinner from '../components/Spinner'
 import Sidebar from '../components/Sidebar'
 import Chat from '../components/Chat'
-import { newConnection } from '../socket/socket'
 import ModalDelete from '../components/ModalDelete'
-
-newConnection()
+import { io } from 'socket.io-client'
 
 export default function Home(props) {
 	const [loading, setLoading] = useState(true)
@@ -22,6 +20,23 @@ export default function Home(props) {
 	const [messageSelected, setMessageSelected] = useState([])
 	const [messages, setMessages] = useState([])
 	const [title, setTitle] = useState('')
+	const [receiver, setReceiver] = useState('')
+	const [arrivalMsg, setArrivalMsg] = useState(null)
+
+	const socket = useRef()
+
+	useEffect(() => {
+		socket.current = io('http://localhost:3010')
+		socket.current?.on('getMessage', data => {
+			setArrivalMsg(data)
+		})
+	}, [])
+
+	useEffect(() => {
+		if (arrivalMsg !== null && arrivalMsg.chatId === chatSelected) {
+			setMessages([...messages, arrivalMsg])
+		}
+	}, [arrivalMsg])
 
 	const router = useRouter()
 
@@ -31,12 +46,20 @@ export default function Home(props) {
 	}
 
 	useEffect(() => {
+		socket.current?.emit('userConnection', user.email)
+	}, [user])
+
+	useEffect(() => {
 		if (!props.success) {
 			router.push('/login')
 		} else {
 			setUser(props.user)
 		}
 	}, [])
+
+	useEffect(() => {
+		setReceiver(lastChats[0].otherEmail)
+	}, [chatSelected])
 
 	const firstUpdate = useRef(true)
 
@@ -117,7 +140,7 @@ export default function Home(props) {
 				{props.success ? (
 					<ChatWrapper>
 						<div className='sidebar-selection'>
-							<SidebarHeader user={user} />
+							<SidebarHeader user={user} socket={socket} />
 							<Sidebar
 								owner={user.email}
 								setChatSelected={setChatSelected}
@@ -140,6 +163,8 @@ export default function Home(props) {
 							scrollRef={scrollRef}
 							title={title}
 							setMessages={setMessages}
+							receiver={receiver}
+							socket={socket}
 						/>
 					</ChatWrapper>
 				) : (
