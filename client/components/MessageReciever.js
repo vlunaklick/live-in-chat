@@ -9,7 +9,7 @@ const MessageReciever = ({
 	deleted,
 	setModal,
 	setMessageSelected,
-	message,
+	messagePlain,
 }) => {
 	const [options, setOptions] = useState(false)
 	const [open, setOpen] = useState(false)
@@ -51,7 +51,7 @@ const MessageReciever = ({
 				setOptions={setOptions}
 				setModal={setModal}
 				setMessageSelected={setMessageSelected}
-				message={message}
+				message={messagePlain}
 				sender={false}
 			/>
 		</MessageRecieverWrapper>

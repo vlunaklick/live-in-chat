@@ -49,12 +49,12 @@ export default function MessageDropdown({
 }
 
 const WrapperDropdown = styled.div`
-	width: 20px;
-	height: 20px;
+	width: 1.2rem;
+	height: 1.2rem;
 	display: ${props => (props.options ? 'flex' : 'none')};
+	position: absolute;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
 	right: 5px;
 	top: 5px;
 	z-index: 2;

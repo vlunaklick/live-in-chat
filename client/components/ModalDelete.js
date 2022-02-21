@@ -127,6 +127,7 @@ const ModalWrapper = styled.div`
 			gap: 1rem;
 			justify-content: flex-end;
 			font-size: 1rem;
+			font-weight: 500;
 
 			.cancel {
 				outline: none;
