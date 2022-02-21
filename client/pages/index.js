@@ -15,7 +15,7 @@ export default function Home(props) {
 	const [loading, setLoading] = useState(true)
 	const [user, setUser] = useState({})
 	const [chatSelected, setChatSelected] = useState(false)
-	const [lastChats, setLastChats] = useState(props.lastChats)
+	const [lastChats, setLastChats] = useState([])
 	const [modal, setModal] = useState(false)
 	const [messageSelected, setMessageSelected] = useState([])
 	const [messages, setMessages] = useState([])
@@ -84,10 +84,13 @@ export default function Home(props) {
 
 	useEffect(() => {
 		socket.current?.emit('userConnection', user.email)
+		setLastChats(props.lastChats)
 	}, [user])
 
 	useEffect(() => {
-		setReceiver(lastChats[0].otherEmail)
+		if (lastChats.length !== 0) {
+			setReceiver(lastChats[0].otherEmail)
+		}
 	}, [chatSelected])
 
 	const firstUpdate = useRef(true)

@@ -6,10 +6,10 @@ const Logoutbutton = ({ socket }) => {
 	const router = useRouter()
 
 	const logOut = e => {
+		socket.current?.emit('userDisconnection')
+		router.push('/login')
 		e.preventDefault()
 		removeCookies('session')
-		socket.current?.emit('userDisconnection')
-		router.reload('/')
 	}
 
 	return <LogOutWrapper onClick={logOut}>Logout</LogOutWrapper>

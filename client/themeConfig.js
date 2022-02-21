@@ -15,7 +15,7 @@ export const darkTheme = {
 		online: '#a3a3a3',
 	},
 	dropdown: {
-		svg: 'rgba(0, 0, 0, 0.1)',
+		svg: 'rgba(0, 0, 0, 0.5)',
 		bg: '#292234',
 		hover: '#322744',
 	},
