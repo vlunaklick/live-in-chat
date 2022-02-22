@@ -14,7 +14,7 @@ export default function SidebarCreateChat({ sender, lastChats, setLastChats }) {
 					const token = getCookie('session')
 					await axios
 						.post(
-							'http://localhost:3005/chats/create',
+							'https://liveinchat-database.herokuapp.com/chats/create',
 							{
 								sender: sender,
 								receiver: newN,

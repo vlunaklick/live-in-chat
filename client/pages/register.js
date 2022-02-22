@@ -84,10 +84,13 @@ export async function getServerSideProps(context) {
 		return { props: { success: false } }
 	}
 
-	const apiResponse = await axios.get('http://localhost:3005/users/me', {
-		headers: { Authorization: `Bearer ${token}` },
-		withCredentials: true,
-	})
+	const apiResponse = await axios.get(
+		'https://liveinchat-database.herokuapp.com/users/me',
+		{
+			headers: { Authorization: `Bearer ${token}` },
+			withCredentials: true,
+		}
+	)
 
 	if (apiResponse.status === 200) {
 		const props = { success: apiResponse.data.success }

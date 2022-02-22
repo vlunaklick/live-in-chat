@@ -112,7 +112,7 @@ export default function Home(props) {
 		}
 
 		const lastChatFetched = await axios.get(
-			`http://localhost:3005/chats/${user.email}`,
+			`https://liveinchat-database.herokuapp.com/${user.email}`,
 			{
 				headers: { Authorization: `Bearer ${token}` },
 				withCredentials: true,
@@ -134,7 +134,7 @@ export default function Home(props) {
 		if (chatSelected) {
 			await axios
 				.post(
-					`http://localhost:3005/messages/${chatSelected}`,
+					`https://liveinchat-database.herokuapp.com/${chatSelected}`,
 					{
 						user: user.email,
 					},
@@ -235,10 +235,13 @@ export async function getServerSideProps(context) {
 		return { props: { success: false, user: {} } }
 	}
 
-	const authResponse = await axios.get('http://localhost:3005/users/me', {
-		headers: { Authorization: `Bearer ${token}` },
-		withCredentials: true,
-	})
+	const authResponse = await axios.get(
+		'https://liveinchat-database.herokuapp.com/users/me',
+		{
+			headers: { Authorization: `Bearer ${token}` },
+			withCredentials: true,
+		}
+	)
 
 	let props
 
@@ -257,7 +260,7 @@ export async function getServerSideProps(context) {
 
 	if (props.success) {
 		const lastChats = await axios.get(
-			`http://localhost:3005/chats/${props.user.email}`,
+			`https://liveinchat-database.herokuapp.com/${props.user.email}`,
 			{
 				headers: { Authorization: `Bearer ${token}` },
 				withCredentials: true,

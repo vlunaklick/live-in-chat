@@ -29,7 +29,7 @@ export default function ChatInputMessage({
 				}
 
 				const message = await axios.post(
-					'http://localhost:3005/messages/create',
+					'https://liveinchat-database.herokuapp.com/messages/create',
 					data,
 					{
 						headers: { Authorization: `Bearer ${token}` },
