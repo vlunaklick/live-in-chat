@@ -25,11 +25,11 @@ export default function ChatHeader({
 		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
 
 		if (isConnected && isTypingUser.success) {
-			info = 'User is typing...'
+			setInfo('User is typing...')
 		} else if (isConnected) {
-			info = 'Online'
+			setInfo('Online')
 		} else {
-			info = 'User is disconnected'
+			setInfo('User is disconnected')
 		}
 	}, [isTypingUser, userConnecteds])
 
