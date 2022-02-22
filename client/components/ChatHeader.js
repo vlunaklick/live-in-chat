@@ -31,6 +31,10 @@ export default function ChatHeader({
 		}
 	}, [isTypingUser, userConnecteds])
 
+	useEffect(() => {
+		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
+	}, [])
+
 	return (
 		<ChatHeaderWrapper isConnected={isConnected}>
 			<div className='data-container'>
