@@ -33,6 +33,8 @@ export default function ChatHeader({
 
 	useEffect(() => {
 		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
+		console.log(userConnecteds)
+		console.log(receiver)
 		console.log(userConnecteds.some(user => user.userEmail === receiver))
 	}, [])
 
