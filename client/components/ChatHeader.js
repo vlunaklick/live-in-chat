@@ -22,6 +22,8 @@ export default function ChatHeader({
 	useEffect(() => {
 		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
 
+		console.log(userConnecteds)
+
 		if (isConnected && isTypingUser.success) {
 			setInfo('User is typing...')
 		} else if (isConnected) {
@@ -33,9 +35,6 @@ export default function ChatHeader({
 
 	useEffect(() => {
 		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
-		console.log(userConnecteds)
-		console.log(receiver)
-		console.log(userConnecteds.some(user => user.userEmail === receiver))
 	}, [])
 
 	return (
