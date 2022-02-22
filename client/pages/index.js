@@ -58,6 +58,7 @@ export default function Home(props) {
 			setIsTypingUser(data)
 		})
 		socket.current?.on('getCreatedChat', data => {
+			console.log(data)
 			setChatArrival(data)
 		})
 	}, [])
