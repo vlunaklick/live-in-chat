@@ -26,7 +26,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 app.use(cookieParser())
-app.set('port', 3005 || process.env.PORT)
+const PORT = process.env.PORT || 3005
 
 app.use('/users', userRouter)
 app.use('/chats', chatRouter)
@@ -34,6 +34,6 @@ app.use('/messages', messageRouter)
 
 /* Api listener */
 
-app.listen(app.get('port'), () => {
-	console.log(`Listening on port ${app.get('port')}`)
+app.listen(PORT, () => {
+	console.log(`Listening on port ${PORT}`)
 })

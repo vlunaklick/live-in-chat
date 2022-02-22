@@ -35,7 +35,7 @@ export default function useErrorForms() {
 		if (mailError[0] === false && passwordError[0] === false) {
 			axios
 				.post(
-					`http://localhost:3005/users/login`,
+					`https://liveinchat-database.herokuapp.com/users/login`,
 					{
 						email: email,
 						password: password,
@@ -97,7 +97,7 @@ export default function useErrorForms() {
 			user.length >= 6
 		) {
 			axios
-				.post(`http://localhost:3005/users/create`, {
+				.post(`https://liveinchat-database.herokuapp.com/users/create`, {
 					user: user,
 					email: email,
 					password: password,
