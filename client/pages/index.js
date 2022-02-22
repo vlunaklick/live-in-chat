@@ -39,8 +39,10 @@ export default function Home(props) {
 		}
 	}, [])
 
+	console.log(lastChats)
+
 	useEffect(() => {
-		socket.current = io('http://localhost:3010')
+		socket.current = io('https://liveinchat-sockets.herokuapp.com/')
 		socket.current?.on('getUsers', data => {
 			setUserConnecteds(data)
 		})
