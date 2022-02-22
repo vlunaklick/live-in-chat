@@ -63,6 +63,8 @@ export default function ChatInputMessage({
 				setLastChats(newLastChats)
 
 				e.target[0].value = ''
+
+				notTyping()
 			} catch (err) {
 				console.log(err)
 			}
@@ -84,10 +86,10 @@ export default function ChatInputMessage({
 				receiverId: otherEmail,
 				chatId: chatId,
 			})
-			let time = setTimeout(notTyping, 2000)
+			let time = setTimeout(notTyping, 5000)
 		} else {
 			clearTimeout(time)
-			let time = setTimeout(notTyping, 2000)
+			let time = setTimeout(notTyping, 5000)
 		}
 	}
 

@@ -9,7 +9,8 @@ import { getCookie } from 'cookies-next'
 import Spinner from '../components/Spinner'
 
 export default function Login(props) {
-	const { mailError, passwordError, loginSubmit, logged } = useErrorForms()
+	const { mailError, passwordError, loginSubmit, logged, loading } =
+		useErrorForms()
 	const router = useRouter()
 
 	useEffect(() => {
@@ -54,7 +55,9 @@ export default function Login(props) {
 							<Link href='/register'>
 								<a>Are you new? Create a new account here.</a>
 							</Link>
-							<button type='submit'>Login</button>
+							<button type='submit' disabled={loading}>
+								Login
+							</button>
 						</form>
 					</section>
 				)}
@@ -134,6 +137,10 @@ const LoginWrapper = styled.main`
 		button:hover,
 		button:active {
 			background-color: #1e40af;
+		}
+
+		button:disabled {
+			background-color: #6b7280;
 		}
 
 		a {

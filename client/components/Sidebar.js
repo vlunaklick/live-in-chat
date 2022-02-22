@@ -45,6 +45,7 @@ const Sidebar = ({
 				sender={owner}
 				lastChats={showChat}
 				setLastChats={setLastChats}
+				setChatSelected={setChatSelected}
 			/>
 			<SidebarSearch setShowChat={setShowChat} lastChats={lastChats} />
 			<div className='container-chats-side'>{lastChatsShow}</div>
