@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
 import ChatHeaderDropdown from './ChatHeaderDropdown'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function ChatHeader({
 	user,
@@ -12,22 +12,26 @@ export default function ChatHeader({
 	setLastChats,
 	lastChats,
 	setMessages,
-	socket,
 	userConnecteds,
 	receiver,
 	isTypingUser,
 }) {
-	let isConnected = userConnecteds.some(user => user.userEmail === receiver)
+	const [info, setInfo] = useState('User is disconnected')
+	const [isConnected, setIsConnected] = useState(false)
 
 	let info
 
-	if (isConnected && isTypingUser.success) {
-		info = 'User is typing...'
-	} else if (isConnected) {
-		info = 'Online'
-	} else {
-		info = 'User is disconnected'
-	}
+	useEffect(() => {
+		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
+
+		if (isConnected && isTypingUser.success) {
+			info = 'User is typing...'
+		} else if (isConnected) {
+			info = 'Online'
+		} else {
+			info = 'User is disconnected'
+		}
+	}, [isTypingUser, userConnecteds])
 
 	return (
 		<ChatHeaderWrapper isConnected={isConnected}>
