@@ -8,6 +8,8 @@ export default function SidebarCreateChat({
 	lastChats,
 	setLastChats,
 	setChatSelected,
+	socket,
+	receiver,
 }) {
 	const changeName = async () => {
 		let newN = prompt('Enter the email')
@@ -42,11 +44,17 @@ export default function SidebarCreateChat({
 							])
 							setChatSelected(data.message.id)
 						})
+
+					socket.current?.emit('createChat', {
+						receiverId: receiver,
+					})
 				} catch (err) {
 					console.log(err)
 				}
 			}
-		} catch (err) {}
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	return (

@@ -60,6 +60,13 @@ io.on('connection', socket => {
 		}
 	})
 
+	socket.on('createChat', ({ receiverId }) => {
+		const receiver = findUser(receiverId)
+		if (receiver) {
+			io.to(receiver.socketId).emit('getCreatedChat', receiverId)
+		}
+	})
+
 	// when user is typing
 	socket.on('isTyping', ({ receiverId, chatId }) => {
 		const receiver = findUser(receiverId)

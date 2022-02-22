@@ -10,6 +10,8 @@ const Sidebar = ({
 	lastChats,
 	owner,
 	setLastChats,
+	socket,
+	receiver,
 }) => {
 	const [showChat, setShowChat] = useState(lastChats)
 
@@ -46,6 +48,8 @@ const Sidebar = ({
 				lastChats={showChat}
 				setLastChats={setLastChats}
 				setChatSelected={setChatSelected}
+				socket={socket}
+				receiver={socket}
 			/>
 			<SidebarSearch setShowChat={setShowChat} lastChats={lastChats} />
 			<div className='container-chats-side'>{lastChatsShow}</div>

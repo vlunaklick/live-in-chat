@@ -28,6 +28,7 @@ export default function Home(props) {
 		success: false,
 		chatId: 0,
 	})
+	const [chatArrival, setChatArrival] = useState('')
 
 	const socket = useRef()
 
@@ -42,7 +43,6 @@ export default function Home(props) {
 	useEffect(() => {
 		socket.current = io('https://liveinchat-sockets.herokuapp.com/')
 		socket.current?.on('getUsers', data => {
-			console.log(data)
 			setUserConnecteds(data)
 		})
 		socket.current?.on('getMessage', data => {
@@ -56,6 +56,9 @@ export default function Home(props) {
 		})
 		socket.current?.on('getIsTyping', data => {
 			setIsTypingUser(data)
+		})
+		socket.current?.on('getCreatedChat', data => {
+			setChatArrival(data)
 		})
 	}, [])
 
@@ -119,7 +122,7 @@ export default function Home(props) {
 		)
 
 		setLastChats(lastChatFetched.data.chats)
-	}, [messages, arrivalMsg, arrivalDelete])
+	}, [messages, arrivalMsg, arrivalDelete, chatArrival])
 
 	useEffect(async () => {
 		if (firstUpdate.current) {
@@ -180,6 +183,8 @@ export default function Home(props) {
 								chatSelected={chatSelected}
 								lastChats={lastChats}
 								setLastChats={setLastChats}
+								receiver={receiver}
+								socket={socket}
 							/>
 						</div>
 						<Chat
