@@ -112,7 +112,7 @@ export default function Home(props) {
 		}
 
 		const lastChatFetched = await axios.get(
-			`https://liveinchat-database.herokuapp.com/${user.email}`,
+			`https://liveinchat-database.herokuapp.com/chats/${user.email}`,
 			{
 				headers: { Authorization: `Bearer ${token}` },
 				withCredentials: true,
