@@ -19,8 +19,6 @@ export default function ChatHeader({
 	const [info, setInfo] = useState('User is disconnected')
 	const [isConnected, setIsConnected] = useState(false)
 
-	let info
-
 	useEffect(() => {
 		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
 
