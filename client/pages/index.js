@@ -134,7 +134,7 @@ export default function Home(props) {
 		if (chatSelected) {
 			await axios
 				.post(
-					`https://liveinchat-database.herokuapp.com/${chatSelected}`,
+					`https://liveinchat-database.herokuapp.com/messages/${chatSelected}`,
 					{
 						user: user.email,
 					},
@@ -260,7 +260,7 @@ export async function getServerSideProps(context) {
 
 	if (props.success) {
 		const lastChats = await axios.get(
-			`https://liveinchat-database.herokuapp.com/${props.user.email}`,
+			`https://liveinchat-database.herokuapp.com/chats/${props.user.email}`,
 			{
 				headers: { Authorization: `Bearer ${token}` },
 				withCredentials: true,
