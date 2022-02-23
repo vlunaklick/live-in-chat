@@ -9,7 +9,7 @@ const httpServer = createServer()
 
 const io = new Server(httpServer, {
 	cors: {
-		origins: 'https://live-in-chat.vercel.app',
+		origins: `${process.env.CLIENT_URL}`,
 		methods: ['GET', 'POST'],
 	},
 })

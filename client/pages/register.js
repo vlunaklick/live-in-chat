@@ -85,7 +85,7 @@ export async function getServerSideProps(context) {
 	}
 
 	const apiResponse = await axios.get(
-		'https://liveinchat-database.herokuapp.com/users/me',
+		`${process.env.NEXT_PUBLIC_API_URL}/users/me`,
 		{
 			headers: { Authorization: `Bearer ${token}` },
 			withCredentials: true,

@@ -38,7 +38,7 @@ export default function useErrorForms() {
 		if (mailError[0] === false && passwordError[0] === false) {
 			axios
 				.post(
-					`https://liveinchat-database.herokuapp.com/users/login`,
+					`${process.env.NEXT_PUBLIC_API_URL}/users/login`,
 					{
 						email: email,
 						password: password,
@@ -103,7 +103,7 @@ export default function useErrorForms() {
 			user.length >= 6
 		) {
 			axios
-				.post(`https://liveinchat-database.herokuapp.com/users/create`, {
+				.post(`${process.env.NEXT_PUBLIC_API_URL}/users/create`, {
 					user: user,
 					email: email,
 					password: password,

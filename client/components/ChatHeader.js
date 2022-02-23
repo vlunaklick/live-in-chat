@@ -4,7 +4,6 @@ import ChatHeaderDropdown from './ChatHeaderDropdown'
 import { useEffect, useState } from 'react'
 
 export default function ChatHeader({
-	user,
 	profilePicture,
 	setChatSelected,
 	name,

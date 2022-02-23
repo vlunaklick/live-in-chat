@@ -16,13 +16,10 @@ export default function ChatHeaderDropdown({
 
 		if (chatId) {
 			await axios
-				.delete(
-					`https://liveinchat-database.herokuapp.com/chats/id/${chatId}`,
-					{
-						headers: { Authorization: `Bearer ${token}` },
-						withCredentials: true,
-					}
-				)
+				.delete(`${process.env.NEXT_PUBLIC_API_URL}/chats/id/${chatId}`, {
+					headers: { Authorization: `Bearer ${token}` },
+					withCredentials: true,
+				})
 				.then(data => {
 					try {
 						setMessages([])

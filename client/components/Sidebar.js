@@ -49,7 +49,7 @@ const Sidebar = ({
 				setLastChats={setLastChats}
 				setChatSelected={setChatSelected}
 				socket={socket}
-				receiver={socket}
+				receiver={receiver}
 			/>
 			<SidebarSearch setShowChat={setShowChat} lastChats={lastChats} />
 			<div className='container-chats-side'>{lastChatsShow}</div>

@@ -17,7 +17,7 @@ const app = express()
 app.use(express.json())
 
 const corsOptions = {
-	origin: 'https://live-in-chat.vercel.app',
+	origin: `${process.env.CLIENT_URL}`,
 	credentials: true,
 	optionSuccessStatus: 200,
 	exposedHeaders: 'Authorization',

@@ -21,7 +21,7 @@ export default function SidebarCreateChat({
 					const token = getCookie('session')
 					await axios
 						.post(
-							'https://liveinchat-database.herokuapp.com/chats/create',
+							`${process.env.NEXT_PUBLIC_API_URL}/chats/create`,
 							{
 								sender: sender,
 								receiver: newN,
@@ -46,7 +46,7 @@ export default function SidebarCreateChat({
 						})
 
 					socket.current?.emit('createChat', {
-						receiverId: receiver,
+						receiverId: newN,
 					})
 				} catch (err) {
 					console.log(err)

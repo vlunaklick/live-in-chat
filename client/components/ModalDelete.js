@@ -19,7 +19,7 @@ export default function ModalDelete({
 		}
 
 		await axios.post(
-			'https://liveinchat-database.herokuapp.com/messages/delete/message',
+			`${process.env.NEXT_PUBLIC_API_URL}/messages/delete/message`,
 			{
 				messageId: messageSelected[0].id,
 				user: mainEmail,
@@ -49,7 +49,7 @@ export default function ModalDelete({
 		}
 
 		await axios.put(
-			`https://liveinchat-database.herokuapp.com/messages/delete/${messageSelected[0].id}`,
+			`${process.env.NEXT_PUBLIC_API_URL}/messages/delete/${messageSelected[0].id}`,
 			{},
 			{
 				headers: { Authorization: `Bearer ${token}` },

@@ -41,7 +41,7 @@ export default function Home(props) {
 	}, [])
 
 	useEffect(() => {
-		socket.current = io('https://liveinchat-sockets.herokuapp.com/')
+		socket.current = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`)
 		socket.current?.on('getUsers', data => {
 			setUserConnecteds(data)
 		})
@@ -58,7 +58,6 @@ export default function Home(props) {
 			setIsTypingUser(data)
 		})
 		socket.current?.on('getCreatedChat', data => {
-			console.log(data)
 			setChatArrival(data)
 		})
 	}, [])
@@ -115,7 +114,7 @@ export default function Home(props) {
 		}
 
 		const lastChatFetched = await axios.get(
-			`https://liveinchat-database.herokuapp.com/chats/${user.email}`,
+			`${process.env.NEXT_PUBLIC_API_URL}/chats/${user.email}`,
 			{
 				headers: { Authorization: `Bearer ${token}` },
 				withCredentials: true,
@@ -137,7 +136,7 @@ export default function Home(props) {
 		if (chatSelected) {
 			await axios
 				.post(
-					`https://liveinchat-database.herokuapp.com/messages/${chatSelected}`,
+					`${process.env.NEXT_PUBLIC_API_URL}/messages/${chatSelected}`,
 					{
 						user: user.email,
 					},
@@ -241,7 +240,7 @@ export async function getServerSideProps(context) {
 	}
 
 	const authResponse = await axios.get(
-		'https://liveinchat-database.herokuapp.com/users/me',
+		`${process.env.NEXT_PUBLIC_API_URL}/users/me`,
 		{
 			headers: { Authorization: `Bearer ${token}` },
 			withCredentials: true,
@@ -265,7 +264,7 @@ export async function getServerSideProps(context) {
 
 	if (props.success) {
 		const lastChats = await axios.get(
-			`https://liveinchat-database.herokuapp.com/chats/${props.user.email}`,
+			`${process.env.NEXT_PUBLIC_API_URL}/chats/${props.user.email}`,
 			{
 				headers: { Authorization: `Bearer ${token}` },
 				withCredentials: true,

@@ -65,5 +65,3 @@ const ChatWrapper = styled.section`
 		position: relative;
 	}
 `
-
-const SubChatWrapper = styled.section``
