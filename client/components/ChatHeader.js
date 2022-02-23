@@ -18,18 +18,14 @@ export default function ChatHeader({
 	useEffect(() => {
 		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
 
-		if (isConnected && isTypingUser.success) {
-			setInfo('User is typing...')
-		} else if (isConnected) {
+		if (isConnected) {
 			setInfo('Online')
+		} else if (isTypingUser.success) {
+			setInfo('User is typing...')
 		} else {
 			setInfo('User is disconnected')
 		}
 	}, [isTypingUser, userConnecteds])
-
-	useEffect(() => {
-		setIsConnected(userConnecteds.some(user => user.userEmail === receiver))
-	}, [])
 
 	return (
 		<ChatHeaderWrapper isConnected={isConnected}>
