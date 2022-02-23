@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { getCookie } from 'cookies-next'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export default function ModalSureDelete({
 	chatId,
@@ -25,6 +26,17 @@ export default function ModalSureDelete({
 					}
 				})
 		}
+
+		toast.success(`Chat was deleted!`, {
+			theme: 'dark',
+			position: 'top-right',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined,
+		})
 	}
 
 	return (

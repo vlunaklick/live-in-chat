@@ -5,12 +5,8 @@ import { useEffect, useState } from 'react'
 
 export default function ChatHeader({
 	profilePicture,
-	setChatSelected,
+	closeChat,
 	name,
-	chatId,
-	setLastChats,
-	lastChats,
-	setMessages,
 	userConnecteds,
 	receiver,
 	isTypingUser,
@@ -47,7 +43,7 @@ export default function ChatHeader({
 				</div>
 				<ChatHeaderDropdown
 					setSureDelete={setSureDelete}
-					setLastChats={setLastChats}
+					closeChat={closeChat}
 				/>
 			</div>
 		</ChatHeaderWrapper>

@@ -18,7 +18,7 @@ const Logoutbutton = ({ socket }) => {
 export default Logoutbutton
 
 const LogOutWrapper = styled.button`
-	background-color: #dc2626;
+	background-color: ${({ theme }) => theme.sidebar.logut};
 	padding: 0.6rem 1rem;
 	outline: none;
 	border: none;
@@ -31,6 +31,6 @@ const LogOutWrapper = styled.button`
 
 	:hover,
 	:active {
-		background-color: #b91c1c;
+		background-color: ${({ theme }) => theme.sidebar.logut_hover};
 	}
 `

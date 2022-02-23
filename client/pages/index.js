@@ -11,6 +11,8 @@ import Chat from '../components/Chat'
 import ModalDelete from '../components/ModalDelete'
 import { io } from 'socket.io-client'
 import ModalSureDelete from '../components/ModalSureDelete'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Home(props) {
 	const [loading, setLoading] = useState(true)
@@ -175,6 +177,17 @@ export default function Home(props) {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<MainWrapper>
+				<ToastContainer
+					position='top-right'
+					autoClose={3000}
+					hideProgressBar={false}
+					newestOnTop={true}
+					closeOnClick
+					rtl={false}
+					draggable
+				/>
+				<ToastContainer />
+
 				{props.success ? (
 					<ChatWrapper>
 						<div className='sidebar-selection'>
@@ -194,7 +207,7 @@ export default function Home(props) {
 							setLoading={setLoading}
 							user={user}
 							chatSelected={chatSelected}
-							setChatSelected={closeChat}
+							closeChat={closeChat}
 							setLastChats={setLastChats}
 							lastChats={lastChats}
 							setModal={setModal}

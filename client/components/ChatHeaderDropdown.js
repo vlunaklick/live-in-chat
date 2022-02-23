@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useState, useRef, useEffect } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
-export default function ChatHeaderDropdown({ setChatSelected, setSureDelete }) {
+export default function ChatHeaderDropdown({ closeChat, setSureDelete }) {
 	const [open, setOpen] = useState(false)
 
 	let dropdownRef = useRef()
@@ -27,7 +27,7 @@ export default function ChatHeaderDropdown({ setChatSelected, setSureDelete }) {
 			<BsThreeDotsVertical className='dropdown-menu' />
 			<DropdownStyle open={open}>
 				<div onClick={() => setSureDelete(true)}>Delete chat</div>
-				<div onClick={() => setChatSelected(false)}>Close chat</div>
+				<div onClick={() => closeChat(false)}>Close chat</div>
 			</DropdownStyle>
 		</WrapperDropdown>
 	)

@@ -19,7 +19,7 @@ export default function Chat(props) {
 						user={props.user}
 						name={props.title}
 						profilePicture='/no-user.jpg'
-						setChatSelected={props.setChatSelected}
+						closeChat={props.closeChat}
 						chatId={props.chatSelected}
 						setLastChats={props.setLastChats}
 						lastChats={props.lastChats}

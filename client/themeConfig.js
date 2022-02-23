@@ -4,6 +4,8 @@ export const darkTheme = {
 		chats: '#1f1a2c',
 		chats_hover: '#261c42',
 		border: '2px solid #2b1e59',
+		logut: '#a855f7',
+		logut_hover: '#9333ea',
 	},
 	chat: {
 		no_chat: '#1d1925',

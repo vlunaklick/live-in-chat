@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { getCookie } from 'cookies-next'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export default function ModalDelete({
 	mainEmail,
@@ -39,6 +40,17 @@ export default function ModalDelete({
 		setMessages(newMessages)
 
 		setModal(false)
+
+		toast.success(`Message was deleted!`, {
+			theme: 'dark',
+			position: 'top-right',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined,
+		})
 	}
 
 	const deleteForEveryone = async () => {
@@ -73,6 +85,17 @@ export default function ModalDelete({
 		setMessages(newMessages)
 
 		setModal(false)
+
+		toast.success(`Message was deleted!`, {
+			theme: 'dark',
+			position: 'top-right',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined,
+		})
 	}
 
 	return (
