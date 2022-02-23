@@ -1,11 +1,32 @@
 import styled from 'styled-components'
 import { FaUserPlus } from 'react-icons/fa'
+import ModalCreateChat from './ModalCreateChat'
+import { useState } from 'react'
 
-export default function SidebarCreateChat({ setCreating }) {
+export default function SidebarCreateChat({
+	sender,
+	lastChats,
+	setLastChats,
+	setChatSelected,
+	socket,
+	receiver,
+}) {
+	const [creating, setCreating] = useState(false)
+
 	return (
-		<CreateWrapper onClick={() => setCreating(true)}>
-			<FaUserPlus />
-			<p>Start a conversation.</p>
+		<CreateWrapper onClick={() => setCreating(prevState => !prevState)}>
+			<FaUserPlus className='icon' />
+			<p>New chat</p>
+			<ModalCreateChat
+				sender={sender}
+				lastChats={lastChats}
+				setLastChats={setLastChats}
+				setChatSelected={setChatSelected}
+				socket={socket}
+				receiver={receiver}
+				creating={creating}
+				setCreating={setCreating}
+			/>
 		</CreateWrapper>
 	)
 }
@@ -20,4 +41,8 @@ const CreateWrapper = styled.div`
 	color: #fafafa;
 	cursor: pointer;
 	position: relative;
+
+	p {
+		font-weight: 500;
+	}
 `

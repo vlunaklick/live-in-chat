@@ -5,12 +5,12 @@ import { toast } from 'react-toastify'
 import { getCookie } from 'cookies-next'
 
 export default function ModalCreateChat({
-	setCreating,
 	sender,
 	lastChats,
 	setLastChats,
 	setChatSelected,
 	socket,
+	setCreating,
 	creating,
 }) {
 	const [text, setText] = useState('')
@@ -19,7 +19,10 @@ export default function ModalCreateChat({
 
 	useEffect(() => {
 		let handler = e => {
-			if (!createRef.current?.contains(e.target) && open) {
+			if (
+				!createRef.current?.contains(e.target) &&
+				e.target.innerHTML === 'New chat'
+			) {
 				setCreating(false)
 				setText('')
 			}
@@ -110,7 +113,7 @@ export default function ModalCreateChat({
 	}
 
 	return (
-		<ModalCreateWrapper creating={creating} ref={createRef}>
+		<ModalCreateWrapper creating={creating}>
 			<p className='title'>Insert the email you are refering to</p>
 			<input
 				className='create-input'

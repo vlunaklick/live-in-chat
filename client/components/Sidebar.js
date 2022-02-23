@@ -3,7 +3,6 @@ import Sidebarchat from './SidebarChat'
 import SidebarSearch from './SidebarSearch'
 import SidebarCreateChat from './SidebarCreateChat'
 import { useState, useEffect } from 'react'
-import ModalCreateChat from './ModalCreateChat'
 
 const Sidebar = ({
 	chatSelected,
@@ -15,7 +14,6 @@ const Sidebar = ({
 	receiver,
 }) => {
 	const [showChat, setShowChat] = useState(lastChats)
-	const [creating, setCreating] = useState(false)
 
 	useEffect(() => {
 		setShowChat(lastChats)
@@ -45,17 +43,15 @@ const Sidebar = ({
 
 	return (
 		<SidebarWrapper>
-			<SidebarCreateChat setCreating={setCreating} />
-			<ModalCreateChat
-				setCreating={setCreating}
+			<SidebarCreateChat
 				sender={owner}
 				lastChats={showChat}
 				setLastChats={setLastChats}
 				setChatSelected={setChatSelected}
 				socket={socket}
 				receiver={receiver}
-				creating={creating}
 			/>
+
 			<SidebarSearch setShowChat={setShowChat} lastChats={lastChats} />
 			<div className='container-chats-side'>{lastChatsShow}</div>
 		</SidebarWrapper>
