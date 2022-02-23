@@ -9,7 +9,6 @@ export default function SidebarCreateChat({
 	setLastChats,
 	setChatSelected,
 	socket,
-	receiver,
 }) {
 	const changeName = async () => {
 		let newN = prompt('Enter the email')

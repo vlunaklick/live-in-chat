@@ -10,6 +10,7 @@ import Sidebar from '../components/Sidebar'
 import Chat from '../components/Chat'
 import ModalDelete from '../components/ModalDelete'
 import { io } from 'socket.io-client'
+import ModalSureDelete from '../components/ModalSureDelete'
 
 export default function Home(props) {
 	const [loading, setLoading] = useState(true)
@@ -29,6 +30,7 @@ export default function Home(props) {
 		chatId: 0,
 	})
 	const [chatArrival, setChatArrival] = useState('')
+	const [sureDelete, setSureDelete] = useState(false)
 
 	const socket = useRef()
 
@@ -205,6 +207,7 @@ export default function Home(props) {
 							socket={socket}
 							userConnecteds={userConnecteds}
 							isTypingUser={isTypingUser}
+							setSureDelete={setSureDelete}
 						/>
 					</ChatWrapper>
 				) : (
@@ -221,6 +224,15 @@ export default function Home(props) {
 						setMessages={setMessages}
 						socket={socket}
 						receiver={receiver}
+					/>
+				) : (
+					''
+				)}
+				{sureDelete ? (
+					<ModalSureDelete
+						setMessages={setMessages}
+						chatId={chatSelected}
+						setSureDelete={setSureDelete}
 					/>
 				) : (
 					''

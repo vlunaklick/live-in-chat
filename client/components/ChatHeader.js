@@ -14,6 +14,7 @@ export default function ChatHeader({
 	userConnecteds,
 	receiver,
 	isTypingUser,
+	setSureDelete,
 }) {
 	const [info, setInfo] = useState('User is disconnected')
 	const [isConnected, setIsConnected] = useState(false)
@@ -45,11 +46,8 @@ export default function ChatHeader({
 					</div>
 				</div>
 				<ChatHeaderDropdown
-					setChatSelected={setChatSelected}
-					chatId={chatId}
+					setSureDelete={setSureDelete}
 					setLastChats={setLastChats}
-					lastChats={lastChats}
-					setMessages={setMessages}
 				/>
 			</div>
 		</ChatHeaderWrapper>

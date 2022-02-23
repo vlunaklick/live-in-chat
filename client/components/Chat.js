@@ -28,6 +28,7 @@ export default function Chat(props) {
 						userConnecteds={props.userConnecteds}
 						receiver={props.receiver}
 						isTypingUser={props.isTypingUser}
+						setSureDelete={props.setSureDelete}
 					/>
 					<ChatContent
 						messages={props.messages}

@@ -1,34 +1,9 @@
 import styled from 'styled-components'
 import { useState, useRef, useEffect } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { getCookie } from 'cookies-next'
-import axios from 'axios'
 
-export default function ChatHeaderDropdown({
-	setChatSelected,
-	chatId,
-	setMessages,
-}) {
+export default function ChatHeaderDropdown({ setChatSelected, setSureDelete }) {
 	const [open, setOpen] = useState(false)
-
-	const deleteChat = async () => {
-		const token = getCookie('session')
-
-		if (chatId) {
-			await axios
-				.delete(`${process.env.NEXT_PUBLIC_API_URL}/chats/id/${chatId}`, {
-					headers: { Authorization: `Bearer ${token}` },
-					withCredentials: true,
-				})
-				.then(data => {
-					try {
-						setMessages([])
-					} catch (err) {
-						console.log(err)
-					}
-				})
-		}
-	}
 
 	let dropdownRef = useRef()
 
@@ -51,7 +26,7 @@ export default function ChatHeaderDropdown({
 			ref={dropdownRef}>
 			<BsThreeDotsVertical className='dropdown-menu' />
 			<DropdownStyle open={open}>
-				<div onClick={deleteChat}>Delete chat</div>
+				<div onClick={() => setSureDelete(true)}>Delete chat</div>
 				<div onClick={() => setChatSelected(false)}>Close chat</div>
 			</DropdownStyle>
 		</WrapperDropdown>

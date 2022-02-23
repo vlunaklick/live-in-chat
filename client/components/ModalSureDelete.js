@@ -2,99 +2,42 @@ import styled from 'styled-components'
 import { getCookie } from 'cookies-next'
 import axios from 'axios'
 
-export default function ModalDelete({
-	mainEmail,
-	setModal,
-	messageSelected,
-	messages,
+export default function ModalSureDelete({
+	chatId,
 	setMessages,
-	socket,
-	receiver,
+	setSureDelete,
 }) {
-	const deleteForYou = async () => {
+	const deleteChat = async () => {
 		const token = getCookie('session')
 
-		if (!token) {
-			return { props: { success: false, user: {} } }
+		if (chatId) {
+			await axios
+				.delete(`${process.env.NEXT_PUBLIC_API_URL}/chats/id/${chatId}`, {
+					headers: { Authorization: `Bearer ${token}` },
+					withCredentials: true,
+				})
+				.then(data => {
+					try {
+						setMessages([])
+						setSureDelete(false)
+					} catch (err) {
+						console.log(err)
+					}
+				})
 		}
-
-		await axios.post(
-			`${process.env.NEXT_PUBLIC_API_URL}/messages/delete/message`,
-			{
-				messageId: messageSelected[0].id,
-				user: mainEmail,
-			},
-			{
-				headers: { Authorization: `Bearer ${token}` },
-				withCredentials: true,
-			}
-		)
-
-		let newMessages = messages.filter(chat => {
-			if (!(chat.id === messageSelected[0].id)) {
-				return chat
-			}
-		})
-
-		setMessages(newMessages)
-
-		setModal(false)
-	}
-
-	const deleteForEveryone = async () => {
-		const token = getCookie('session')
-
-		if (!token) {
-			return { props: { success: false, user: {} } }
-		}
-
-		await axios.put(
-			`${process.env.NEXT_PUBLIC_API_URL}/messages/delete/${messageSelected[0].id}`,
-			{},
-			{
-				headers: { Authorization: `Bearer ${token}` },
-				withCredentials: true,
-			}
-		)
-
-		socket.current?.emit('deleteMessage', {
-			receiverId: receiver,
-			messageId: messageSelected[0].id,
-		})
-
-		let newMessages = messages.map(chat => {
-			if (chat.id === messageSelected[0].id) {
-				return { ...chat, deleted: true }
-			} else {
-				return chat
-			}
-		})
-
-		setMessages(newMessages)
-
-		setModal(false)
 	}
 
 	return (
 		<ModalWrapper>
 			<div className='box'>
-				<p className='title'>Do you want to delete the message?</p>
-				<div className='buttons'>
-					<button className='cancel' onClick={() => setModal(false)}>
+				<p className='title'>Are you want to delete the chat?</p>
+				<div className='buttons-sure'>
+					<button className='sure-cancel' onClick={() => setSureDelete(false)}>
 						CANCEL
 					</button>
-					<button className='delete_you' onClick={() => deleteForYou()}>
-						DELETE FOR YOU
+					<button className='sure-confirm' onClick={deleteChat}>
+						CONFIRM
 					</button>
-					{messageSelected.length !== 0 &&
-					mainEmail === messageSelected[0].creatorId &&
-					messageSelected[0].deleted === false ? (
-						<button className='delete_you' onClick={() => deleteForEveryone()}>
-							DELETE FOR EVERYONE
-						</button>
-					) : (
-						''
-					)}
 				</div>
 			</div>
 		</ModalWrapper>
@@ -130,7 +73,7 @@ const ModalWrapper = styled.div`
 			font-size: 1.2rem;
 		}
 
-		.buttons {
+		.buttons-sure {
 			display: flex;
 			flex-wrap: wrap;
 			gap: 1rem;
@@ -138,7 +81,7 @@ const ModalWrapper = styled.div`
 			font-size: 1rem;
 			font-weight: 500;
 
-			.cancel {
+			.sure-cancel {
 				outline: none;
 				letter-spacing: 0.15rem;
 				text-align: center;
@@ -153,13 +96,13 @@ const ModalWrapper = styled.div`
 				border-radius: 2px;
 			}
 
-			.cancel:hover {
+			.sure-cancel:hover {
 				background-color: ${({ theme }) => theme.modal.color_cancel_hover};
 				box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
 					0px 1px 2px 0px rgba(0, 0, 0, 0.06);
 			}
 
-			.delete_you {
+			.sure-confirm {
 				outline: none;
 				border: none;
 				letter-spacing: 0.15rem;
@@ -173,7 +116,7 @@ const ModalWrapper = styled.div`
 				border-radius: 2px;
 			}
 
-			.delete_you:hover {
+			.sure-confirm:hover {
 				background-color: ${({ theme }) => theme.modal.color_button_hover};
 				box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
 					0px 1px 2px 0px rgba(0, 0, 0, 0.06);
