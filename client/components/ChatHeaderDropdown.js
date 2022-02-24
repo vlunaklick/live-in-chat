@@ -39,7 +39,7 @@ const WrapperDropdown = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 15;
+	z-index: 20;
 	transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out,
 		background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 

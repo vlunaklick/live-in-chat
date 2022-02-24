@@ -51,7 +51,7 @@ const ChatHeaderWrapper = styled.header`
 	padding: 0.6rem;
 	display: flex;
 	align-items: center;
-	z-index: 10;
+	z-index: 15;
 	transition: opacity 0.3s ease-in-out, background-color 0.5s ease-in-out,
 		color 0.5s ease-in-out;
 

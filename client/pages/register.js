@@ -17,6 +17,7 @@ export default function Register(props) {
 		logged,
 		register,
 		setlogged,
+		loading,
 	} = useErrorForms()
 
 	const router = useRouter()
@@ -66,7 +67,9 @@ export default function Register(props) {
 							<Link href='/login'>
 								<a>Alredy have an account? Log in here.</a>
 							</Link>
-							<button type='submit'>Register</button>
+							<button type='submit' disabled={loading}>
+								Register
+							</button>
 						</form>
 					</section>
 				)}

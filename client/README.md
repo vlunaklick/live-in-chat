@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Welcome to 'Live in Chat'</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+</p>
 
-## Getting Started
+> In this project I created a 'Realtime chat'. It was created using Next.js in the frontend and Express in the backend. Also, I had to create another server where I deployed the socket.io server, this was very important because it let me make the comunication client-server.
 
-First, run the development server:
+### Frontend
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- React: Javascript library to create interfaces.
+- Next.js: React framework that gives functionalities as SSR.
+- 💅 styled-components: CSS-in-JS library for styling.
+- react-icons: npm package with React-ready icon libraries.
+- axios: HTTP client to request data from the backend.
+- cookies-next: library to make cookies.
+- socket.io-client: library to make the connection with the backend.
+- react-toastify: library for notifications.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Backend
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Node & Express: Javascript based stack for server applications.
+- Prisma: ORM to interact with the database.
+- PostgreSQL: A relational database was required by the challenge.
+- socket.io: library for realtime web applications.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### ✨ [Live View](https://live-in-chat.vercel.app/login)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Author
 
-## Learn More
+👤 **vlunaklick**
 
-To learn more about Next.js, take a look at the following resources:
+* Github: [@vlunaklick](https://github.com/vlunaklick)
+* LinkedIn: [@vlunaklick](https://linkedin.com/in/vlunaklick)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## My Profile
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> In my profile you can see route to convert into a fullstack web developer.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Give a ⭐️ if you liked this project.
