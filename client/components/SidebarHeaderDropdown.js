@@ -60,6 +60,7 @@ const WrapperDropdown = styled.div`
 `
 
 const DropdownStyle = styled.div`
+	z-index: 5;
 	position: absolute;
 	top: 42px;
 	right: 25px;
