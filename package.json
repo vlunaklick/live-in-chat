@@ -1,0 +1,24 @@
+{
+  "name": "live_in_chat",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">Welcome to 'Live in Chat'</h1> <p>   <img alt=\"Version\" src=\"https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000\" /> </p>",
+  "main": "index.js",
+  "scripts": {
+    "initialize": "(npm install); (cd frontend && npm install); (cd backend && npm install);",
+    "start": "concurrently \"(cd server && npm run start)\" \"(cd client && npm run dev)\" \"(cd socket && npm run start)\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vlunaklick/live_in_chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vlunaklick/live_in_chat/issues"
+  },
+  "homepage": "https://github.com/vlunaklick/live_in_chat#readme",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
