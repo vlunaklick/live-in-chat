@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
 	}
 
 	return (
-		<ThemeProvider theme={theme == 'dark' ? lightTheme : darkTheme}>
+		<ThemeProvider theme={theme == 'light' ? lightTheme : darkTheme}>
 			<Component toggleTheme={toggleTheme} {...pageProps} />
 		</ThemeProvider>
 	)
