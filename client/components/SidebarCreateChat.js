@@ -20,6 +20,7 @@ export default function SidebarCreateChat({
 		let handler = e => {
 			if (!createRef.current?.contains(e.target)) {
 				setCreating(false)
+				setText('')
 			}
 		}
 		document.addEventListener('mousedown', handler)
