@@ -15,8 +15,8 @@ export const darkTheme = {
 		search_svg: '#fafafa',
 	},
 	chat: {
-		no_chat: '#1d1925',
-		chat: '#0C1E29',
+		no_chat: '#08141B',
+		chat: 'url(dark-bg.png)',
 		header: '#08141B',
 		input: '#0F2837',
 		holder: '#173C52',
@@ -91,7 +91,7 @@ export const lightTheme = {
 	},
 	chat: {
 		no_chat: '#f5f5f5',
-		chat: '#fff7ed',
+		chat: 'url(light-bg.png)',
 		header: '#f5f5f5',
 		input: '#e5e5e5',
 		holder: '#fafafa',
