@@ -44,3 +44,50 @@ export const darkTheme = {
 		color_cancel_hover: '#48435D',
 	},
 }
+
+export const lightTheme = {
+	sidebar: {
+		header: '#fafafa',
+		chats: '#1f1a2c',
+		chats_hover: '#261c42',
+		border: '2px solid #2b1e59',
+		logut: '#a855f7',
+		logut_hover: '#9333ea',
+	},
+	chat: {
+		no_chat: '#1d1925',
+		chat: '#261c42',
+		header: '#1a181e',
+		input: '#221b33',
+		holder: '#2a1d51',
+		deleted: '#737373',
+		online: '#a3a3a3',
+	},
+	dropdown: {
+		svg: 'rgba(0, 0, 0, 0.5)',
+		bg: '#292234',
+		hover: '#322744',
+	},
+	modal: {
+		bg: 'rgba(35, 30, 42, 0.8)',
+		box: '#322744',
+		title: '#fafafa',
+		cancel_border: '1px solid #48435D',
+		color_button: '#dc2626',
+		color_button_hover: '#ef4444',
+		color_cancel_hover: '#48435D',
+		text_color: '#fafafa',
+		text_bold: '#fafafa',
+		color_confirm_text: '#fafafa',
+	},
+	create_chat: {
+		bg: 'rgba(35, 30, 42, 0.8)',
+		box: '#322744',
+		title: '#fafafa',
+		color_button: '#16a34a',
+		cancel_border: '1px solid #48435D',
+		color_button: '#16a34a',
+		color_button_hover: '#22c55e',
+		color_cancel_hover: '#48435D',
+	},
+}

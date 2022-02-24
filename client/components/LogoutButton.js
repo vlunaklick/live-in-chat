@@ -28,6 +28,7 @@ const LogOutWrapper = styled.button`
 	font-size: 0.775rem;
 	line-height: 1;
 	transition: background-color 0.5s ease-in-out;
+	margin: 0 auto;
 
 	:hover,
 	:active {

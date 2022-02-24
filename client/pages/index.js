@@ -191,7 +191,11 @@ export default function Home(props) {
 				{props.success ? (
 					<ChatWrapper>
 						<div className='sidebar-selection'>
-							<SidebarHeader user={user} socket={socket} />
+							<SidebarHeader
+								user={user}
+								socket={socket}
+								changeTheme={props.toggleTheme}
+							/>
 							<Sidebar
 								owner={user.email}
 								setChatSelected={setChatSelected}

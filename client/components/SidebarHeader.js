@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
-import Logoutbutton from './LogoutButton'
+import SidebarHeaderDropdown from './SidebarHeaderDropdown'
 
-export default function SidebarHeader({ user, socket }) {
+export default function SidebarHeader({ user, socket, changeTheme }) {
 	return (
 		<HeaderWrapper>
 			<div className='data-container'>
@@ -13,7 +13,7 @@ export default function SidebarHeader({ user, socket }) {
 				</div>
 			</div>
 
-			<Logoutbutton socket={socket} />
+			<SidebarHeaderDropdown socket={socket} changeTheme={changeTheme} />
 		</HeaderWrapper>
 	)
 }
