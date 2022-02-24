@@ -67,7 +67,7 @@ const MessageWrapper = styled.div`
 	margin: 0 0 0 auto;
 	display: flex;
 	flex-direction: column;
-	background-color: #4c1d95;
+	background-color: ${({ theme }) => theme.sender.bg};
 	border-radius: 7.5px;
 	border-top-right-radius: 0;
 	overflow-wrap: break-word;
@@ -77,11 +77,11 @@ const MessageWrapper = styled.div`
 	position: relative;
 	box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 
 	.options-message {
 		display: ${props => (props.optionsThing === true ? 'block' : 'none')};
 		opacity: ${props => (props.optionsThing === true ? '1' : '0')};
-		color: white;
 	}
 
 	.wrapper-right-text {
@@ -94,7 +94,7 @@ const MessageWrapper = styled.div`
 
 	.text-rigth {
 		font-size: 0.8rem;
-		color: #fafafa;
+		color: ${({ theme }) => theme.sender.numbers};
 		min-width: ${({ deleted }) => (deleted ? '250px' : '111px')};
 		max-width: 622px;
 		margin-bottom: 0.5rem;
@@ -105,7 +105,8 @@ const MessageWrapper = styled.div`
 		align-items: center;
 		gap: 0.2rem;
 		color: ${({ deleted, theme }) =>
-			deleted ? theme.chat.deleted : '#fafafa'};
+			deleted ? theme.sender.eliminated : theme.sender.text};
+		transition: color 0.5s ease-in-out;
 	}
 
 	.icon-cancel {
@@ -114,11 +115,12 @@ const MessageWrapper = styled.div`
 
 	.hour-rigth {
 		font-size: 0.5rem;
-		color: #a1a1aa;
+		color: ${({ theme }) => theme.sender.numbers};
 		position: absolute;
 		right: 8px;
 		bottom: 5px;
 		z-index: 2;
 		line-height: 1;
+		transition: color 0.5s ease-in-out;
 	}
 `

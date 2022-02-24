@@ -312,12 +312,13 @@ export async function getServerSideProps(context) {
 }
 
 const MainWrapper = styled.main`
-	background-color: #171717;
+	background-color: ${({ theme }) => theme.app.bg};
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	transition: background-color 0.5s ease-in-out;
 `
 
 const ChatWrapper = styled.section`

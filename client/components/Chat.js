@@ -61,6 +61,7 @@ const ChatWrapper = styled.section`
 	display: flex;
 	flex-direction: column;
 	position: fixed;
+	transition: background-color 0.5s ease-in-out;
 
 	@media screen and (min-width: 786px) {
 		position: relative;

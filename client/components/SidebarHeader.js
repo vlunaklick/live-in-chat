@@ -24,7 +24,7 @@ const HeaderWrapper = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	transition: border-rigth 0.5s ease-in-out;
+	transition: border-rigth 0.5s ease-in-out, background-color 0.5s ease-in-out;
 	position: relative;
 
 	.data-container {
@@ -43,12 +43,14 @@ const HeaderWrapper = styled.header`
 
 			.user-name-header {
 				font-weight: 600;
-				color: #fafafa;
+				color: ${({ theme }) => theme.sidebar.user};
+				transition: color 0.5s ease-in-out;
 			}
 
 			.user-email-header {
 				font-size: 0.8rem;
-				color: #a3a3a3;
+				color: ${({ theme }) => theme.sidebar.mail};
+				transition: color 0.5s ease-in-out;
 			}
 		}
 	}

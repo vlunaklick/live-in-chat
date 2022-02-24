@@ -68,6 +68,8 @@ const SidebarChatWrapper = styled.div`
 	background-color: ${({ selected, id, theme }) =>
 		selected === id ? theme.sidebar.chats_hover : ''};
 	position: relative;
+	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out,
+		border-bottom 0.5s ease-in-out;
 
 	.container-hour-name {
 		position: relative;
@@ -78,7 +80,7 @@ const SidebarChatWrapper = styled.div`
 
 	.hour-sidebar-chats {
 		font-size: 0.6rem;
-		color: #e5e5e5;
+		color: ${({ theme }) => theme.chat.chat_hour};
 	}
 
 	.sidebar-chat-data {
@@ -97,12 +99,12 @@ const SidebarChatWrapper = styled.div`
 		.sidebar-chat-name {
 			font-size: 0.8rem;
 			font-weight: 600;
-			color: #fafafa;
+			color: ${({ theme }) => theme.chat.chat_name};
 		}
 
 		.sidebar-chat-last {
 			font-size: 0.6rem;
-			color: #d4d4d4;
+			color: ${({ theme }) => theme.chat.chat_message};
 			text-overflow: ellipsis;
 			max-width: 239.84px;
 			white-space: nowrap;

@@ -74,6 +74,7 @@ const ModalWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 
 	.box {
 		display: flex;

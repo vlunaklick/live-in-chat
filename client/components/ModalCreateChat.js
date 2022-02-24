@@ -128,11 +128,10 @@ const ModalCreateWrapper = styled.div`
 	border-radius: 3px;
 	margin: 0 auto;
 	z-index: 5;
-	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
-		0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.4));
 	transform: ${({ creating }) => (creating ? 'scale(1,1)' : 'scale(0,0)')};
 	transform-origin: top;
-	transition: transform 0.2s ease-in;
+	transition: transform 0.2s ease-in, background-color 0.5s ease-in-out;
 
 	:before {
 		content: '';
@@ -150,22 +149,24 @@ const ModalCreateWrapper = styled.div`
 		left: 0;
 		right: 0;
 		margin: 0 auto;
+
+		transition: border-color 0.5s ease-in-out;
 	}
 
 	.title {
-		color: #fafafa;
+		color: ${({ theme }) => theme.create_chat.title};
 		font-weight: 600;
+		transition: color 0.5s ease-in-out;
 	}
 
 	.create-input {
 		padding: 5px;
 		outline: none;
 		border: 2px solid ${({ theme }) => theme.create_chat.color_button};
-		box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
-			0px 1px 2px 0px rgba(0, 0, 0, 0.06);
 		background-color: ${({ theme }) => theme.create_chat.bg};
-		color: #fafafa;
+		color: ${({ theme }) => theme.create_chat.color_input};
 		font-size: 0.9rem;
+		transition: border 0.5s ease-in-out, background-color 0.5s ease-in-out;
 	}
 
 	.btns-create-chat {
@@ -185,7 +186,8 @@ const ModalCreateWrapper = styled.div`
 			font-size: 0.8rem;
 			border: ${({ theme }) => theme.create_chat.cancel_border};
 			color: ${({ theme }) => theme.create_chat.color_button};
-			transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+			transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+				border 0.5s ease-in-out, color 0.5s ease-in-out;
 			cursor: pointer;
 			border-radius: 2px;
 		}
@@ -203,8 +205,10 @@ const ModalCreateWrapper = styled.div`
 			text-align: center;
 			padding: 0.5rem;
 			font-size: 0.8rem;
+			color: ${({ theme }) => theme.create_chat.color_button_text};
 			background-color: ${({ theme }) => theme.create_chat.color_button};
-			transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+			transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+				border 0.5s ease-in-out, color 0.5s ease-in-out;
 			cursor: pointer;
 			border-radius: 2px;
 		}

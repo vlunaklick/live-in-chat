@@ -52,7 +52,8 @@ const ChatHeaderWrapper = styled.header`
 	display: flex;
 	align-items: center;
 	z-index: 10;
-	border-bottom: ${({ theme }) => theme.sidebar.border};
+	transition: opacity 0.3s ease-in-out, background-color 0.5s ease-in-out,
+		color 0.5s ease-in-out;
 
 	.data-container {
 		display: flex;
@@ -66,14 +67,6 @@ const ChatHeaderWrapper = styled.header`
 			gap: 1rem;
 		}
 
-		.back-header-chat {
-			margin-right: 0.5rem;
-			color: #fafafa;
-			cursor: pointer;
-			width: 20px;
-			height: 20px;
-		}
-
 		p {
 			line-height: 1;
 		}
@@ -85,12 +78,12 @@ const ChatHeaderWrapper = styled.header`
 
 			.user-name-header {
 				font-weight: 600;
-				color: #fafafa;
+				color: ${({ theme }) => theme.chat.user};
 			}
 
 			.user-email-header {
 				font-size: 0.8rem;
-				color: #a3a3a3;
+				color: ${({ theme }) => theme.chat.mail};
 			}
 		}
 	}
@@ -100,6 +93,5 @@ const ChatHeaderWrapper = styled.header`
 		font-size: 0.8rem;
 		font-style: italic;
 		color: ${({ theme }) => theme.chat.online};
-		transition: opacity 0.5s ease-in-out;
 	}
 `

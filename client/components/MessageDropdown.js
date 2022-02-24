@@ -60,7 +60,8 @@ const WrapperDropdown = styled.div`
 	z-index: 2;
 	border-radius: 50%;
 	background-color: ${({ theme }) => theme.dropdown.svg};
-	transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out;
+	transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out,
+		background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 
 	.dropdown-menu {
 		cursor: pointer;

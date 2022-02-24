@@ -59,9 +59,10 @@ const CreateWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	border-bottom: ${({ theme }) => theme.sidebar.border};
-	color: #fafafa;
+	color: ${({ theme }) => theme.sidebar.search_svg};
 	cursor: pointer;
 	position: relative;
+	transition: border-bottom 0.5s ease-in-out, color 0.5s ease-in-out;
 
 	p {
 		font-weight: 500;

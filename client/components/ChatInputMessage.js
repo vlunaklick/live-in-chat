@@ -121,6 +121,7 @@ const InputWrapper = styled.section`
 	flex: 1;
 	z-index: 5;
 	border-top: ${({ theme }) => theme.sidebar.border};
+	transition: background-color 0.5s ease-in-out, border-top 0.5s ease-in-out;
 
 	form {
 		display: flex;
@@ -146,7 +147,7 @@ const InputWrapper = styled.section`
 		padding: 9px 12px 11px;
 		width: 100%;
 		border-radius: 0.5rem;
-		color: #fafafa;
+		color: ${({ theme }) => theme.chat.holder_text};
 		background-color: ${({ theme }) => theme.chat.holder};
 		border: none;
 		outline: none;
@@ -157,16 +158,17 @@ const InputWrapper = styled.section`
 		overflow-x: hidden;
 		white-space: pre-wrap;
 		word-wrap: break-word;
+		transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 	}
 
 	input::placeholder {
-		color: #979797;
+		color: ${({ theme }) => theme.chat.holder_no_text};
 	}
 
 	.message-send-svg {
 		line-height: 1;
 		font-size: 1.5rem;
-		color: #979797;
+		color: ${({ theme }) => theme.chat.holder_no_text};
 		cursor: pointer;
 		transition: color 0.5s ease-in-out;
 	}

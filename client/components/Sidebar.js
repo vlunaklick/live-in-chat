@@ -66,6 +66,7 @@ const SidebarWrapper = styled.section`
 	height: calc(100vh - 59.19px);
 	transition: border-rigth 0.5s ease-in-out;
 	position: relative;
+	transition: background-color 0.5s ease-in-out;
 
 	.container-chats-side {
 		position: absolute;

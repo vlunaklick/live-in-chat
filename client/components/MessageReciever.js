@@ -65,7 +65,7 @@ const MessageRecieverWrapper = styled.div`
 	margin: 0 auto 0 0;
 	display: flex;
 	flex-direction: column;
-	background-color: #171717;
+	background-color: ${({ theme }) => theme.receiver.bg};
 	border-radius: 7.5px;
 	border-top-left-radius: 0;
 	max-width: 65%;
@@ -73,6 +73,7 @@ const MessageRecieverWrapper = styled.div`
 	box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0px 2px 4px -1px rgba(0, 0, 0, 0.06);
 	width: fit-content;
+	transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 
 	.wrapper-left-text {
 		position: relative;
@@ -84,7 +85,6 @@ const MessageRecieverWrapper = styled.div`
 
 	.text-left {
 		font-size: 0.8rem;
-		color: #fafafa;
 		min-width: ${({ deleted }) => (deleted ? '250px' : '111px')};
 		max-width: 622px;
 		margin-bottom: 0.5rem;
@@ -94,16 +94,18 @@ const MessageRecieverWrapper = styled.div`
 		align-items: center;
 		gap: 0.2rem;
 		color: ${({ deleted, theme }) =>
-			deleted ? theme.chat.deleted : '#fafafa'};
+			deleted ? theme.receiver.eliminated : theme.receiver.text};
+		transition: color 0.5s ease-in-out;
 	}
 
 	.hour-left {
 		font-size: 0.5rem;
-		color: #a1a1aa;
+		color: ${({ theme }) => theme.receiver.numbers};
 		position: absolute;
 		right: 8px;
 		bottom: 5px;
 		z-index: 2;
 		line-height: 1;
+		transition: color 0.5s ease-in-out;
 	}
 `

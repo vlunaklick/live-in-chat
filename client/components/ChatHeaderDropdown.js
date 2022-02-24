@@ -39,11 +39,15 @@ const WrapperDropdown = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 15;
+	transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out,
+		background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 
 	.dropdown-menu {
 		cursor: pointer;
-		color: #fafafa;
+		color: ${({ theme }) => theme.chat.user};
 		font-size: 1.2rem;
+		transition: color 0.5s ease-in-out;
 	}
 `
 
@@ -63,11 +67,13 @@ const DropdownStyle = styled.div`
 		0px 1px 10px 0px rgba(0, 0, 0, 0.12), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
 	transform: ${({ open }) => (open ? 'scale(1,1)' : 'scale(0,0)')};
 	transform-origin: top right;
-	transition: transform 0.2s ease-in;
+	transition: transform 0.2s ease-in, opacity 0.3s ease-in-out,
+		display 0.3s ease-in-out, background-color 0.5s ease-in-out,
+		color 0.5s ease-in-out;
 
 	div {
 		padding: 0.5rem 1rem;
-		color: #fafafa;
+		color: ${({ theme }) => theme.chat.user};
 		font-size: 0.9rem;
 		transition: background-color 0.5s ease-in-out;
 		cursor: pointer;
