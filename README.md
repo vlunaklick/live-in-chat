@@ -7,6 +7,9 @@
 
 ### ✨ [Live View](https://live-in-chat.vercel.app/login)
 
+- Account for testing: fakeuser1@gmail.com:fakepass123
+- Other account: fakeuser2@gmail.com:fakepass123
+
 ### Frontend
 
 - React: Javascript library to create interfaces.
