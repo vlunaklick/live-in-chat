@@ -101,8 +101,15 @@ export default function ModalDelete({
 	return (
 		<ModalWrapper>
 			<div className='box'>
-				<p className='title'>Do you want to delete the message?</p>
+				<div className='info-wrap'>
+					<p className='title'>DELETE MESSAGE</p>
+					<p className='text-info'>
+						You are one step away from permanently deleting the message,{' '}
+						<bold> this action cannot be reversed.</bold>
+					</p>
+				</div>
 				<div className='buttons'>
+					<p className='text-btn'>Are you sure you want to delete it?</p>
 					<button className='cancel' onClick={() => setModal(false)}>
 						CANCEL
 					</button>
@@ -139,7 +146,7 @@ const ModalWrapper = styled.div`
 	.box {
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 2rem;
 		background-color: ${({ theme }) => theme.modal.box};
 		padding: 1.2rem;
 		border-radius: 2px;
@@ -147,10 +154,27 @@ const ModalWrapper = styled.div`
 		box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.14),
 			0px 1px 10px 0px rgba(0, 0, 0, 0.12), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
 
+		.info-wrap {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+
 		.title {
 			color: ${({ theme }) => theme.modal.title};
-			font-weight: 500;
-			font-size: 1.2rem;
+			font-weight: 800;
+			letter-spacing: 0.1rem;
+			font-size: 1.4rem;
+		}
+
+		.text-info {
+			color: ${({ theme }) => theme.modal.text_color};
+			font-size: 0.9rem;
+		}
+
+		bold {
+			font-weight: 800;
+			color: ${({ theme }) => theme.modal.text_bold};
 		}
 
 		.buttons {
@@ -160,6 +184,11 @@ const ModalWrapper = styled.div`
 			justify-content: flex-end;
 			font-size: 1rem;
 			font-weight: 500;
+
+			.text-btn {
+				color: ${({ theme }) => theme.modal.text_color};
+				font-size: 0.9rem;
+			}
 
 			.cancel {
 				outline: none;
@@ -189,6 +218,7 @@ const ModalWrapper = styled.div`
 				text-align: center;
 				padding: 0.5rem;
 				font-size: 0.8rem;
+				color: ${({ theme }) => theme.modal.color_confirm_text};
 				background-color: ${({ theme }) => theme.modal.color_button};
 				transition: background-color 0.3s ease-in-out,
 					box-shadow 0.3s ease-in-out;

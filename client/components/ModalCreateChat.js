@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { getCookie } from 'cookies-next'
@@ -12,28 +11,9 @@ export default function ModalCreateChat({
 	socket,
 	setCreating,
 	creating,
+	text,
+	setText,
 }) {
-	const [text, setText] = useState('')
-
-	let createRef = useRef()
-
-	useEffect(() => {
-		let handler = e => {
-			if (
-				!createRef.current?.contains(e.target) &&
-				e.target.innerHTML === 'New chat'
-			) {
-				setCreating(false)
-				setText('')
-			}
-		}
-		document.addEventListener('mousedown', handler)
-
-		return () => {
-			document.removeEventListener('mousedown', handler)
-		}
-	})
-
 	const changeName = async e => {
 		const regexMail =
 			/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g
@@ -107,8 +87,8 @@ export default function ModalCreateChat({
 		setText(e.target.value)
 	}
 
-	const cancelEmail = e => {
-		setCreating(false)
+	const cancelEmail = () => {
+		setCreating(prevState => !prevState)
 		setText('')
 	}
 
@@ -123,7 +103,7 @@ export default function ModalCreateChat({
 				onChange={writeEmail}
 			/>
 			<div className='btns-create-chat'>
-				<button className='create-cancel' onClick={cancelEmail}>
+				<button className='create-cancel' onClick={() => cancelEmail()}>
 					CANCEL
 				</button>
 				<button className='create-create' onClick={e => changeName(e)}>
@@ -135,10 +115,10 @@ export default function ModalCreateChat({
 }
 
 const ModalCreateWrapper = styled.div`
-	top: 60px;
+	top: 50px;
 	left: 0;
 	right: 0;
-	background-color: ${({ theme }) => theme.modal.box};
+	background-color: ${({ theme }) => theme.create_chat.box};
 	position: absolute;
 	width: 80%;
 	display: flex;
@@ -160,8 +140,8 @@ const ModalCreateWrapper = styled.div`
 		height: 0px;
 		border-style: solid;
 		border-width: 15px 15px 0px 15px;
-		border-color: ${({ theme }) => theme.modal.box} transparent transparent
-			transparent;
+		border-color: ${({ theme }) => theme.create_chat.box} transparent
+			transparent transparent;
 		display: inline-block;
 		vertical-align: middle;
 		position: absolute;
@@ -180,10 +160,10 @@ const ModalCreateWrapper = styled.div`
 	.create-input {
 		padding: 5px;
 		outline: none;
-		border: 2px solid ${({ theme }) => theme.modal.color_button};
+		border: 2px solid ${({ theme }) => theme.create_chat.color_button};
 		box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
 			0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-		background-color: ${({ theme }) => theme.modal.bg};
+		background-color: ${({ theme }) => theme.create_chat.bg};
 		color: #fafafa;
 		font-size: 0.9rem;
 	}
@@ -203,15 +183,15 @@ const ModalCreateWrapper = styled.div`
 			background-color: transparent;
 			padding: 0.5rem;
 			font-size: 0.8rem;
-			border: ${({ theme }) => theme.modal.cancel_border};
-			color: ${({ theme }) => theme.modal.color_button};
+			border: ${({ theme }) => theme.create_chat.cancel_border};
+			color: ${({ theme }) => theme.create_chat.color_button};
 			transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 			cursor: pointer;
 			border-radius: 2px;
 		}
 
 		.create-cancel:hover {
-			background-color: ${({ theme }) => theme.modal.color_cancel_hover};
+			background-color: ${({ theme }) => theme.create_chat.color_cancel_hover};
 			box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
 				0px 1px 2px 0px rgba(0, 0, 0, 0.06);
 		}
@@ -223,14 +203,14 @@ const ModalCreateWrapper = styled.div`
 			text-align: center;
 			padding: 0.5rem;
 			font-size: 0.8rem;
-			background-color: ${({ theme }) => theme.modal.color_button};
+			background-color: ${({ theme }) => theme.create_chat.color_button};
 			transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 			cursor: pointer;
 			border-radius: 2px;
 		}
 
 		.create-create:hover {
-			background-color: ${({ theme }) => theme.modal.color_button_hover};
+			background-color: ${({ theme }) => theme.create_chat.color_button_hover};
 			box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
 				0px 1px 2px 0px rgba(0, 0, 0, 0.06);
 		}

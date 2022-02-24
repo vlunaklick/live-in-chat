@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { FaUserPlus } from 'react-icons/fa'
 import ModalCreateChat from './ModalCreateChat'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function SidebarCreateChat({
 	sender,
@@ -11,12 +11,30 @@ export default function SidebarCreateChat({
 	socket,
 	receiver,
 }) {
+	const [text, setText] = useState('')
 	const [creating, setCreating] = useState(false)
 
+	let createRef = useRef()
+
+	useEffect(() => {
+		let handler = e => {
+			if (!createRef.current?.contains(e.target)) {
+				setCreating(false)
+			}
+		}
+		document.addEventListener('mousedown', handler)
+
+		return () => {
+			document.removeEventListener('mousedown', handler)
+		}
+	})
+
 	return (
-		<CreateWrapper onClick={() => setCreating(prevState => !prevState)}>
-			<FaUserPlus className='icon' />
-			<p>New chat</p>
+		<div ref={createRef}>
+			<CreateWrapper onClick={() => setCreating(prevState => !prevState)}>
+				<FaUserPlus />
+				<p>New chat</p>
+			</CreateWrapper>
 			<ModalCreateChat
 				sender={sender}
 				lastChats={lastChats}
@@ -26,8 +44,10 @@ export default function SidebarCreateChat({
 				receiver={receiver}
 				creating={creating}
 				setCreating={setCreating}
+				text={text}
+				setText={setText}
 			/>
-		</CreateWrapper>
+		</div>
 	)
 }
 
