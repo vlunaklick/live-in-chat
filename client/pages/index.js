@@ -170,92 +170,90 @@ export default function Home(props) {
 	}, [chatSelected])
 
 	return (
-		<div>
+		<MainWrapper>
 			<Head>
 				<title>Live in Chat</title>
 				<meta name='description' content='Chatting app' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<MainWrapper>
-				<ToastContainer
-					position='top-right'
-					autoClose={3000}
-					hideProgressBar={false}
-					newestOnTop={true}
-					closeOnClick
-					rtl={false}
-					draggable
-				/>
-				<ToastContainer />
+			<ToastContainer
+				position='top-right'
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={true}
+				closeOnClick
+				rtl={false}
+				draggable
+			/>
+			<ToastContainer />
 
-				{props.success ? (
-					<ChatWrapper>
-						<div className='sidebar-selection'>
-							<SidebarHeader
-								user={user}
-								socket={socket}
-								changeTheme={props.toggleTheme}
-							/>
-							<Sidebar
-								owner={user.email}
-								setChatSelected={setChatSelected}
-								chatSelected={chatSelected}
-								lastChats={lastChats}
-								setLastChats={setLastChats}
-								receiver={receiver}
-								socket={socket}
-							/>
-						</div>
-						<Chat
-							loading={loading}
-							setLoading={setLoading}
+			{props.success ? (
+				<ChatWrapper>
+					<div className='sidebar-selection'>
+						<SidebarHeader
 							user={user}
+							socket={socket}
+							changeTheme={props.toggleTheme}
+						/>
+						<Sidebar
+							owner={user.email}
+							setChatSelected={setChatSelected}
 							chatSelected={chatSelected}
-							closeChat={closeChat}
-							setLastChats={setLastChats}
 							lastChats={lastChats}
-							setModal={setModal}
-							setMessageSelected={setMessageSelected}
-							messages={messages}
-							scrollRef={scrollRef}
-							title={title}
-							setMessages={setMessages}
+							setLastChats={setLastChats}
 							receiver={receiver}
 							socket={socket}
-							userConnecteds={userConnecteds}
-							isTypingUser={isTypingUser}
-							setSureDelete={setSureDelete}
 						/>
-					</ChatWrapper>
-				) : (
-					<Spinner />
-				)}
-				{modal ? (
-					<ModalDelete
-						mainEmail={user.email}
-						setModal={setModal}
-						messageSelected={messageSelected}
-						lastChats={lastChats}
+					</div>
+					<Chat
+						loading={loading}
+						setLoading={setLoading}
+						user={user}
+						chatSelected={chatSelected}
+						closeChat={closeChat}
 						setLastChats={setLastChats}
+						lastChats={lastChats}
+						setModal={setModal}
+						setMessageSelected={setMessageSelected}
 						messages={messages}
+						scrollRef={scrollRef}
+						title={title}
 						setMessages={setMessages}
-						socket={socket}
 						receiver={receiver}
-					/>
-				) : (
-					''
-				)}
-				{sureDelete ? (
-					<ModalSureDelete
-						setMessages={setMessages}
-						chatId={chatSelected}
+						socket={socket}
+						userConnecteds={userConnecteds}
+						isTypingUser={isTypingUser}
 						setSureDelete={setSureDelete}
 					/>
-				) : (
-					''
-				)}
-			</MainWrapper>
-		</div>
+				</ChatWrapper>
+			) : (
+				<Spinner />
+			)}
+			{modal ? (
+				<ModalDelete
+					mainEmail={user.email}
+					setModal={setModal}
+					messageSelected={messageSelected}
+					lastChats={lastChats}
+					setLastChats={setLastChats}
+					messages={messages}
+					setMessages={setMessages}
+					socket={socket}
+					receiver={receiver}
+				/>
+			) : (
+				''
+			)}
+			{sureDelete ? (
+				<ModalSureDelete
+					setMessages={setMessages}
+					chatId={chatSelected}
+					setSureDelete={setSureDelete}
+				/>
+			) : (
+				''
+			)}
+		</MainWrapper>
 	)
 }
 

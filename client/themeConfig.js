@@ -134,7 +134,7 @@ export const lightTheme = {
 		color_input: '#171717',
 	},
 	sender: {
-		bg: '#E1EFF7',
+		bg: '#bfdbfe',
 		numbers: '#434343',
 		text: '#171717',
 		eliminated: '#545454',

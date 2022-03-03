@@ -65,7 +65,7 @@ const WrapperDropdown = styled.div`
 
 	.dropdown-menu {
 		cursor: pointer;
-		color: #fafafa;
+		color: ${({ theme }) => theme.chat.user};
 		font-size: 0.8rem;
 		z-index: 3;
 		position: relative;
@@ -94,7 +94,6 @@ const DropdownStyle = styled.div`
 
 	div {
 		padding: 0.5rem 1rem;
-		color: #fafafa;
 		font-size: 0.6rem;
 		line-height: 1;
 		transition: background-color 0.5s ease-in-out;
