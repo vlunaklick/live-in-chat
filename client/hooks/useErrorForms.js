@@ -16,26 +16,14 @@ export default function useErrorForms() {
 	const loginSubmit = async e => {
 		e.preventDefault()
 
-		setLoading(true)
+		restartErrors()
+
 		const email = e.target[0].value
 		const password = e.target[1].value
 
-		if (email.match(regexMail) === null) {
-			setMailError([true, 'The email isn\u0027t valid.'])
-		} else {
-			setMailError([false, ''])
-		}
+		checkEmailPass(email, password)
 
-		if (password.length < 6) {
-			setPasswordError([
-				true,
-				'The password should be at least 6 characters long.',
-			])
-		} else {
-			setPasswordError([false, ''])
-		}
-
-		if (mailError[0] === false && passwordError[0] === false) {
+		if (email.match(regexMail) !== null && password.length >= 6) {
 			axios
 				.post(
 					`${process.env.NEXT_PUBLIC_API_URL}/users/login`,
@@ -46,14 +34,10 @@ export default function useErrorForms() {
 					{ withCredentials: true }
 				)
 				.then(data => {
-					try {
-						let token = data.headers['authorization'].split(' ')[1]
-						removeCookies('session')
-						setCookies('session', token, { HttpOnly: true })
-						setlogged(true)
-					} catch (error) {
-						console.log(error)
-					}
+					let token = data.headers['authorization'].split(' ')[1]
+					removeCookies('session')
+					setCookies('session', token, { HttpOnly: true })
+					setlogged(true)
 				})
 				.catch(error => {
 					setLoading(false)
@@ -61,8 +45,6 @@ export default function useErrorForms() {
 						setPasswordError([true, error.response.data.message])
 					} else if (error.response.data.source === 'email') {
 						setMailError([true, error.response.data.message])
-					} else {
-						console.log(error)
 					}
 				})
 		}
@@ -70,31 +52,17 @@ export default function useErrorForms() {
 
 	const registerSubmit = async e => {
 		e.preventDefault()
+
+		restartErrors()
+
 		const user = e.target[0].value
 		const email = e.target[1].value
 		const password = e.target[2].value
 
-		setLoading(true)
-
-		if (email.match(regexMail) === null) {
-			setMailError([true, 'The email isn\u0027t valid.'])
-		} else {
-			setMailError([false, ''])
-		}
+		checkEmailPass(email, password)
 
 		if (user.length < 6) {
 			setUserError([true, 'The user should be at least 6 characters long.'])
-		} else {
-			setUserError([false, ''])
-		}
-
-		if (password.length < 6) {
-			setPasswordError([
-				true,
-				'The password should be at least 6 characters long.',
-			])
-		} else {
-			setPasswordError([false, ''])
 		}
 
 		if (
@@ -118,6 +86,26 @@ export default function useErrorForms() {
 					setLoading(false)
 				})
 		}
+	}
+
+	const checkEmailPass = (email, password) => {
+		if (email.match(regexMail).length !== 1) {
+			setMailError([true, 'The email isn\u0027t valid.'])
+		}
+
+		if (password.length < 6) {
+			setPasswordError([
+				true,
+				'The password should be at least 6 characters long.',
+			])
+		}
+	}
+
+	const restartErrors = () => {
+		setLoading(true)
+		setMailError([false, ''])
+		setPasswordError([false, ''])
+		setUserError([false, ''])
 	}
 
 	return {
