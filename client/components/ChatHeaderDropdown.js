@@ -26,8 +26,8 @@ export default function ChatHeaderDropdown({ closeChat, setSureDelete }) {
 			ref={dropdownRef}>
 			<BsThreeDotsVertical className='dropdown-menu' />
 			<DropdownStyle open={open}>
-				<div onClick={() => setSureDelete(true)}>Delete chat</div>
 				<div onClick={() => closeChat(false)}>Close chat</div>
+				<div onClick={() => setSureDelete(true)}>Delete chat</div>
 			</DropdownStyle>
 		</WrapperDropdown>
 	)

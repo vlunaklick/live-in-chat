@@ -16,16 +16,17 @@ export default function ChatInputMessage({
 	socket,
 }) {
 	const [typing, setTyping] = useState(false)
+	const [text, setText] = useState('')
 
 	const createMessage = async e => {
 		e.preventDefault()
-		if (e.target[0].value.replace(/\s/g, '').length) {
+		if (text.replace(/\s/g, '').length) {
 			try {
 				const token = getCookie('session')
 				const data = {
 					email: email,
 					chatId: chatId,
-					text: e.target[0].value,
+					text: text,
 				}
 
 				const message = await axios.post(
@@ -62,7 +63,7 @@ export default function ChatInputMessage({
 
 				setLastChats(newLastChats)
 
-				e.target[0].value = ''
+				setText('')
 
 				notTyping()
 			} catch (err) {
@@ -93,14 +94,22 @@ export default function ChatInputMessage({
 		}
 	}
 
+	const writeEmail = e => {
+		setText(e.target.value)
+	}
+
 	return (
 		<InputWrapper>
 			<form action='' method='post' onSubmit={createMessage}>
-				<input
-					type='text'
-					placeholder='Write your message here.'
-					onKeyDown={() => isTyping()}
-				/>
+				<div className='inputwr'>
+					<input
+						type='text'
+						placeholder='Write your message here.'
+						onKeyDown={() => isTyping()}
+						value={text}
+						onChange={writeEmail}
+					/>
+				</div>
 				<button>
 					<IoMdSend className='message-send-svg' />
 				</button>
@@ -143,12 +152,21 @@ const InputWrapper = styled.section`
 		justify-content: center;
 	}
 
-	input {
-		padding: 9px 12px 11px;
+	.inputwr {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 		width: 100%;
 		border-radius: 0.5rem;
-		color: ${({ theme }) => theme.chat.holder_text};
 		background-color: ${({ theme }) => theme.chat.holder};
+		transition: background-color 0.5s ease-in-out;
+		padding: 9px 12px 11px;
+	}
+
+	input {
+		width: 100%;
+		color: ${({ theme }) => theme.chat.holder_text};
+		background-color: transparent;
 		border: none;
 		outline: none;
 		max-height: 100px;
@@ -158,7 +176,7 @@ const InputWrapper = styled.section`
 		overflow-x: hidden;
 		white-space: pre-wrap;
 		word-wrap: break-word;
-		transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+		transition: color 0.5s ease-in-out;
 	}
 
 	input::placeholder {
