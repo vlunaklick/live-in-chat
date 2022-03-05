@@ -3,6 +3,7 @@ import { IoMdSend } from 'react-icons/io'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 import { useState } from 'react'
+import useText from '../hooks/useText'
 
 export default function ChatInputMessage({
 	email,
@@ -16,7 +17,7 @@ export default function ChatInputMessage({
 	socket,
 }) {
 	const [typing, setTyping] = useState(false)
-	const [text, setText] = useState('')
+	const { text, changeText, resetText } = useText
 
 	const createMessage = async e => {
 		e.preventDefault()
@@ -63,7 +64,7 @@ export default function ChatInputMessage({
 
 				setLastChats(newLastChats)
 
-				setText('')
+				resetText()
 
 				notTyping()
 			} catch (err) {
@@ -94,10 +95,6 @@ export default function ChatInputMessage({
 		}
 	}
 
-	const writeEmail = e => {
-		setText(e.target.value)
-	}
-
 	return (
 		<InputWrapper>
 			<form action='' method='post' onSubmit={createMessage}>
@@ -107,7 +104,7 @@ export default function ChatInputMessage({
 						placeholder='Write your message here.'
 						onKeyDown={() => isTyping()}
 						value={text}
-						onChange={writeEmail}
+						onChange={changeText}
 					/>
 				</div>
 				<button>

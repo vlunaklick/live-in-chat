@@ -24,8 +24,13 @@ const Sidebar = ({
 	})
 
 	const sideChatRef = useRef()
+	let firstRefSidebar = useRef(true)
 
 	useEffect(() => {
+		if (firstRefSidebar.current) {
+			firstRefSidebar.current = false
+			return
+		}
 		sideChatRef.current?.scrollIntoView({ behavior: 'smooth' })
 	}, [chatSelected])
 
