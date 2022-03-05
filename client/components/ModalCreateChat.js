@@ -3,7 +3,6 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { getCookie } from 'cookies-next'
 import { regexMail } from '../utils/regexMail'
-import { useEffect, useRef } from 'react'
 
 export default function ModalCreateChat({
 	sender,
@@ -11,8 +10,8 @@ export default function ModalCreateChat({
 	setLastChats,
 	setChatSelected,
 	socket,
-	setCreating,
-	creating,
+	setOpen,
+	open,
 	text,
 	changeText,
 	resetText,
@@ -52,7 +51,7 @@ export default function ModalCreateChat({
 						receiverId: text,
 					})
 
-					setCreating(false)
+					setOpen(false)
 
 					resetText()
 
@@ -87,12 +86,12 @@ export default function ModalCreateChat({
 	}
 
 	const cancelEmail = () => {
-		setCreating(prevState => !prevState)
+		setOpen(false)
 		resetText()
 	}
 
 	return (
-		<ModalCreateWrapper creating={creating}>
+		<ModalCreateWrapper open={open}>
 			<p className='title'>Insert the email you are refering to</p>
 			<input
 				className='create-input'
@@ -128,7 +127,7 @@ const ModalCreateWrapper = styled.div`
 	margin: 0 auto;
 	z-index: 5;
 	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.4));
-	transform: ${({ creating }) => (creating ? 'scale(1,1)' : 'scale(0,0)')};
+	transform: ${({ open }) => (open ? 'scale(1,1)' : 'scale(0,0)')};
 	transform-origin: top;
 	transition: transform 0.2s ease-in, background-color 0.5s ease-in-out;
 

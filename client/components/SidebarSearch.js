@@ -3,9 +3,9 @@ import { BsSearch } from 'react-icons/bs'
 import useText from '../hooks/useText'
 
 export default function SidebarSearch({ setShowChat, lastChats }) {
-	const { text, changeText, resetText } = useText()
+	const { text, changeText } = useText()
 
-	const searchInput = e => {
+	const searchInput = () => {
 		if (text === '') {
 			setShowChat(lastChats)
 		} else {
@@ -31,7 +31,7 @@ export default function SidebarSearch({ setShowChat, lastChats }) {
 					placeholder='Search a chat'
 					onChange={e => {
 						changeText(e)
-						searchInput(e)
+						searchInput()
 					}}
 				/>
 			</div>
