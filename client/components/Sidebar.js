@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import Sidebarchat from './SidebarChat'
 import SidebarSearch from './SidebarSearch'
 import SidebarCreateChat from './SidebarCreateChat'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const Sidebar = ({
 	chatSelected,
@@ -23,10 +23,17 @@ const Sidebar = ({
 		return new Date(b.date) - new Date(a.date)
 	})
 
+	const sideChatRef = useRef()
+
+	useEffect(() => {
+		sideChatRef.current?.scrollIntoView({ behavior: 'smooth' })
+	}, [chatSelected])
+
 	let lastChatsShow = fixedArray.map(chat => {
 		return (
 			<Sidebarchat
 				owner={owner}
+				sideChatRef={sideChatRef}
 				date={chat.date}
 				messageMail={chat.email}
 				name={chat.creator}

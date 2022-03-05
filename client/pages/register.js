@@ -47,7 +47,7 @@ export default function Register(props) {
 					<Spinner />
 				) : (
 					<section>
-						<h2>Register</h2>
+						<h2>Register - Register</h2>
 						<form action='' method='post' onSubmit={registerSubmit}>
 							<label>
 								Username:

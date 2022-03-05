@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import ChatHeader from './ChatHeader'
 import ChatInputMessage from './ChatInputMessage'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import ChatContent from './ChatContent'
 
 export default function Chat(props) {

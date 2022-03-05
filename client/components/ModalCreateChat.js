@@ -3,6 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { getCookie } from 'cookies-next'
 import { regexMail } from '../utils/regexMail'
+import { useEffect, useRef } from 'react'
 
 export default function ModalCreateChat({
 	sender,
@@ -51,6 +52,8 @@ export default function ModalCreateChat({
 					})
 
 					setCreating(false)
+
+					setText('')
 
 					toast.success(`Chat was created successfully!`, {
 						theme: 'dark',

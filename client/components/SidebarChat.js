@@ -13,6 +13,7 @@ const SidebarChat = ({
 	messageMail,
 	date,
 	deleted,
+	sideChatRef,
 }) => {
 	const dateH = new Date(date)
 
@@ -31,6 +32,7 @@ const SidebarChat = ({
 
 	return (
 		<SidebarChatWrapper
+			ref={sideChatRef}
 			deleted={deleted}
 			selected={chatSelected}
 			id={id}

@@ -28,7 +28,7 @@ export default function Login(props) {
 	return (
 		<div>
 			<Head>
-				<title>Live in Chat</title>
+				<title>Live in Chat - Login</title>
 				<meta name='description' content='Chatting app' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
