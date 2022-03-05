@@ -24,22 +24,17 @@ const Sidebar = ({
 	})
 
 	const sideChatRef = useRef()
-	let firstRefSidebar = useRef(true)
 
 	useEffect(() => {
-		if (firstRefSidebar.current) {
-			firstRefSidebar.current = false
-			return
-		}
 		sideChatRef.current?.scrollIntoView({ behavior: 'smooth' })
-	}, [chatSelected])
+	}, [lastChats])
 
 	let lastChatsShow = fixedArray.map(chat => {
 		return (
 			<Sidebarchat
 				owner={owner}
-				sideChatRef={sideChatRef}
 				date={chat.date}
+				sideChatRef={undefined}
 				messageMail={chat.email}
 				name={chat.creator}
 				lastMessage={chat.message}
@@ -53,6 +48,8 @@ const Sidebar = ({
 		)
 	})
 
+	lastChatsShow.unshift(<div key='refLastChat' ref={sideChatRef}></div>)
+
 	return (
 		<SidebarWrapper>
 			<SidebarCreateChat
@@ -65,6 +62,7 @@ const Sidebar = ({
 			/>
 
 			<SidebarSearch setShowChat={setShowChat} lastChats={lastChats} />
+
 			<div className='container-chats-side'>{lastChatsShow}</div>
 		</SidebarWrapper>
 	)
