@@ -1,24 +1,9 @@
 import styled from 'styled-components'
-import { useState, useRef, useEffect } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import useDropdown from '../hooks/useDropdown'
 
 export default function ChatHeaderDropdown({ closeChat, setSureDelete }) {
-	const [open, setOpen] = useState(false)
-
-	let dropdownRef = useRef()
-
-	useEffect(() => {
-		let handler = e => {
-			if (!dropdownRef.current?.contains(e.target)) {
-				setOpen(false)
-			}
-		}
-		document.addEventListener('mousedown', handler)
-
-		return () => {
-			document.removeEventListener('mousedown', handler)
-		}
-	})
+	const { open, setOpen, dropdownRef } = useDropdown()
 
 	return (
 		<WrapperDropdown
