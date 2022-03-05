@@ -6,28 +6,12 @@ export default function MessageDropdown({
 	options,
 	open,
 	setOpen,
-	setOptions,
 	setModal,
 	setMessageSelected,
 	message,
 	sender,
+	messageDropdownRef,
 }) {
-	let dropdownRef = useRef()
-
-	useEffect(() => {
-		let handler = e => {
-			if (!dropdownRef.current?.contains(e.target) && open) {
-				setOpen(false)
-				setOptions(false)
-			}
-		}
-		document.addEventListener('mousedown', handler)
-
-		return () => {
-			document.removeEventListener('mousedown', handler)
-		}
-	})
-
 	const openModal = () => {
 		setMessageSelected([message])
 		setModal(true)
@@ -38,7 +22,7 @@ export default function MessageDropdown({
 			<WrapperDropdown
 				options={options}
 				onClick={() => setOpen(prevState => !prevState)}
-				ref={dropdownRef}>
+				ref={messageDropdownRef}>
 				<BsChevronUp className='dropdown-menu' />
 				<DropdownStyle sender={sender} open={open}>
 					<div onClick={() => openModal()}>Delete message</div>

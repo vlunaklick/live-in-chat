@@ -21,10 +21,11 @@ export default function ModalSureDelete({
 					try {
 						setMessages([])
 						setSureDelete(false)
-					} catch (err) {
-						console.log(err)
+					} catch (error) {
+						console.log(error)
 					}
 				})
+				.catch(error => console.log(error))
 		}
 
 		toast.success(`Chat was deleted!`, {
@@ -46,7 +47,7 @@ export default function ModalSureDelete({
 					<p className='title'>DELETE CHAT</p>
 					<p className='text-info'>
 						You are one step away from permanently deleting{' '}
-						<bold>all the conversation, this action cannot be reversed.</bold>
+						<b>all the conversation, this action cannot be reversed.</b>
 					</p>
 				</div>
 				<div className='buttons-sure'>
@@ -105,7 +106,7 @@ const ModalWrapper = styled.div`
 			font-size: 0.9rem;
 		}
 
-		bold {
+		b {
 			font-weight: 800;
 			color: ${({ theme }) => theme.modal.text_bold};
 		}

@@ -185,7 +185,6 @@ export default function Home(props) {
 				rtl={false}
 				draggable
 			/>
-			<ToastContainer />
 
 			{props.success ? (
 				<ChatWrapper>

@@ -2,29 +2,26 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import MessageDropdown from './MessageDropdown'
 import { HiOutlineBan } from 'react-icons/hi'
+import useDropdownMessage from '../hooks/useDropdownMessage'
+import converHours from '../utils/convertHours'
 
 const MessageSend = ({
 	text,
 	hours,
-	scrollRef,
+	messageDropRef,
 	deleted,
 	setModal,
 	setMessageSelected,
 	messagePlain,
 }) => {
-	const [options, setOptions] = useState(false)
-	const [open, setOpen] = useState(false)
+	const { open, setOpen, messageDropdownRef, options, setOptions } =
+		useDropdownMessage()
 
-	const dateH = new Date(hours)
-
-	const hoursGood = dateH.toLocaleTimeString('en-US', {
-		hour: '2-digit',
-		minute: '2-digit',
-	})
+	const hoursGood = converHours(hours)
 
 	return (
 		<MessageWrapper
-			ref={scrollRef}
+			ref={messageDropRef}
 			deleted={deleted}
 			optionsThing={options}
 			onMouseEnter={() => setOptions(true)}
@@ -50,11 +47,11 @@ const MessageSend = ({
 				options={options}
 				open={open}
 				setOpen={setOpen}
-				setOptions={setOptions}
 				setModal={setModal}
 				setMessageSelected={setMessageSelected}
 				message={messagePlain}
 				sender={true}
+				messageDropdownRef={messageDropdownRef}
 			/>
 		</MessageWrapper>
 	)

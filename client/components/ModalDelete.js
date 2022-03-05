@@ -105,7 +105,7 @@ export default function ModalDelete({
 					<p className='title'>DELETE MESSAGE</p>
 					<p className='text-info'>
 						You are one step away from permanently deleting the message,{' '}
-						<bold> this action cannot be reversed.</bold>
+						<b> this action cannot be reversed.</b>
 					</p>
 				</div>
 				<div className='buttons'>
@@ -173,7 +173,7 @@ const ModalWrapper = styled.div`
 			font-size: 0.9rem;
 		}
 
-		bold {
+		b {
 			font-weight: 800;
 			color: ${({ theme }) => theme.modal.text_bold};
 		}

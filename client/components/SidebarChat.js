@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import UserIcon from './UserIcon'
 import { HiOutlineBan } from 'react-icons/hi'
+import converHours from '../utils/convertHours'
 
 const SidebarChat = ({
 	name,
@@ -15,12 +16,7 @@ const SidebarChat = ({
 	deleted,
 	sideChatRef,
 }) => {
-	const dateH = new Date(date)
-
-	const hoursGood = dateH.toLocaleTimeString('en-US', {
-		hour: '2-digit',
-		minute: '2-digit',
-	})
+	const hoursGood = converHours(date)
 
 	let messageShow
 

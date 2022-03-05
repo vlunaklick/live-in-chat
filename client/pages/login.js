@@ -11,6 +11,7 @@ import Spinner from '../components/Spinner'
 export default function Login(props) {
 	const { mailError, passwordError, loginSubmit, logged, loading } =
 		useErrorForms()
+
 	const router = useRouter()
 
 	useEffect(() => {
