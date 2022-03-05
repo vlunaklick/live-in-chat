@@ -14,7 +14,8 @@ export default function ModalCreateChat({
 	setCreating,
 	creating,
 	text,
-	setText,
+	changeText,
+	resetText,
 }) {
 	const changeName = async e => {
 		try {
@@ -53,7 +54,7 @@ export default function ModalCreateChat({
 
 					setCreating(false)
 
-					setText('')
+					resetText()
 
 					toast.success(`Chat was created successfully!`, {
 						theme: 'dark',
@@ -85,13 +86,9 @@ export default function ModalCreateChat({
 		}
 	}
 
-	const writeEmail = e => {
-		setText(e.target.value)
-	}
-
 	const cancelEmail = () => {
 		setCreating(prevState => !prevState)
-		setText('')
+		resetText()
 	}
 
 	return (
@@ -102,7 +99,7 @@ export default function ModalCreateChat({
 				type='text'
 				placeholder='Email'
 				value={text}
-				onChange={writeEmail}
+				onChange={changeText}
 			/>
 			<div className='btns-create-chat'>
 				<button className='create-cancel' onClick={() => cancelEmail()}>

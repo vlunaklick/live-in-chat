@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { FaUserPlus } from 'react-icons/fa'
 import ModalCreateChat from './ModalCreateChat'
 import { useState, useRef, useEffect } from 'react'
+import useText from '../hooks/useText'
 
 export default function SidebarCreateChat({
 	sender,
@@ -11,7 +12,7 @@ export default function SidebarCreateChat({
 	socket,
 	receiver,
 }) {
-	const [text, setText] = useState('')
+	const { text, changeText, resetText } = useText()
 	const [creating, setCreating] = useState(false)
 
 	let createRef = useRef()
@@ -20,7 +21,7 @@ export default function SidebarCreateChat({
 		let handler = e => {
 			if (!createRef.current?.contains(e.target)) {
 				setCreating(false)
-				setText('')
+				resetText()
 			}
 		}
 		document.addEventListener('mousedown', handler)
@@ -46,7 +47,8 @@ export default function SidebarCreateChat({
 				creating={creating}
 				setCreating={setCreating}
 				text={text}
-				setText={setText}
+				changeText={changeText}
+				resetText={resetText}
 			/>
 		</div>
 	)
