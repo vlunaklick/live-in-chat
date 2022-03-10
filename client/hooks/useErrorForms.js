@@ -34,7 +34,10 @@ export default function useErrorForms() {
 				.then(data => {
 					let token = data.headers['authorization'].split(' ')[1]
 					removeCookies('session')
-					setCookies('session', token, { HttpOnly: true })
+					setCookies('session', token, {
+						HttpOnly: true,
+						maxAge: 60 * 60 * 24 * 15,
+					})
 					setlogged(true)
 				})
 				.catch(error => {
