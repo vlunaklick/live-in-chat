@@ -17,7 +17,7 @@ export default function ChatInputMessage({
 	socket,
 }) {
 	const [typing, setTyping] = useState(false)
-	const { text, changeText, resetText } = useText
+	const { text, changeText, resetText } = useText()
 
 	const createMessage = async e => {
 		e.preventDefault()
