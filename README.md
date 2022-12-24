@@ -1,16 +1,12 @@
-<h1 align="center">Welcome to 'Live in Chat'</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-</p>
+# Live in Chat
 
-> In this project I created a 'Realtime chat'. It was created using Next.js in the frontend and Express in the backend. Also, I had to create another server where I deployed the socket.io server, this was very important because it let me make the comunication client-server.
+I developed a real-time chat application using Next.js and Express in the frontend and backend, respectively. In addition, I set up a separate server to host the socket.io server, which enables the client and server to communicate in real-time. The chat allows users to send and receive messages in real-time, providing a seamless and interactive communication experience.
 
-### ✨ [Live View](https://live-in-chat.vercel.app/login)
+## Deploy: [Live View](https://live-in-chat.vercel.app/login) ✨
 
-- Account for testing: testuser1@gmail.com:fakepass123
-- Other account: testuser2@gmail.com:fakepass123
+You can see the live version of the project clicking on the link above.
 
-### Frontend
+## Frontend
 
 - React: Javascript library to create interfaces.
 - Next.js: React framework that gives functionalities as SSR.
@@ -21,12 +17,26 @@
 - socket.io-client: library to make the connection with the backend.
 - react-toastify: library for notifications.
 
-### Backend
+## Backend
 
 - Node & Express: Javascript based stack for server applications.
 - Prisma: ORM to interact with the database.
 - PostgreSQL: A relational database was required by the challenge.
 - socket.io: library for realtime web applications.
+
+## Install and start
+
+To install all the things required to execute the app, you just need to do it in the root folder:
+
+```sh
+npm run initialize
+```
+
+You can start the app with a single command also in the root folder:
+
+```sh
+npm run start
+```
 
 ## Requirements
 
@@ -67,28 +77,9 @@ Create a file .env with the next text:
 CLIENT_URL=http://localhost:3000
 ```
 
-## Install and start
-
-To install all the things required to execute the app, you just need to do it in the root folder:
-
-```sh
-npm run initialize
-```
-
-You can start the app with a single command also in the root folder:
-
-```sh
-npm run start
-```
 ## Author
 
 👤 **vlunaklick**
 
-* Github: [@vlunaklick](https://github.com/vlunaklick)
-* LinkedIn: [@vlunaklick](https://linkedin.com/in/vlunaklick)
-
-## My Profile
-
-> In my profile you can see route to convert into a fullstack web developer.
-
-Give a ⭐️ if you liked this project.
+- Github: [@vlunaklick](https://github.com/vlunaklick)
+- LinkedIn: [@vlunaklick](https://linkedin.com/in/vlunaklick)
